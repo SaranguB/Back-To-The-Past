@@ -41,10 +41,6 @@ namespace Player
             {
                 isJump = true;
             }
-            if (Input.GetKeyUp(KeyCode.Space))
-            {
-                isJump = false;
-            }
         }
 
         private void SetMoveValue()
@@ -61,6 +57,7 @@ namespace Player
                 if (isJump && ISGrounded())
                 {
                     playerController.Jump();
+                    isJump = false;
                 }
                 playerController.HandleFalling();
 

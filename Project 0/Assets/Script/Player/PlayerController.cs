@@ -52,6 +52,10 @@ namespace Player
             {
                 playerRB.gravityScale = playerModel.fallingSpeed;
             }
+            else if(playerRB.linearVelocity.y>0 && !Input.GetKey(KeyCode.Space))
+            {
+                playerRB.gravityScale = playerModel.fallingSpeed;
+            }
             else
             {
                 playerRB.gravityScale = 1f; 
