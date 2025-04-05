@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 4
   health: 100
-  jumpForce: 10
+  jumpForce: 8
   fallingSpeed: 4
