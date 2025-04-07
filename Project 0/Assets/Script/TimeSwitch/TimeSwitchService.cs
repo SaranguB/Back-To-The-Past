@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Time
+namespace TimeSwitching
 {
     public class TimeSwitchService
     {

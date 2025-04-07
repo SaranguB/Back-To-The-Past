@@ -1,8 +1,8 @@
 using StateMachine;
-using Time;
+using TimeSwitching;
 using UnityEngine;
 
-namespace Time
+namespace TimeSwitching
 {
     public class PresentState : IState<TimeSwitchController>
     {

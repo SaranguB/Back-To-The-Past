@@ -2,7 +2,7 @@ using StateMachine;
 using System;
 using UnityEngine;
 
-namespace Time
+namespace TimeSwitching
 {
     public class TimeStateMachine : GenericStateMachine<TimeSwitchController, TimeState>
     {

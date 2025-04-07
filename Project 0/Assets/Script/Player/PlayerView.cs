@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using TimeSwitching;
 
 namespace Player
 {
@@ -10,21 +11,28 @@ namespace Player
         private Rigidbody2D playerRB;
 
         [Header("Jump")]
-        private bool isJump;
+        private bool isJumping = false;
         [SerializeField] private Transform[] groundCheckPoint;
         [SerializeField] private float groundCheckDistance;
         [SerializeField] private LayerMask groundLayer;
+
+        [Header("TimeSwitching Switch")]
+        
+        private float timeSwitchingDuration;
+        private float timeRequiredForSwitching = 2f;
+        private bool isTimeSwitching = false;
 
         private float horizontalInput;
 
         private void Start()
         {
-            isJump = false;
+
             playerRB = GetComponent<Rigidbody2D>();
             playerState = PlayerState.ALIVE;
 
             playerController.SetPlayerRb(playerRB);
         }
+
 
         private void Update()
         {
@@ -38,9 +46,25 @@ namespace Player
 
         private void SetTimeSwitchInput()
         {
-            if (Input.GetKeyDown(KeyCode.Tab))
+            if (Input.GetKey(KeyCode.Tab))
             {
+                if (!isTimeSwitching)
+                {
+                    timeSwitchingDuration += Time.deltaTime;
+                    
+                    if (timeSwitchingDuration >= timeRequiredForSwitching)
+                    {
+                        Debug.Log("Time Switched");
+                        playerController.SwitchTime();
+                        isTimeSwitching = true;
+                    }
+                }
+            }
 
+            if (Input.GetKeyUp(KeyCode.Tab))
+            {
+                timeSwitchingDuration = 0f;
+                isTimeSwitching = false;
             }
         }
 
@@ -48,7 +72,7 @@ namespace Player
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                isJump = true;
+                isJumping = true;
             }
         }
 
@@ -63,10 +87,10 @@ namespace Player
             {
                 playerController.Move(horizontalInput);
 
-                if (isJump && ISGrounded())
+                if (isJumping && ISGrounded())
                 {
                     playerController.Jump();
-                    isJump = false;
+                    isJumping = false;
                 }
                 playerController.HandleFalling();
 

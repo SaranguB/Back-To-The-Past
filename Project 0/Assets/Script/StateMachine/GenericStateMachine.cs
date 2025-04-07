@@ -34,11 +34,14 @@ namespace StateMachine
             }
         }
 
-        protected void AddState(TEnum key,IState<T> state)
+        protected void AddState(TEnum key, IState<T> state)
         {
             states[key] = state;
         }
 
         public void Update() => currentState?.UpdateState();
+
+        public IState<T> GetCurrentState()
+            => currentState;
     }
 }

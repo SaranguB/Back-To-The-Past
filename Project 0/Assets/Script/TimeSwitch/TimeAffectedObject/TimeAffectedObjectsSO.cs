@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Time
+namespace TimeSwitching
 {
     [CreateAssetMenu(fileName = "new Object", menuName = "TimeAffectedObject")]
     public class TimeAffectedObjectsSO : ScriptableObject

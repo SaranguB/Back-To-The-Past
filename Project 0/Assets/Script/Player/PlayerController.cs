@@ -1,3 +1,4 @@
+using Main;
 using System;
 using UnityEngine;
 
@@ -58,6 +59,11 @@ namespace Player
             {
                 playerRB.gravityScale = 1f; 
             }
+        }
+
+        public void SwitchTime()
+        {
+            GameManager.Instance.eventService.onTimeSwitched.InvokeEvent();
         }
     }
 }

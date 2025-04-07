@@ -1,7 +1,8 @@
 using Player;
 using UnityEngine;
 using Utilities;
-using Time;
+using TimeSwitching;
+using Events;
 
 namespace Main
 {
@@ -9,6 +10,7 @@ namespace Main
     {
         public PlayerService playerService;
         public TimeSwitchService timeSwitchService;
+        public EventService eventService;
 
         [Header("Player")]
         [SerializeField] private PlayerView playerView;
@@ -20,6 +22,7 @@ namespace Main
         protected override void Awake()
         {
             base.Awake();
+            eventService = new EventService();
             playerService = new PlayerService(playerView, playerS0);
             timeSwitchService = new TimeSwitchService(timeSwitchView);
         }

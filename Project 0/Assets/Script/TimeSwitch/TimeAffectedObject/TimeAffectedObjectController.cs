@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Time
+namespace TimeSwitching
 {
     public class TimeAffectedObjectController : MonoBehaviour
     {
@@ -27,8 +27,7 @@ namespace Time
 
         public void SetPresentProperties()
         {
-            Debug.Log("called");
-
+  
             objectRB.bodyType = objectData.isMovableInPresent ? RigidbodyType2D.Dynamic : RigidbodyType2D.Kinematic;
             objectSprite.sprite = objectData.presentSprite;
             Updatecollider();
