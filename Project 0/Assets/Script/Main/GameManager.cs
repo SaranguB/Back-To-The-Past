@@ -7,6 +7,7 @@ namespace Main
     public class GameManager : GenericMonoSingelton<GameManager>
     {
         public PlayerService playerService;
+        public TimeSwitchService timeSwitchService;
 
         [Header("Player")]
         [SerializeField] private PlayerView playerView;

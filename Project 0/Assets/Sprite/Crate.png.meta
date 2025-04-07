@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: da5581ec30395e64e92657c4ff810640
+guid: 2b965c9660a85af49bc564251408e272
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4723107735738678597
-    second: Idle_0
+      213: -1362058913294850930
+    second: Crate_0
+  - first:
+      213: 7915073754930829435
+    second: Crate_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +54,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 15
+  spritePixelsToUnits: 500
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,35 +116,57 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Idle_0
+      name: Crate_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 21
-        height: 16
+        x: 130
+        y: 255
+        width: 400
+        height: 490
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 54d7a982679db8140800000000000000
-      internalID: 4723107735738678597
+      spriteID: e84e7e582aef81de0800000000000000
+      internalID: -1362058913294850930
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle_1
+      name: Crate_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 11
-        height: 16
+        x: 583
+        y: 250
+        width: 378
+        height: 528
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b785bade4adf7dd60800000000000000
+      internalID: 7915073754930829435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Crate_2
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 222
+        width: 930
+        height: 560
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,30 +175,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b1a94ea66755c784fa963f5661125075
-      internalID: 636612708
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Idle_2
-      rect:
-        serializedVersion: 2
-        x: 12
-        y: 0
-        width: 10
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 49e8e27354584224fafcc65867192fa5
-      internalID: 1770444044
+      spriteID: 2a762b8730ed9ab4f9ffd2d860aadcf9
+      internalID: -1711768396
       vertices: []
       indices: 
       edges: []
@@ -182,7 +185,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 7a0a09f1809fa2e4ca2b38d125fdcd1a
+    spriteID: c71b678b5282de242b5ac0c71bb562fd
     internalID: 0
     vertices: []
     indices: 
@@ -192,10 +195,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Idle_0: 4723107735738678597
-      Idle_1: 636612708
-      Idle_2: 1770444044
-      Idle_3: -1039337789
+      Crate_2: -1711768396
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
