@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class TimeSwitchService : MonoBehaviour
+namespace Time
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class TimeSwitchService
     {
-        
-    }
+        private TimeSwitchController timeSwitchController;
+        public TimeSwitchService(TimeSwitchView timeSwitchView)
+        {
+            timeSwitchController = new TimeSwitchController(timeSwitchView);
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public TimeSwitchController GetTimeSwitchController()
+            => timeSwitchController;
     }
 }
