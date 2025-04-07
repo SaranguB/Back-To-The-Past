@@ -21,17 +21,16 @@ namespace StateMachine
             {
                 currentState?.OnStateExit();
                 currentState = newState;
-                currentState.Owner = owner;
+                currentState.owner = owner;
                 currentState?.OnStateEnter();
             }
         }
-
 
         protected void SetOwner()
         {
             foreach (var state in states.Values)
             {
-                state.Owner = owner;
+                state.owner = owner;
             }
         }
 
@@ -40,6 +39,6 @@ namespace StateMachine
             states[key] = state;
         }
 
-        public void Update() => currentState?.Update();
+        public void Update() => currentState?.UpdateState();
     }
 }

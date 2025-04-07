@@ -6,16 +6,18 @@ namespace Time
 {
     public class TimeStateMachine : GenericStateMachine<TimeSwitchController, TimeState>
     {
-        public TimeStateMachine(TimeSwitchController owner) : base(owner) 
+        private TimeAffectedObjectController[] objectController;
+        public TimeStateMachine(TimeSwitchController owner, TimeAffectedObjectController[] timeAffectedObjectControllers) : base(owner) 
         {
-            this.owner = owner;
+            objectController = timeAffectedObjectControllers;
             CreateStates();
             SetOwner();
         }
 
         private void CreateStates()
         {
-            AddState(TimeState.Past, new )
+            AddState(TimeState.Past, new PastState(objectController));
+            AddState(TimeState.Present, new PresentState(objectController));
         }
     }
 

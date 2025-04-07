@@ -1,16 +1,37 @@
+using StateMachine;
+using Time;
 using UnityEngine;
 
-public class PresentState : MonoBehaviour
+namespace Time
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class PresentState : IState<TimeSwitchController>
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public TimeSwitchController owner { get; set; }
+        public TimeAffectedObjectController[] objectController;
+
+        public PresentState(TimeAffectedObjectController[] objectController)
+        {
+            this.objectController = objectController;
+        }
+
+
+        public void OnStateEnter()
+        {
+            foreach (TimeAffectedObjectController affectedObject in objectController)
+            {
+                owner.SetPresentproperties(affectedObject);
+            }
+        }
+
+        public void UpdateState()
+        {
+
+        }
+
+        public void OnStateExit()
+        {
+
+        }
     }
 }

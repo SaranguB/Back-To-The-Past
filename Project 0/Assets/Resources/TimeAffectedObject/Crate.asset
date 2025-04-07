@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77ebf63f6c3b95548b78052ca0d28291, type: 3}
   m_Name: Crate
   m_EditorClassIdentifier: 
-  pastSprite: {fileID: 0}
-  presentSprite: {fileID: 0}
+  pastSprite: {fileID: 4723107735738678597, guid: da5581ec30395e64e92657c4ff810640, type: 3}
+  presentSprite: {fileID: -1711768396, guid: 2b965c9660a85af49bc564251408e272, type: 3}
   isMovableInPresent: 0
-  isMovableInPast: 0
+  isMovableInPast: 1
