@@ -9,8 +9,6 @@ namespace Player
         private PlayerModel playerModel;
         private Rigidbody2D playerRB;
 
-        
-
         public PlayerController(PlayerView playerView, PlayerSO playerS0)
         {
             this.playerView = playerView;

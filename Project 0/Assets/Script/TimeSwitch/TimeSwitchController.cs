@@ -14,6 +14,16 @@ namespace Time
             SetController();
         }
 
+        public void SetPastProperties(TimeAffectedObjectController affectedObject)
+        {
+            affectedObject.SetPastProperties();
+        }
+
+        public void SetPresentproperties(TimeAffectedObjectController affectedObject)
+        {
+            affectedObject.SetPresentProperties();
+        }
+
         private void SetController()
         {
             timeSwitchView.SetController(this);

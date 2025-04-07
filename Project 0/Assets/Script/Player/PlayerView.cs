@@ -30,12 +30,21 @@ namespace Player
         {
             if (playerState == PlayerState.ALIVE)
             {
-                SetMoveValue();
-                SetJumpvalue();
+                SetMoveInput();
+                SetJumpInput();
+                SetTimeSwitchInput();
             }
         }
 
-        private void SetJumpvalue()
+        private void SetTimeSwitchInput()
+        {
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+
+            }
+        }
+
+        private void SetJumpInput()
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -43,7 +52,7 @@ namespace Player
             }
         }
 
-        private void SetMoveValue()
+        private void SetMoveInput()
         {
             horizontalInput = Input.GetAxis("Horizontal");
         }
