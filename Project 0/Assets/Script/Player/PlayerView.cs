@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using TimeSwitching;
+using UI;
 
 namespace Player
 {
@@ -9,6 +10,7 @@ namespace Player
         private PlayerController playerController;
         private PlayerState playerState;
         private Rigidbody2D playerRB;
+        private float horizontalInput;
 
         [Header("Jump")]
         private bool isJumping = false;
@@ -17,12 +19,10 @@ namespace Player
         [SerializeField] private LayerMask groundLayer;
 
         [Header("TimeSwitching Switch")]
-        
         private float timeSwitchingDuration;
         private float timeRequiredForSwitching = 2f;
         private bool isTimeSwitching = false;
-
-        private float horizontalInput;
+       
 
         private void Start()
         {
@@ -51,7 +51,8 @@ namespace Player
                 if (!isTimeSwitching)
                 {
                     timeSwitchingDuration += Time.deltaTime;
-                    
+                    playerController.SetTimeSwitchSlider(true, timeRequiredForSwitching);
+
                     if (timeSwitchingDuration >= timeRequiredForSwitching)
                     {
                         Debug.Log("Time Switched");
@@ -63,6 +64,7 @@ namespace Player
 
             if (Input.GetKeyUp(KeyCode.Tab))
             {
+                playerController.SetTimeSwitchSlider(false, timeRequiredForSwitching);
                 timeSwitchingDuration = 0f;
                 isTimeSwitching = false;
             }
@@ -118,5 +120,6 @@ namespace Player
                 transform.localScale = scale;
             }
         }
+
     }
 }

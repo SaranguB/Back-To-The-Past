@@ -1,5 +1,6 @@
 using Player;
 using System;
+using UI;
 using UnityEngine;
 
 namespace TimeSwitching
@@ -9,8 +10,10 @@ namespace TimeSwitching
         [SerializeField] private TimeAffectedObjectController[] objectController;
         [SerializeField] private GameObject pastPlatform;
         [SerializeField] private GameObject presentPlatform;
-
+        
+       
         private TimeSwitchController timeSwitchController;
+      
 
         private void OnDisable()
         {
@@ -60,5 +63,7 @@ namespace TimeSwitching
             presentPlatform.SetActive(true);
         }
 
+
+      
     }
 }

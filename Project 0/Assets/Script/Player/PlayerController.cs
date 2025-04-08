@@ -1,5 +1,7 @@
 using Main;
 using System;
+using TimeSwitching;
+using UI;
 using UnityEngine;
 
 namespace Player
@@ -9,7 +11,7 @@ namespace Player
         private PlayerView playerView;
         private PlayerModel playerModel;
         private Rigidbody2D playerRB;
-
+        private TimeSwitchUIController timeSwitchUIController;
         public PlayerController(PlayerView playerView, PlayerSO playerS0)
         {
             this.playerView = playerView;
@@ -51,19 +53,32 @@ namespace Player
             {
                 playerRB.gravityScale = playerModel.fallingSpeed;
             }
-            else if(playerRB.linearVelocity.y>0 && !Input.GetKey(KeyCode.Space))
+            else if (playerRB.linearVelocity.y > 0 && !Input.GetKey(KeyCode.Space))
             {
                 playerRB.gravityScale = playerModel.fallingSpeed;
             }
             else
             {
-                playerRB.gravityScale = 1f; 
+                playerRB.gravityScale = 1f;
             }
         }
 
         public void SwitchTime()
         {
             GameManager.Instance.eventService.onTimeSwitched.InvokeEvent();
+        }
+
+        public void SetTimeSwitchUI(TimeSwitchUIController timeSwitchUIController)
+        {
+            this.timeSwitchUIController = timeSwitchUIController;
+        }
+
+        public void SetTimeSwitchSlider(bool isKeyHeld, float timeRequiredForSwitching)
+        {
+            if (timeSwitchUIController == null)
+                Debug.Log("Null");
+
+            timeSwitchUIController.UpdateTimeSwitchUISlider(isKeyHeld, timeRequiredForSwitching);
         }
     }
 }
