@@ -119,10 +119,10 @@ TextureImporter:
       name: Crate_0
       rect:
         serializedVersion: 2
-        x: 130
-        y: 255
-        width: 400
-        height: 490
+        x: 131
+        y: 256
+        width: 398
+        height: 488
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,10 +163,10 @@ TextureImporter:
       name: Crate_2
       rect:
         serializedVersion: 2
-        x: 61
-        y: 222
-        width: 930
-        height: 560
+        x: 131
+        y: 255
+        width: 821
+        height: 490
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
