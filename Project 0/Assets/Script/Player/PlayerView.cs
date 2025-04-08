@@ -22,13 +22,16 @@ namespace Player
         private float timeSwitchingDuration;
         private float timeRequiredForSwitching = 2f;
         private bool isTimeSwitching = false;
-       
+
+        [Header("Animation")]
+        [SerializeField] private Animator playerAnimator;
 
         private void Start()
         {
 
             playerRB = GetComponent<Rigidbody2D>();
             playerState = PlayerState.ALIVE;
+            playerAnimator = GetComponent<Animator>();
 
             playerController.SetPlayerRb(playerRB);
         }
@@ -38,6 +41,7 @@ namespace Player
         {
             if (playerState == PlayerState.ALIVE)
             {
+
                 SetMoveInput();
                 SetJumpInput();
                 SetTimeSwitchInput();
@@ -50,6 +54,10 @@ namespace Player
             {
                 if (!isTimeSwitching)
                 {
+                    horizontalInput = 0f;
+                    isJumping = false;
+                    playerAnimator.SetFloat("Speed", 0f);
+
                     timeSwitchingDuration += Time.deltaTime;
                     playerController.SetTimeSwitchSlider(true, timeRequiredForSwitching);
 
@@ -59,6 +67,12 @@ namespace Player
                         playerController.SwitchTime();
                         isTimeSwitching = true;
                     }
+                }
+                else
+                {
+                    horizontalInput = 0f;
+                    isJumping = false;
+                    playerAnimator.SetFloat("Speed", 0f);
                 }
             }
 
@@ -81,11 +95,13 @@ namespace Player
         private void SetMoveInput()
         {
             horizontalInput = Input.GetAxis("Horizontal");
+
+            playerAnimator.SetFloat("Speed", MathF.Abs(horizontalInput));
         }
 
         private void FixedUpdate()
         {
-            if (playerState == PlayerState.ALIVE)
+            if (playerState == PlayerState.ALIVE && !isTimeSwitching)
             {
                 playerController.Move(horizontalInput);
 
