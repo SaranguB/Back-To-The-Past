@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using TimeSwitching;
+using UI;
 
 namespace Player
 {
@@ -8,42 +10,75 @@ namespace Player
         private PlayerController playerController;
         private PlayerState playerState;
         private Rigidbody2D playerRB;
+        private float horizontalInput;
 
         [Header("Jump")]
-        private bool isJump;
+        private bool isJumping = false;
         [SerializeField] private Transform[] groundCheckPoint;
         [SerializeField] private float groundCheckDistance;
         [SerializeField] private LayerMask groundLayer;
 
-        private float horizontalInput;
+        [Header("TimeSwitching Switch")]
+        private float timeSwitchingDuration;
+        private float timeRequiredForSwitching = 2f;
+        private bool isTimeSwitching = false;
+       
 
         private void Start()
         {
-            isJump = false;
+
             playerRB = GetComponent<Rigidbody2D>();
             playerState = PlayerState.ALIVE;
 
             playerController.SetPlayerRb(playerRB);
         }
 
+
         private void Update()
         {
             if (playerState == PlayerState.ALIVE)
             {
-                SetMoveValue();
-                SetJumpvalue();
+                SetMoveInput();
+                SetJumpInput();
+                SetTimeSwitchInput();
             }
         }
 
-        private void SetJumpvalue()
+        private void SetTimeSwitchInput()
+        {
+            if (Input.GetKey(KeyCode.Tab))
+            {
+                if (!isTimeSwitching)
+                {
+                    timeSwitchingDuration += Time.deltaTime;
+                    playerController.SetTimeSwitchSlider(true, timeRequiredForSwitching);
+
+                    if (timeSwitchingDuration >= timeRequiredForSwitching)
+                    {
+                        Debug.Log("Time Switched");
+                        playerController.SwitchTime();
+                        isTimeSwitching = true;
+                    }
+                }
+            }
+
+            if (Input.GetKeyUp(KeyCode.Tab))
+            {
+                playerController.SetTimeSwitchSlider(false, timeRequiredForSwitching);
+                timeSwitchingDuration = 0f;
+                isTimeSwitching = false;
+            }
+        }
+
+        private void SetJumpInput()
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                isJump = true;
+                isJumping = true;
             }
         }
 
-        private void SetMoveValue()
+        private void SetMoveInput()
         {
             horizontalInput = Input.GetAxis("Horizontal");
         }
@@ -54,10 +89,10 @@ namespace Player
             {
                 playerController.Move(horizontalInput);
 
-                if (isJump && ISGrounded())
+                if (isJumping && ISGrounded())
                 {
                     playerController.Jump();
-                    isJump = false;
+                    isJumping = false;
                 }
                 playerController.HandleFalling();
 
@@ -85,5 +120,6 @@ namespace Player
                 transform.localScale = scale;
             }
         }
+
     }
 }

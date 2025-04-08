@@ -1,3 +1,5 @@
+using TimeSwitching;
+using UI;
 using UnityEngine;
 
 namespace Player
@@ -11,6 +13,10 @@ namespace Player
         }
 
         public PlayerController GetPlayer() => playerController;
-      
+
+        public void SetTimeSwitchUI(TimeSwitchUIController timeSwitchUIController)
+        {
+            playerController.SetTimeSwitchUI(timeSwitchUIController);
+        }
     }
 }
