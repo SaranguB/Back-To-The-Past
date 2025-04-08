@@ -10,18 +10,11 @@ namespace Player
         private PlayerController playerController;
         private PlayerState playerState;
         private Rigidbody2D playerRB;
-        private float horizontalInput;
 
         [Header("Jump")]
-        private bool isJumping = false;
         [SerializeField] private Transform[] groundCheckPoint;
         [SerializeField] private float groundCheckDistance;
         [SerializeField] private LayerMask groundLayer;
-
-        [Header("TimeSwitching Switch")]
-        private float timeSwitchingDuration;
-        private float timeRequiredForSwitching = 2f;
-        private bool isTimeSwitching = false;
 
         [Header("Animation")]
         [SerializeField] private Animator playerAnimator;
@@ -33,7 +26,7 @@ namespace Player
             playerState = PlayerState.ALIVE;
             playerAnimator = GetComponent<Animator>();
 
-            playerController.SetPlayerRb(playerRB);
+            this.playerController.SetPlayerValues(playerAnimator, playerRB);
         }
 
 
@@ -41,7 +34,6 @@ namespace Player
         {
             if (playerState == PlayerState.ALIVE)
             {
-
                 SetMoveInput();
                 SetJumpInput();
                 SetTimeSwitchInput();
@@ -52,35 +44,19 @@ namespace Player
         {
             if (Input.GetKey(KeyCode.Tab))
             {
-                if (!isTimeSwitching)
+                if (!playerController.GetIsTimeSwitching())
                 {
-                    horizontalInput = 0f;
-                    isJumping = false;
-                    playerAnimator.SetFloat("Speed", 0f);
-
-                    timeSwitchingDuration += Time.deltaTime;
-                    playerController.SetTimeSwitchSlider(true, timeRequiredForSwitching);
-
-                    if (timeSwitchingDuration >= timeRequiredForSwitching)
-                    {
-                        Debug.Log("Time Switched");
-                        playerController.SwitchTime();
-                        isTimeSwitching = true;
-                    }
+                    playerController.CancelTimeSwitching(Time.deltaTime, playerAnimator);
                 }
                 else
                 {
-                    horizontalInput = 0f;
-                    isJumping = false;
-                    playerAnimator.SetFloat("Speed", 0f);
+                    playerController.StopPlayerMovement(playerAnimator);
                 }
             }
 
             if (Input.GetKeyUp(KeyCode.Tab))
             {
-                playerController.SetTimeSwitchSlider(false, timeRequiredForSwitching);
-                timeSwitchingDuration = 0f;
-                isTimeSwitching = false;
+                playerController.handleTimeSwitching();
             }
         }
 
@@ -88,44 +64,32 @@ namespace Player
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                isJumping = true;
+                playerController.SetJumping(true);
             }
         }
 
         private void SetMoveInput()
         {
-            horizontalInput = Input.GetAxis("Horizontal");
-
-            playerAnimator.SetFloat("Speed", MathF.Abs(horizontalInput));
+            playerController.SetMoveInputValues(playerAnimator, Input.GetAxis("Horizontal"));
         }
 
         private void FixedUpdate()
         {
-            if (playerState == PlayerState.ALIVE && !isTimeSwitching)
+            if (playerState == PlayerState.ALIVE && !playerController.GetIsTimeSwitching())
             {
-                playerController.Move(horizontalInput);
-
-                if (isJumping && ISGrounded())
-                {
-                    playerController.Jump();
-                    isJumping = false;
-                }
-                playerController.HandleFalling();
-
+                playerController.HandleMovement();
             }
         }
 
-        private bool ISGrounded()
+        public bool ISGrounded()
           => playerController.IsGrounded(groundCheckPoint, groundCheckDistance, groundLayer);
 
 
         public void SetController(PlayerController playerController)
         {
             this.playerController = playerController;
+            
         }
-
-        public Rigidbody2D GetPlayerRigidBody()
-            => playerRB;
 
         public void FlipOnDirection(float horizontalInput)
         {

@@ -6,10 +6,21 @@ namespace Player
     {
         private PlayerSO playerSO;
 
-        public float movementSpeed;
-        public float jumpForce;
         public int health;
+
+        [Header("Jump")]
+        public bool isJumping = false;
+        public float jumpForce;
         public float fallingSpeed;
+
+        [Header("TimeSwitching Switch")]
+        public float timeSwitchingDuration;
+        public float timeRequiredForSwitching = 2f;
+        public bool isTimeSwitching = false;
+
+        [Header("Move")]
+        public float horizontalInput;
+        public float movementSpeed;
 
         public PlayerModel(PlayerSO playerS0)
         {
