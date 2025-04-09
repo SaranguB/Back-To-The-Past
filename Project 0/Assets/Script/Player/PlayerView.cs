@@ -8,23 +8,23 @@ namespace Player
 {
     public class PlayerView : MonoBehaviour
     {
+        //Player
         private PlayerController playerController;
-        private PlayerState playerState;
         private Rigidbody2D playerRB;
 
+        //Jump
         [Header("Jump")]
         [SerializeField] private Transform[] groundCheckPoint;
         [SerializeField] private float groundCheckDistance;
         [SerializeField] private LayerMask groundLayer;
 
-        [Header("Animation")]
+        //Animation
         private Animator playerAnimator;
 
         private void Start()
         {
 
             playerRB = GetComponent<Rigidbody2D>();
-            playerState = PlayerState.ALIVE;
             playerAnimator = GetComponent<Animator>();
 
             this.playerController.SetPlayerValues(playerAnimator, playerRB);
@@ -33,47 +33,7 @@ namespace Player
 
         private void Update()
         {
-            if (playerState == PlayerState.ALIVE)
-            {
-                SetMoveInput();
-                SetJumpInput();
-                SetTimeSwitchInput();
-            }
-        }
-
-        private void SetTimeSwitchInput()
-        {
-            if (Input.GetKey(KeyCode.Tab))
-            {
-                if (!playerController.GetIsTimeSwitching())
-                {
-                    playerController.CancelTimeSwitching(Time.deltaTime, playerAnimator);
-                }
-                else
-                {
-                    playerController.StopPlayerMovement(playerAnimator);
-                }
-            }
-
-            if (Input.GetKeyUp(KeyCode.Tab))
-            {
-                playerController.handleTimeSwitching();
-            }
-        }
-
-        private void SetJumpInput()
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                playerController.SetISJumping(true);
-                playerController.SetAnimatorBool("IsJumping", true);
-            }
-        }
-
-
-        private void SetMoveInput()
-        {
-            playerController.SetMoveInputValues(playerAnimator, Input.GetAxis("Horizontal"));
+            playerController.HandleInput();
         }
 
         private void FixedUpdate()
@@ -88,7 +48,6 @@ namespace Player
         public void SetController(PlayerController playerController)
         {
             this.playerController = playerController;
-
         }
 
         public void FlipOnDirection(float horizontalInput)

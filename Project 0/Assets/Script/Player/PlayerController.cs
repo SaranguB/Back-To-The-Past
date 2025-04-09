@@ -21,6 +21,49 @@ namespace Player
 
             this.playerView.SetController(this);
         }
+
+        public void HandleInput()
+        {
+            SetMoveInput();
+            SetJumpInput();
+            SetTimeSwitchInput();
+        }
+
+        private void SetTimeSwitchInput()
+        {
+            if (Input.GetKey(KeyCode.Tab))
+            {
+                if (!playerModel.isTimeSwitching)
+                {
+                    CancelTimeSwitching(Time.deltaTime);
+                }
+                else
+                {
+                    StopPlayerMovement(playerAnimator);
+                }
+            }
+
+            if (Input.GetKeyUp(KeyCode.Tab))
+            {
+                handleTimeSwitching();
+            }
+        }
+
+        private void SetJumpInput()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                SetISJumping(true);
+                SetAnimatorBool("IsJumping", true);
+            }
+        }
+
+        private void SetMoveInput()
+        {
+            playerModel.horizontalInput = Input.GetAxis("Horizontal");
+            SetAnimatorFloatValue("Speed", playerModel.horizontalInput);
+        }
+
         public void HandleMovement()
         {
             if (!playerModel.isTimeSwitching)
@@ -35,6 +78,7 @@ namespace Player
                 HandleFalling();
             }
         }
+
         public void Move(float horizontalInput)
         {
             float speed = horizontalInput * playerModel.movementSpeed;
@@ -94,7 +138,7 @@ namespace Player
             timeSwitchUIController.UpdateTimeSwitchUISlider(isKeyHeld, timeRequiredForSwitching);
         }
 
-        public void CancelTimeSwitching(float deltaTime, Animator playerAnimator)
+        public void CancelTimeSwitching(float deltaTime)
         {
             StopPlayerMovement(playerAnimator);
 
@@ -113,7 +157,7 @@ namespace Player
         {
             playerModel.horizontalInput = 0f;
             playerModel.isJumping = false;
-            SetAnimatorFloatValue("Speed", playerAnimator, 0f);
+            SetAnimatorFloatValue("Speed", 0f);
         }
 
         public void handleTimeSwitching()
@@ -128,21 +172,9 @@ namespace Player
             playerModel.isJumping = value;
         }
 
-        public bool GetIsJumping()
-            => playerModel.isJumping;
-
-        public bool GetIsTimeSwitching()
-            => playerModel.isTimeSwitching;
-
-        public void SetAnimatorFloatValue(string parameterName, Animator playerAnimator, float value)
+        public void SetAnimatorFloatValue(string parameterName, float value)
         {
             playerAnimator.SetFloat(parameterName, MathF.Abs(value));
-        }
-
-        internal void SetMoveInputValues(Animator playerAnimator, float horizontalInput)
-        {
-            playerModel.horizontalInput = horizontalInput;
-            SetAnimatorFloatValue("Speed", playerAnimator, playerModel.horizontalInput);
         }
 
         public void SetPlayerValues(Animator playerAnimator, Rigidbody2D playerRB)
