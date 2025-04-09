@@ -21,7 +21,20 @@ namespace Player
 
             this.playerView.SetController(this);
         }
+        public void HandleMovement()
+        {
+            if (!playerModel.isTimeSwitching)
+            {
+                Move(playerModel.horizontalInput);
 
+                if (playerModel.isJumping && playerView.ISGrounded())
+                {
+                    Jump();
+                    SetISJumping(false);
+                }
+                HandleFalling();
+            }
+        }
         public void Move(float horizontalInput)
         {
             float speed = horizontalInput * playerModel.movementSpeed;
@@ -50,6 +63,7 @@ namespace Player
         {
             if (playerRB.linearVelocity.y < 0)
             {
+                SetAnimatorBool("IsJumping", false);
                 playerRB.gravityScale = playerModel.fallingSpeed;
             }
             else if (playerRB.linearVelocity.y > 0 && !Input.GetKey(KeyCode.Space))
@@ -109,8 +123,10 @@ namespace Player
             playerModel.isTimeSwitching = false;
         }
 
-        public void SetJumping(bool value)
-            => playerModel.isJumping = value;
+        public void SetISJumping(bool value)
+        {
+            playerModel.isJumping = value;
+        }
 
         public bool GetIsJumping()
             => playerModel.isJumping;
@@ -135,16 +151,9 @@ namespace Player
             this.playerRB = playerRB;
         }
 
-        public void HandleMovement()
+        public void SetAnimatorBool(string stringValue, bool boolValue)
         {
-            Move(playerModel.horizontalInput);
-
-            if (playerModel.isJumping && playerView.ISGrounded())
-            {
-                Jump();
-                SetJumping(false);
-            }
-           HandleFalling();
+            playerAnimator.SetBool(stringValue, boolValue);
         }
     }
 }

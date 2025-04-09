@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using TimeSwitching;
 using UI;
+using static UnityEngine.Rendering.DebugUI;
 
 namespace Player
 {
@@ -17,7 +18,7 @@ namespace Player
         [SerializeField] private LayerMask groundLayer;
 
         [Header("Animation")]
-        [SerializeField] private Animator playerAnimator;
+        private Animator playerAnimator;
 
         private void Start()
         {
@@ -64,9 +65,11 @@ namespace Player
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                playerController.SetJumping(true);
+                playerController.SetISJumping(true);
+                playerController.SetAnimatorBool("IsJumping", true);
             }
         }
+
 
         private void SetMoveInput()
         {
@@ -75,10 +78,7 @@ namespace Player
 
         private void FixedUpdate()
         {
-            if (playerState == PlayerState.ALIVE && !playerController.GetIsTimeSwitching())
-            {
-                playerController.HandleMovement();
-            }
+            playerController.HandleMovement();
         }
 
         public bool ISGrounded()
@@ -88,7 +88,7 @@ namespace Player
         public void SetController(PlayerController playerController)
         {
             this.playerController = playerController;
-            
+
         }
 
         public void FlipOnDirection(float horizontalInput)
