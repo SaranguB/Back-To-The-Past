@@ -1,16 +1,22 @@
 using UnityEngine;
 
-public class BombController : MonoBehaviour
+namespace Wepons.Bomb
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class BombController
     {
-        
-    }
+        private BombView bombView;
+        private BombModel bombModel;
+        public BombController(BombView bombPrefab, BombSO bombSO)
+        {
+            bombView = Object.Instantiate(bombPrefab);
+            bombView.SetController(this);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+            bombModel = new BombModel(bombSO);
+        }
+
+        public void ConfigureBomb(Transform bombPosition)
+        {
+            bombView.ConfigurePosition(bombPosition);
+        }
     }
 }

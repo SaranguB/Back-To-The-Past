@@ -3,6 +3,7 @@ using System;
 using TimeSwitching;
 using UI;
 using UnityEngine;
+using Wepons.Bomb;
 
 namespace Player
 {
@@ -13,13 +14,14 @@ namespace Player
         private Rigidbody2D playerRB;
         private TimeSwitchUIController timeSwitchUIController;
         private Animator playerAnimator;
-
-        public PlayerController(PlayerView playerView, PlayerSO playerS0)
+        private BombPool bombPool;
+        public PlayerController(PlayerView playerView, PlayerSO playerS0, BombPool bombPool)
         {
             this.playerView = playerView;
             playerModel = new PlayerModel(playerS0);
 
             this.playerView.SetController(this);
+            this.bombPool = bombPool;
         }
 
         public void HandleInput()
@@ -27,6 +29,22 @@ namespace Player
             SetMoveInput();
             SetJumpInput();
             SetTimeSwitchInput();
+            SetBombThrowInput();
+        }
+
+        private void SetBombThrowInput()
+        {
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                DeployBomb();
+            }
+
+        }
+
+        private void DeployBomb()
+        {
+            BombController bombToDeploy = bombPool.GetBomb();
+            bombToDeploy.ConfigureBomb(playerView.bombBagPosition);
         }
 
         private void SetTimeSwitchInput()
@@ -35,18 +53,83 @@ namespace Player
             {
                 if (!playerModel.isTimeSwitching)
                 {
-                    CancelTimeSwitching(Time.deltaTime);
+                    HandleTimeSwitching(Time.deltaTime);
                 }
                 else
                 {
-                    StopPlayerMovement(playerAnimator);
+                    StopPlayerMovement();
                 }
             }
 
             if (Input.GetKeyUp(KeyCode.Tab))
             {
-                handleTimeSwitching();
+                CancelTimeSwitching();
             }
+        }
+
+        public void HandleTimeSwitching(float deltaTime)
+        {
+            StopPlayerMovement();
+
+            playerModel.timeSwitchingDuration += Time.deltaTime;
+            SetTimeSwitchSlider(true, playerModel.timeRequiredForSwitching);
+
+            if (playerModel.timeSwitchingDuration >= playerModel.timeRequiredForSwitching)
+            {
+                Debug.Log("Time Switched");
+                SwitchTime();
+                playerModel.isTimeSwitching = true;
+            }
+        }
+
+        public void CancelTimeSwitching()
+        {
+            SetTimeSwitchSlider(false, playerModel.timeRequiredForSwitching);
+            playerModel.timeSwitchingDuration = 0f;
+            playerModel.isTimeSwitching = false;
+        }
+
+        public void SwitchTime()
+        {
+            GameManager.Instance.eventService.onTimeSwitched.InvokeEvent();
+        }
+
+        public void SetTimeSwitchUI(TimeSwitchUIController timeSwitchUIController)
+        {
+            this.timeSwitchUIController = timeSwitchUIController;
+        }
+
+        public void SetTimeSwitchSlider(bool isKeyHeld, float timeRequiredForSwitching)
+        {
+            timeSwitchUIController.UpdateTimeSwitchUISlider(isKeyHeld, timeRequiredForSwitching);
+        }
+
+        private void SetMoveInput()
+        {
+            playerModel.horizontalInput = Input.GetAxis("Horizontal");
+            SetAnimatorFloatValue("Speed", playerModel.horizontalInput);
+        }
+
+        public void HandleMovement()
+        {
+                Move(playerModel.horizontalInput);
+
+                if (playerModel.isJumping && IsGrounded())
+                {
+                    Jump();
+                    SetISJumping(false);
+                }
+                HandleFalling();
+        }
+
+        public void Move(float horizontalInput)
+        {
+            float speed = horizontalInput * playerModel.movementSpeed;
+            Vector2 currentvelocity = playerRB.linearVelocity;
+            playerRB.linearVelocity = new Vector2(speed, currentvelocity.y);
+
+            if (horizontalInput != 0)
+                playerView.FlipOnDirection(horizontalInput);
         }
 
         private void SetJumpInput()
@@ -58,46 +141,16 @@ namespace Player
             }
         }
 
-        private void SetMoveInput()
-        {
-            playerModel.horizontalInput = Input.GetAxis("Horizontal");
-            SetAnimatorFloatValue("Speed", playerModel.horizontalInput);
-        }
-
-        public void HandleMovement()
-        {
-            if (!playerModel.isTimeSwitching)
-            {
-                Move(playerModel.horizontalInput);
-
-                if (playerModel.isJumping && playerView.ISGrounded())
-                {
-                    Jump();
-                    SetISJumping(false);
-                }
-                HandleFalling();
-            }
-        }
-
-        public void Move(float horizontalInput)
-        {
-            float speed = horizontalInput * playerModel.movementSpeed;
-            Vector2 currentvelocity = playerRB.linearVelocity;
-            playerRB.linearVelocity = new Vector2(speed, currentvelocity.y);
-
-            playerView.FlipOnDirection(horizontalInput);
-        }
-
         public void Jump()
         {
             playerRB.linearVelocity = new Vector2(playerRB.linearVelocityX, playerModel.jumpForce);
         }
 
-        public bool IsGrounded(Transform[] groundCheckPoint, float groundCheckDistance, LayerMask groundLayer)
+        public bool IsGrounded()
         {
-            foreach (Transform point in groundCheckPoint)
+            foreach (Transform point in playerView.groundCheckPoint)
             {
-                if (Physics2D.OverlapCircle(point.position, groundCheckDistance, groundLayer))
+                if (Physics2D.OverlapCircle(point.position, playerModel.groundCheckDistance, playerView.groundLayer))
                     return true;
             }
             return false;
@@ -120,52 +173,13 @@ namespace Player
             }
         }
 
-        public void SwitchTime()
-        {
-            GameManager.Instance.eventService.onTimeSwitched.InvokeEvent();
-        }
-
-        public void SetTimeSwitchUI(TimeSwitchUIController timeSwitchUIController)
-        {
-            this.timeSwitchUIController = timeSwitchUIController;
-        }
-
-        public void SetTimeSwitchSlider(bool isKeyHeld, float timeRequiredForSwitching)
-        {
-            if (timeSwitchUIController == null)
-                Debug.Log("Null");
-
-            timeSwitchUIController.UpdateTimeSwitchUISlider(isKeyHeld, timeRequiredForSwitching);
-        }
-
-        public void CancelTimeSwitching(float deltaTime)
-        {
-            StopPlayerMovement(playerAnimator);
-
-            playerModel.timeSwitchingDuration += Time.deltaTime;
-            SetTimeSwitchSlider(true, playerModel.timeRequiredForSwitching);
-
-            if (playerModel.timeSwitchingDuration >= playerModel.timeRequiredForSwitching)
-            {
-                Debug.Log("Time Switched");
-                SwitchTime();
-                playerModel.isTimeSwitching = true;
-            }
-        }
-
-        public void StopPlayerMovement(Animator playerAnimator)
+        public void StopPlayerMovement()
         {
             playerModel.horizontalInput = 0f;
             playerModel.isJumping = false;
             SetAnimatorFloatValue("Speed", 0f);
         }
 
-        public void handleTimeSwitching()
-        {
-            SetTimeSwitchSlider(false, playerModel.timeRequiredForSwitching);
-            playerModel.timeSwitchingDuration = 0f;
-            playerModel.isTimeSwitching = false;
-        }
 
         public void SetISJumping(bool value)
         {

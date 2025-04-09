@@ -11,15 +11,16 @@ namespace Player
         //Player
         private PlayerController playerController;
         private Rigidbody2D playerRB;
+        private Animator playerAnimator;
 
         //Jump
         [Header("Jump")]
-        [SerializeField] private Transform[] groundCheckPoint;
-        [SerializeField] private float groundCheckDistance;
-        [SerializeField] private LayerMask groundLayer;
+        public Transform[] groundCheckPoint;
+        public LayerMask groundLayer;
 
-        //Animation
-        private Animator playerAnimator;
+        //Bomb
+        [Header("Bomb")]
+        public Transform bombBagPosition;
 
         private void Start()
         {
@@ -41,10 +42,6 @@ namespace Player
             playerController.HandleMovement();
         }
 
-        public bool ISGrounded()
-          => playerController.IsGrounded(groundCheckPoint, groundCheckDistance, groundLayer);
-
-
         public void SetController(PlayerController playerController)
         {
             this.playerController = playerController;
@@ -52,12 +49,9 @@ namespace Player
 
         public void FlipOnDirection(float horizontalInput)
         {
-            if (horizontalInput != 0)
-            {
-                Vector3 scale = transform.localScale;
-                scale.x = MathF.Sign(horizontalInput) * MathF.Abs(scale.x);
-                transform.localScale = scale;
-            }
+            Vector3 scale = transform.localScale;
+            scale.x = MathF.Sign(horizontalInput) * MathF.Abs(scale.x);
+            transform.localScale = scale;
         }
 
     }

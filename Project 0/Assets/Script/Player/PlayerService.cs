@@ -1,15 +1,18 @@
 using TimeSwitching;
 using UI;
 using UnityEngine;
+using Wepons.Bomb;
 
 namespace Player
 {
     public class PlayerService
     {
         private PlayerController playerController;
-        public PlayerService(PlayerView playerView, PlayerSO playerS0) 
-        { 
-            playerController = new PlayerController(playerView, playerS0);
+        private BombPool bombPool;
+        public PlayerService(PlayerView playerView, PlayerSO playerS0, BombSO bombSO, BombView bombPrefab) 
+        {
+            bombPool = new BombPool(bombSO, bombPrefab);
+            playerController = new PlayerController(playerView, playerS0, bombPool);
         }
 
         public PlayerController GetPlayer() => playerController;
@@ -18,5 +21,8 @@ namespace Player
         {
             playerController.SetTimeSwitchUI(timeSwitchUIController);
         }
+
+        public void ReturneBombToPool(BombController bombToReturn)
+            => bombPool.ReturnItem(bombToReturn);
     }
 }

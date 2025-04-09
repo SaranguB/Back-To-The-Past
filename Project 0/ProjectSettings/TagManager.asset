@@ -12,7 +12,7 @@ TagManager:
   - Water
   - UI
   - Player
-  - 
+  - Bomb
   - 
   - 
   - 
@@ -52,6 +52,9 @@ TagManager:
     locked: 0
   - name: Objects
     uniqueID: 852844931
+    locked: 0
+  - name: Bomb
+    uniqueID: 559389947
     locked: 0
   m_RenderingLayers:
   - Default

@@ -7,13 +7,13 @@ namespace ObjectPool
 {
     public class GenericObjectPool<T> where T : class
     {
-        public List<PooledItem<T>> pooledItems = new();
+        public List<PooledItem> pooledItems = new();
 
         public virtual T GetItem<U>() where U : T
         {
             if (pooledItems.Count > 0)
             {
-                PooledItem<T> item = pooledItems.Find(item => !item.isUsed && item.Item is U);
+                PooledItem item = pooledItems.Find(item => !item.isUsed && item.Item is U);
                 if (item != null)
                 {
                     item.isUsed = true;
@@ -25,7 +25,7 @@ namespace ObjectPool
 
         private T CreateNewPooledItem<U>() where U : T
         {
-            PooledItem<T> newItem = new PooledItem<T>();
+            PooledItem newItem = new PooledItem();
             newItem.Item = CreateItem<U>();
             newItem.isUsed = true;
             pooledItems.Add(newItem);
@@ -39,13 +39,13 @@ namespace ObjectPool
 
         public virtual void ReturnItem(T item)
         {
-            PooledItem<T> pooledItem = pooledItems.Find(i => i.Item.Equals(item));
+            PooledItem pooledItem = pooledItems.Find(i => i.Item.Equals(item));
 
             if (pooledItem != null)
                 pooledItem.isUsed = false;
         }
 
-        public class PooledItem<T>
+        public class PooledItem
         {
             public T Item;
             public bool isUsed;
