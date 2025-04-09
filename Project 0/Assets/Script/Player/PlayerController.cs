@@ -69,6 +69,7 @@ namespace Player
 
         public void HandleTimeSwitching(float deltaTime)
         {
+            SetAnimatorBool("IsTimeSwitching", true);
             StopPlayerMovement();
 
             playerModel.timeSwitchingDuration += Time.deltaTime;
@@ -84,6 +85,7 @@ namespace Player
 
         public void CancelTimeSwitching()
         {
+            SetAnimatorBool("IsTimeSwitching", false);
             SetTimeSwitchSlider(false, playerModel.timeRequiredForSwitching);
             playerModel.timeSwitchingDuration = 0f;
             playerModel.isTimeSwitching = false;
@@ -91,6 +93,7 @@ namespace Player
 
         public void SwitchTime()
         {
+            SetAnimatorBool("IsTimeSwitching", false);
             GameManager.Instance.eventService.onTimeSwitched.InvokeEvent();
         }
 
