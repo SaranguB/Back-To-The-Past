@@ -15,13 +15,26 @@ namespace Player
         private TimeSwitchUIController timeSwitchUIController;
         private Animator playerAnimator;
         private BombPool bombPool;
+        private PlayerStateMachine playerStateMachine;
         public PlayerController(PlayerView playerView, PlayerSO playerS0, BombPool bombPool)
         {
             this.playerView = playerView;
             playerModel = new PlayerModel(playerS0);
-
             this.playerView.SetController(this);
+
+            CreatePlayerStateMachine();
+            ChangePlayerState(PlayerState.Alive);
             this.bombPool = bombPool;
+        }
+
+        private void ChangePlayerState(PlayerState state)
+        {
+            playerStateMachine.ChangeState(state);
+        }
+
+        private void CreatePlayerStateMachine()
+        {
+          playerStateMachine = new PlayerStateMachine(this);
         }
 
         public void HandleInput()
