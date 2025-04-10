@@ -55,7 +55,6 @@ namespace Player
         public void TakeDamageFromBomb(float damage)
         {
             Debug.Log("Player took damage");
-
         }
 
     }
