@@ -1,0 +1,544 @@
+fileFormatVersion: 2
+guid: 731fdffffcd30464e80d5ea040bc8944
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4847453367263176156
+    second: Time Traveling Animation_0
+  - first:
+      213: -854222787390793124
+    second: Time Traveling Animation_1
+  - first:
+      213: -1183224197872295822
+    second: Time Traveling Animation_2
+  - first:
+      213: 8701358581580499884
+    second: Time Traveling Animation_3
+  - first:
+      213: 5942315879862657005
+    second: Time Traveling Animation_4
+  - first:
+      213: -371674659678031948
+    second: Time Traveling Animation_5
+  - first:
+      213: 965247514458169705
+    second: Time Traveling Animation_6
+  - first:
+      213: -839675440165989452
+    second: Time Traveling Animation_7
+  - first:
+      213: 8562385536702588727
+    second: Time Traveling Animation_8
+  - first:
+      213: -7942681657392225858
+    second: Time Traveling Animation_9
+  - first:
+      213: 7646756056170218666
+    second: Time Traveling Animation_10
+  - first:
+      213: 7157124512766504900
+    second: Time Traveling Animation_11
+  - first:
+      213: -9115867899910831428
+    second: Time Traveling Animation_12
+  - first:
+      213: -723558531378407909
+    second: Time Traveling Animation_13
+  - first:
+      213: -6909596269607188310
+    second: Time Traveling Animation_14
+  - first:
+      213: -5578787879401380403
+    second: Time Traveling Animation_15
+  - first:
+      213: -5529702013581827792
+    second: Time Traveling Animation_16
+  - first:
+      213: 6739341814477668421
+    second: Time Traveling Animation_17
+  - first:
+      213: 8886706787977655272
+    second: Time Traveling Animation_18
+  - first:
+      213: 7037371419048420564
+    second: Time Traveling Animation_19
+  - first:
+      213: -5896427016656181024
+    second: Time Traveling Animation_20
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 170
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: img5
+      rect:
+        serializedVersion: 2
+        x: 378
+        y: 705
+        width: 254
+        height: 283
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5a178696e03524f0800000000000000
+      internalID: -854222787390793124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: img7
+      rect:
+        serializedVersion: 2
+        x: 716
+        y: 706
+        width: 261
+        height: 275
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 270ec2c6cd7549fe0800000000000000
+      internalID: -1183224197872295822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Time Traveling Animation_3
+      rect:
+        serializedVersion: 2
+        x: 795
+        y: 971
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cab0766378f61c870800000000000000
+      internalID: 8701358581580499884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: img1
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 705
+        width: 260
+        height: 264
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: def506a1fc8577250800000000000000
+      internalID: 5942315879862657005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: img6
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 373
+        width: 217
+        height: 274
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4bf60e1cddb87daf0800000000000000
+      internalID: -371674659678031948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Time Traveling Animation_6
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 520
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 961ab93108f356d00800000000000000
+      internalID: 965247514458169705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: img8
+      rect:
+        serializedVersion: 2
+        x: 363
+        y: 371
+        width: 278
+        height: 286
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b3594ec2afd854f0800000000000000
+      internalID: -839675440165989452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: img4
+      rect:
+        serializedVersion: 2
+        x: 695
+        y: 371
+        width: 263
+        height: 275
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 737a919b744b3d670800000000000000
+      internalID: 8562385536702588727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Time Traveling Animation_9
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 473
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb1202f5d1de5c190800000000000000
+      internalID: -7942681657392225858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Time Traveling Animation_10
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 459
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa4c71c6e1cbe1a60800000000000000
+      internalID: 7646756056170218666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Time Traveling Animation_11
+      rect:
+        serializedVersion: 2
+        x: 639
+        y: 459
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4cf20b403d6335360800000000000000
+      internalID: 7157124512766504900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: img3
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 36
+        width: 244
+        height: 279
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa803b82dce2c10a0800000000000000
+      internalID: -6909596269607188310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Time Traveling Animation_18
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 35
+        width: 249
+        height: 290
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e3f5786dbce35b70800000000000000
+      internalID: 8886706787977655272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: img2
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 36
+        width: 243
+        height: 274
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d42ed02504c9a160800000000000000
+      internalID: 7037371419048420564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Time Traveling Animation_20
+      rect:
+        serializedVersion: 2
+        x: 746
+        y: 209
+        width: 42
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e821347edeab2ea0800000000000000
+      internalID: -5896427016656181024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 1c2ea335a8e307746821f51a2ae9749a
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Time Traveling Animation_0: 4847453367263176156
+      Time Traveling Animation_10: 7646756056170218666
+      Time Traveling Animation_11: 7157124512766504900
+      Time Traveling Animation_12: -9115867899910831428
+      Time Traveling Animation_13: -723558531378407909
+      Time Traveling Animation_15: -5578787879401380403
+      Time Traveling Animation_16: -5529702013581827792
+      Time Traveling Animation_17: 6739341814477668421
+      Time Traveling Animation_18: 8886706787977655272
+      Time Traveling Animation_20: -5896427016656181024
+      Time Traveling Animation_3: 8701358581580499884
+      Time Traveling Animation_6: 965247514458169705
+      Time Traveling Animation_9: -7942681657392225858
+      img1: 5942315879862657005
+      img2: 7037371419048420564
+      img3: -6909596269607188310
+      img4: 8562385536702588727
+      img5: -854222787390793124
+      img6: -371674659678031948
+      img7: -1183224197872295822
+      img8: -839675440165989452
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -12,6 +12,7 @@ namespace Player
         public bool isJumping = false;
         public float jumpForce;
         public float fallingSpeed;
+        public float groundCheckDistance = .2f;
 
         [Header("TimeSwitching Switch")]
         public float timeSwitchingDuration;
@@ -22,6 +23,7 @@ namespace Player
         public float horizontalInput;
         public float movementSpeed;
 
+        public bool canDeployBomb = true;
         public PlayerModel(PlayerSO playerS0)
         {
             this.playerSO = playerS0;

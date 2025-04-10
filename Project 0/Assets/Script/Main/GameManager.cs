@@ -3,6 +3,7 @@ using UnityEngine;
 using Utilities;
 using TimeSwitching;
 using Events;
+using Wepons.Bomb;
 
 namespace Main
 {
@@ -19,11 +20,15 @@ namespace Main
         [Header("TimeSwitch")]
         [SerializeField] private TimeSwitchView timeSwitchView;
 
+        [Header("Wepons")]
+        [SerializeField] private BombView bombView;
+        [SerializeField] private BombSO bombSO;
+
         protected override void Awake()
         {
             base.Awake();
             eventService = new EventService();
-            playerService = new PlayerService(playerView, playerS0);
+            playerService = new PlayerService(playerView, playerS0, bombSO, bombView);
             timeSwitchService = new TimeSwitchService(timeSwitchView);
         }
     }

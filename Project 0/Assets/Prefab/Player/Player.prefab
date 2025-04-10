@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 667548102634992035}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GrounCheckCentre
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,6 +31,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7525151381986033123}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2390970102062460683
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2945203400665531027}
+  m_Layer: 6
+  m_Name: BombBagPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2945203400665531027
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2390970102062460683}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.201, y: -0.12, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7525151381986033123}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2981375480604484610
 GameObject:
   m_ObjectHideFlags: 0
@@ -40,7 +71,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1376652388582851680}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GrounCheckRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +106,8 @@ GameObject:
   - component: {fileID: 1253787077536760158}
   - component: {fileID: 506335931965030337}
   - component: {fileID: 5929827514563647122}
-  m_Layer: 0
+  - component: {fileID: 4199621830093461611}
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,6 +130,7 @@ Transform:
   - {fileID: 667548102634992035}
   - {fileID: 1376652388582851680}
   - {fileID: 6866321766857904969}
+  - {fileID: 2945203400665531027}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4030304724170264737
@@ -141,9 +174,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -26352721
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: -855298285791758126, guid: 6146adcc77c29fa44af3f9dff7a79b1d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -216,8 +249,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.025660515, y: -0.03895706}
-  m_Size: {x: 0.4639578, y: 0.48663127}
+  m_Offset: {x: 0.025660515, y: -0.027784288}
+  m_Size: {x: 0.4639578, y: 0.4642859}
   m_Direction: 0
 --- !u!114 &5929827514563647122
 MonoBehaviour:
@@ -235,10 +268,32 @@ MonoBehaviour:
   - {fileID: 667548102634992035}
   - {fileID: 1376652388582851680}
   - {fileID: 6866321766857904969}
-  groundCheckDistance: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  bombBagPosition: {fileID: 2945203400665531027}
+--- !u!95 &4199621830093461611
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6477960034497839151}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7d0a752337326404eba1b43bce551c04, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7992864699413002419
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,7 +303,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6866321766857904969}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GrounCheckLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}

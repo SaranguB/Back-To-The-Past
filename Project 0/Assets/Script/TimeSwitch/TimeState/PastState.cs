@@ -6,7 +6,6 @@ namespace TimeSwitching
 {
     public class PastState : IState<TimeSwitchController>
     {
-
         public TimeSwitchController owner { get; set; }
         public TimeAffectedObjectController[] objectController;
 
