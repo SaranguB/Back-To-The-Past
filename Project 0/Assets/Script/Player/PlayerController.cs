@@ -29,12 +29,12 @@ namespace Player
             SetMoveInput();
             SetJumpInput();
             SetTimeSwitchInput();
-            SetBombThrowInput();
+            SetBombDeployInput();
         }
 
-        private void SetBombThrowInput()
+        private void SetBombDeployInput()
         {
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+            if (Input.GetKeyDown(KeyCode.LeftShift) && playerModel.canDeployBomb)
             {
                 DeployBomb();
             }
@@ -57,7 +57,8 @@ namespace Player
                 }
                 else
                 {
-                    StopPlayerMovement();
+                    Debug.Log("Yes");
+                    //StopPlayerActions();
                 }
             }
 
@@ -70,7 +71,7 @@ namespace Player
         public void HandleTimeSwitching(float deltaTime)
         {
             SetAnimatorBool("IsTimeSwitching", true);
-            StopPlayerMovement();
+            StopPlayerActions();
 
             playerModel.timeSwitchingDuration += Time.deltaTime;
             SetTimeSwitchSlider(true, playerModel.timeRequiredForSwitching);
@@ -89,6 +90,7 @@ namespace Player
             SetTimeSwitchSlider(false, playerModel.timeRequiredForSwitching);
             playerModel.timeSwitchingDuration = 0f;
             playerModel.isTimeSwitching = false;
+            playerModel.canDeployBomb = true;
         }
 
         public void SwitchTime()
@@ -115,14 +117,14 @@ namespace Player
 
         public void HandleMovement()
         {
-                Move(playerModel.horizontalInput);
+            Move(playerModel.horizontalInput);
 
-                if (playerModel.isJumping && IsGrounded())
-                {
-                    Jump();
-                    SetISJumping(false);
-                }
-                HandleFalling();
+            if (playerModel.isJumping && IsGrounded())
+            {
+                Jump();
+                SetISJumping(false);
+            }
+            HandleFalling();
         }
 
         public void Move(float horizontalInput)
@@ -140,12 +142,13 @@ namespace Player
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 SetISJumping(true);
-                SetAnimatorBool("IsJumping", true);
+
             }
         }
 
         public void Jump()
         {
+            SetAnimatorBool("IsJumping", true);
             playerRB.linearVelocity = new Vector2(playerRB.linearVelocityX, playerModel.jumpForce);
         }
 
@@ -176,11 +179,12 @@ namespace Player
             }
         }
 
-        public void StopPlayerMovement()
+        public void StopPlayerActions()
         {
             playerModel.horizontalInput = 0f;
             playerModel.isJumping = false;
             SetAnimatorFloatValue("Speed", 0f);
+            playerModel.canDeployBomb = false;
         }
 
 

@@ -1,12 +1,10 @@
 using System;
 using UnityEngine;
-using TimeSwitching;
-using UI;
-using static UnityEngine.Rendering.DebugUI;
+using Wepons.Bomb;
 
 namespace Player
 {
-    public class PlayerView : MonoBehaviour
+    public class PlayerView : MonoBehaviour, IDamagableFromBomb
     {
         //Player
         private PlayerController playerController;
@@ -52,6 +50,12 @@ namespace Player
             Vector3 scale = transform.localScale;
             scale.x = MathF.Sign(horizontalInput) * MathF.Abs(scale.x);
             transform.localScale = scale;
+        }
+
+        public void TakeDamageFromBomb(float damage)
+        {
+            Debug.Log("Player took damage");
+
         }
 
     }

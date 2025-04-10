@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e5023da1acf63e49bba990cafefdd05, type: 3}
   m_Name: Bomb
   m_EditorClassIdentifier: 
-  Damage: 5
+  bombDamage: 0
+  DamageRadius: 2.3
+  primingTime: 1.5

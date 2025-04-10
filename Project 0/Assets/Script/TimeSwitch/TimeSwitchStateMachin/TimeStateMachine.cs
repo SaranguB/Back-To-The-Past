@@ -7,7 +7,8 @@ namespace TimeSwitching
     public class TimeStateMachine : GenericStateMachine<TimeSwitchController, TimeState>
     {
         private TimeAffectedObjectController[] objectController;
-        public TimeStateMachine(TimeSwitchController owner, TimeAffectedObjectController[] timeAffectedObjectControllers) : base(owner) 
+        public TimeStateMachine(TimeSwitchController owner, 
+            TimeAffectedObjectController[] timeAffectedObjectControllers) : base(owner) 
         {
             objectController = timeAffectedObjectControllers;
             CreateStates();

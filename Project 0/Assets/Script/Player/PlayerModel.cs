@@ -23,6 +23,7 @@ namespace Player
         public float horizontalInput;
         public float movementSpeed;
 
+        public bool canDeployBomb = true;
         public PlayerModel(PlayerSO playerS0)
         {
             this.playerSO = playerS0;
