@@ -1,7 +1,10 @@
 using Enemy;
 using UnityEngine;
 
-public class EnemyViewCollection : MonoBehaviour
+namespace Enemy
 {
-    public EnemyView[] enemyView;
+    public class EnemyViewCollection : MonoBehaviour
+    {
+        public EnemyView[] enemyView;
+    }
 }

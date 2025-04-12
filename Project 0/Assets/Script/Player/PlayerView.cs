@@ -10,6 +10,7 @@ namespace Player
         private PlayerController playerController;
         private Rigidbody2D playerRB;
         private Animator playerAnimator;
+        private Transform playerTransform;
 
         //Jump
         [Header("Jump")]
