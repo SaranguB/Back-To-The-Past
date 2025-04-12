@@ -68,11 +68,6 @@ namespace Player
                 {
                     HandleTimeSwitching(Time.deltaTime);
                 }
-                else
-                {
-                    Debug.Log("Yes");
-                    //StopPlayerActions();
-                }
             }
 
             if (Input.GetKeyUp(KeyCode.Tab))
