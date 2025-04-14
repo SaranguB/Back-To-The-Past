@@ -6,6 +6,13 @@ namespace Enemy
 {
     public class DeadState<T> : IState<T> where T : EnemyController
     {
+        private Animator enemyAnimator;
+
+        public DeadState(Animator enemyAnimator)
+        {
+            this.enemyAnimator = enemyAnimator;
+        }
+
         public T owner { get; set; }
 
         public void OnStateEnter()
@@ -13,6 +20,10 @@ namespace Enemy
 
         }
 
+        public void FixedUpdateState()
+        {
+
+        }
         public void UpdateState()
         {
         }

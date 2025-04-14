@@ -216,5 +216,10 @@ namespace Player
         {
             playerAnimator.SetBool(stringValue, boolValue);
         }
+
+        public void OnPlayerPositionChanged(Vector2 position)
+        {
+            GameManager.Instance.eventService.onPlayerPositionChanged.InvokeEvent(position);
+        }
     }
 }

@@ -103,6 +103,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: cc2d108280d4b724f8b3156d435dc9e1, type: 2}
+  enemyAnimator: {fileID: 0}
+  enemyTriggerManager: {fileID: 0}
 --- !u!50 &4628536599963473096
 Rigidbody2D:
   serializedVersion: 5
@@ -115,7 +117,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1000
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1

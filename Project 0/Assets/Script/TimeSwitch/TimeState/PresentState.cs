@@ -28,7 +28,10 @@ namespace TimeSwitching
         {
 
         }
+        public void FixedUpdateState()
+        {
 
+        }
         public void OnStateExit()
         {
 

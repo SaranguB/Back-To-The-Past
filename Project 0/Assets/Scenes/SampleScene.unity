@@ -2795,6 +2795,97 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1507974478}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1122626705
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1122626706}
+  - component: {fileID: 1122626708}
+  - component: {fileID: 1122626707}
+  m_Layer: 0
+  m_Name: TriggerZone1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1122626706
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1122626705}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.16, y: 5.63, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1610374835}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1122626707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1122626705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6eca3558d6f49e43b2ef4acb9323574, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &1122626708
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1122626705}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 1.8138938, y: 0.42389297}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 7.901162, y: 0.15221405}
+  m_EdgeRadius: 0
 --- !u!1 &1426783700
 GameObject:
   m_ObjectHideFlags: 0
@@ -2932,6 +3023,7 @@ Transform:
   - {fileID: 2033473873}
   - {fileID: 518992866}
   - {fileID: 299389922}
+  - {fileID: 1610374835}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1507974479
@@ -2999,7 +3091,7 @@ MonoBehaviour:
   timeSwitchView: {fileID: 1507974479}
   bombView: {fileID: -3466430657764210644, guid: 31e02e0aeace9464fa5eeebf61b9de26, type: 3}
   bombSO: {fileID: 11400000, guid: 4c89c1fdc6cc01b479af43ad220b3394, type: 2}
-  enemyViewCollection: {fileID: 0}
+  enemyViewCollection: {fileID: 299389923}
 --- !u!4 &1522333370
 Transform:
   m_ObjectHideFlags: 0
@@ -3014,6 +3106,38 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1610374834
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1610374835}
+  m_Layer: 0
+  m_Name: TriggerZonesForEnemy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1610374835
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610374834}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1122626706}
+  m_Father: {fileID: 1507974478}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1652719032
 GameObject:
@@ -4942,6 +5066,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 299389922}
     m_Modifications:
+    - target: {fileID: 4217941440022314185, guid: 743af5436a7a6cd4d94a5d6c8008b0c0, type: 3}
+      propertyPath: m_Size.x
+      value: 1.3746529
+      objectReference: {fileID: 0}
+    - target: {fileID: 4217941440022314185, guid: 743af5436a7a6cd4d94a5d6c8008b0c0, type: 3}
+      propertyPath: m_Size.y
+      value: 1.3746533
+      objectReference: {fileID: 0}
+    - target: {fileID: 4217941440022314185, guid: 743af5436a7a6cd4d94a5d6c8008b0c0, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.01687622
+      objectReference: {fileID: 0}
+    - target: {fileID: 4217941440022314185, guid: 743af5436a7a6cd4d94a5d6c8008b0c0, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.008437395
+      objectReference: {fileID: 0}
     - target: {fileID: 5368945797799237045, guid: 743af5436a7a6cd4d94a5d6c8008b0c0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.55
@@ -4986,6 +5126,10 @@ PrefabInstance:
       propertyPath: enemyAnimator
       value: 
       objectReference: {fileID: 480029962}
+    - target: {fileID: 7560869638478553525, guid: 743af5436a7a6cd4d94a5d6c8008b0c0, type: 3}
+      propertyPath: enemyTriggerManager
+      value: 
+      objectReference: {fileID: 1122626707}
     - target: {fileID: 8408619135518438466, guid: 743af5436a7a6cd4d94a5d6c8008b0c0, type: 3}
       propertyPath: m_Name
       value: PigEnemy

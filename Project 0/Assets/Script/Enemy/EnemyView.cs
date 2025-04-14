@@ -18,19 +18,12 @@ namespace Enemy
 
         private void Update()
         {
-            if (enemyController.isInCastingState())
-            {
-                enemyController.MoveTowardsPlayer();
-            }
-        }
-        public Coroutine SetCorotuine()
-        {
-            return StartCoroutine(CheckPlayerDistance());
-        }
+            enemyController.UpdateStateMachine();
 
-        private IEnumerator CheckPlayerDistance()
+        }
+        private void FixedUpdate()
         {
-            yield return null;
+            enemyController.FixedUpdateStateMachine();
         }
     }
 }

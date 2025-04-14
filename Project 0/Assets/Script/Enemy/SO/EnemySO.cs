@@ -8,7 +8,9 @@ namespace Enemy
         public EnemyType enemyType;
         public int damage;
         public float speed;
-        public bool InPast;
-        public bool InPresent;
+        public bool inPast;
+        public bool inPresent;
+        public float attackRange;
+        public float attackDelay;
     }
 }

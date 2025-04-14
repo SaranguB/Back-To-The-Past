@@ -6,18 +6,23 @@ namespace Enemy
 {
     public class PigController : EnemyController
     {
-        private EnemySO data;
+        private EnemySO enemyData;
         private EnemyView enemyView;
         private PigStateMachine pigStateMachine;
+
         public PigController(EnemyView enemyView)
         {
-            this.enemyView = enemyView;
-            enemyView.SetController(this);
-            enemyView.enemyTriggerManager.SetEnemyTriggerZone(this);
+            SetEnemyView(enemyView);
             CreateStateMachine();
-            pigStateMachine.ChangeState(PigStates.Idle);
+            ChangeState(EnemyStates.Idle);
+        }
 
-
+        private void SetEnemyView(EnemyView enemyView)
+        {
+            this.enemyView = enemyView;
+            this.enemyView.SetController(this);
+            this.enemyView.enemyTriggerManager.SetEnemyTriggerZone(this);
+            enemyData = this.enemyView.enemyData;
         }
 
         private void CreateStateMachine()
@@ -25,28 +30,44 @@ namespace Enemy
             pigStateMachine = new PigStateMachine(this, enemyView.enemyAnimator);
         }
 
-        public override Coroutine SetCorotuine()
-        {
-            return enemyView.SetCorotuine();
-        }
-
         public override void PlayerEnteredRange()
         {
             base.PlayerEnteredRange();
-            Debug.Log("changed1");
-            pigStateMachine.ChangeState(PigStates.Catching);
+            ChangeState(EnemyStates.Catching);
         }
 
-        public override bool isInCastingState()
+        public override bool IsInCastingState()
         {
             return GetCurrentState() is catchingState<PigController>;
         }
         public IState<PigController> GetCurrentState()
             => pigStateMachine.GetCurrentState();
 
-        public override void MoveTowardsPlayer()
-        {
-            pigStateMachine.Update();
-        }
+        public override void UpdateStateMachine()
+            => pigStateMachine.Update();
+
+        public override void FixedUpdateStateMachine()
+            => pigStateMachine.FixedUpdate();
+
+        public override void SetEnemyPosition(Vector2 pos)
+            => enemyView.transform.position = pos;
+
+        public override Vector2 GetPlayerPosition()
+            => playerPosition;
+
+        public override float GetSpeed()
+            => enemyData.speed;
+
+        public override float GetAttackRange()
+            => enemyData.attackRange;
+
+        public override void ChangeState(EnemyStates state)
+             => pigStateMachine.ChangeState(state);
+
+        public override Transform GetEnemyTransform()
+            => enemyView.transform;
+
+        public override float GetAttackDelay()
+            => enemyData.attackDelay;
     }
 }

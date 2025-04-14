@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Enemy
 {
-    public class PigStateMachine : GenericStateMachine<PigController, PigStates>
+    public class PigStateMachine : GenericStateMachine<PigController, EnemyStates>
     {
         public PigStateMachine(PigController owner, Animator enemyAnimator) : base(owner)
         {
@@ -14,18 +14,12 @@ namespace Enemy
 
         private void CreateState(Animator enemyAnimator)
         {
-            AddState(PigStates.Idle, new IdleState<PigController>(enemyAnimator));
-            AddState(PigStates.Catching, new catchingState<PigController>());
-            AddState(PigStates.Attack, new AttackState<PigController>());
-            AddState(PigStates.Dead, new DeadState<PigController>());
+            AddState(EnemyStates.Idle, new IdleState<PigController>(enemyAnimator));
+            AddState(EnemyStates.Catching, new catchingState<PigController>(enemyAnimator));
+            AddState(EnemyStates.Attack, new AttackState<PigController>(enemyAnimator));
+            AddState(EnemyStates.Dead, new DeadState<PigController>(enemyAnimator));
         }
     }
 
-    public enum PigStates
-    {
-        Idle,
-        Catching,
-        Attack,
-        Dead,
-    }
+
 }

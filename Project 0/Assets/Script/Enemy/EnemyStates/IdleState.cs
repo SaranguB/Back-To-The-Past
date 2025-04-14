@@ -17,12 +17,16 @@ namespace Enemy
 
         public void OnStateEnter()
         {
-            Debug.Log("idle");
+           
         }
 
         public void UpdateState()
         {
             
+        }
+        public void FixedUpdateState()
+        {
+
         }
 
         public void OnStateExit()

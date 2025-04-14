@@ -26,6 +26,7 @@ namespace Player
 
             playerRB = GetComponent<Rigidbody2D>();
             playerAnimator = GetComponent<Animator>();
+            playerTransform = playerRB.transform;
 
             this.playerController.SetPlayerValues(playerAnimator, playerRB);
         }
@@ -34,6 +35,7 @@ namespace Player
         private void Update()
         {
             playerController.HandleInput();
+            playerController.OnPlayerPositionChanged(playerTransform.position);
         }
 
         private void FixedUpdate()

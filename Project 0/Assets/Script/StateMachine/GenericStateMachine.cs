@@ -41,6 +41,8 @@ namespace StateMachine
 
         public void Update() => currentState?.UpdateState();
 
+        public void FixedUpdate() => currentState?.FixedUpdateState();
+
         public IState<T> GetCurrentState()
             => currentState;
     }
