@@ -10,6 +10,7 @@ namespace Player
         private PlayerController playerController;
         private Rigidbody2D playerRB;
         private Animator playerAnimator;
+        private Transform playerTransform;
 
         //Jump
         [Header("Jump")]
@@ -25,6 +26,7 @@ namespace Player
 
             playerRB = GetComponent<Rigidbody2D>();
             playerAnimator = GetComponent<Animator>();
+            playerTransform = playerRB.transform;
 
             this.playerController.SetPlayerValues(playerAnimator, playerRB);
         }
@@ -33,6 +35,7 @@ namespace Player
         private void Update()
         {
             playerController.HandleInput();
+            playerController.OnPlayerPositionChanged(playerTransform.position);
         }
 
         private void FixedUpdate()

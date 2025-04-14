@@ -68,11 +68,6 @@ namespace Player
                 {
                     HandleTimeSwitching(Time.deltaTime);
                 }
-                else
-                {
-                    Debug.Log("Yes");
-                    //StopPlayerActions();
-                }
             }
 
             if (Input.GetKeyUp(KeyCode.Tab))
@@ -220,6 +215,11 @@ namespace Player
         public void SetAnimatorBool(string stringValue, bool boolValue)
         {
             playerAnimator.SetBool(stringValue, boolValue);
+        }
+
+        public void OnPlayerPositionChanged(Vector2 position)
+        {
+            GameManager.Instance.eventService.onPlayerPositionChanged.InvokeEvent(position);
         }
     }
 }

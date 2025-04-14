@@ -15,6 +15,11 @@ namespace Player
         {
         }
 
+        public void FixedUpdateState()
+        {
+
+        }
+
         public void OnStateExit()
         {
         }
