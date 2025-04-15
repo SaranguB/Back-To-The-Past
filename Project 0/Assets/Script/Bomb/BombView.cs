@@ -10,10 +10,12 @@ namespace Wepons.Bomb
         public Animator bombAnimator;
         public BombDamageArea damageArea;
         public CapsuleCollider2D damageAreaCollider;
+        public Rigidbody2D bombRB;
 
         private void Start()
         {
             bombAnimator = GetComponent<Animator>();
+            bombRB = GetComponent<Rigidbody2D>();
         }
 
         public void SetController(BombController bombController)

@@ -14,7 +14,7 @@ TagManager:
   - Player
   - Bomb
   - BombDamageArea
-  - 
+  - Environment
   - 
   - 
   - 
@@ -44,14 +44,17 @@ TagManager:
   - name: Background
     uniqueID: 3273055811
     locked: 0
-  - name: Player
-    uniqueID: 4268614575
-    locked: 0
-  - name: Environment
-    uniqueID: 12997045
+  - name: Decoration
+    uniqueID: 2333476581
     locked: 0
   - name: Objects
     uniqueID: 852844931
+    locked: 0
+  - name: Ground
+    uniqueID: 4268614575
+    locked: 0
+  - name: Player
+    uniqueID: 12997045
     locked: 0
   - name: Bomb
     uniqueID: 559389947
@@ -59,8 +62,8 @@ TagManager:
   - name: Enemy
     uniqueID: 3346897823
     locked: 0
-  - name: New Layer 7
-    uniqueID: 2333476581
+  - name: Crates
+    uniqueID: 390953359
     locked: 0
   m_RenderingLayers:
   - Default
