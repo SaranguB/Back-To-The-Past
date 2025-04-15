@@ -17,7 +17,7 @@ namespace Enemy
 
         public void OnStateEnter()
         {
-           
+           enemyAnimator.SetBool("IsCatching", false);
         }
 
         public void UpdateState()

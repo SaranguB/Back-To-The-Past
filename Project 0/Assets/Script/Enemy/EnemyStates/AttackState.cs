@@ -49,7 +49,6 @@ namespace Enemy
 
         private void AttackPlayerBetweenDelays()
         {
-            Debug.Log("Attack");
             attackTimer += Time.deltaTime;
 
             if (attackTimer >= attackDelay)

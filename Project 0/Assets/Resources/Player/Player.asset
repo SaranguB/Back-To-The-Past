@@ -16,3 +16,7 @@ MonoBehaviour:
   health: 100
   jumpForce: 8
   fallingSpeed: 4
+  dashSpeed: 20
+  dashDuration: 0.2
+  maxDashes: 1
+  currentDashes: 25

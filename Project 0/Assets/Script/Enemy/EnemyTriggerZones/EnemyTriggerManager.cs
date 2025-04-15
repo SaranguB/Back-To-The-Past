@@ -19,5 +19,14 @@ namespace Enemy
                 enemy.PlayerEnteredRange();
             }
         }
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+
+            if (other.gameObject.GetComponent<PlayerView>() != null)
+            {
+                enemy.PlayerExitRanged();
+            }
+        }
     }
 }

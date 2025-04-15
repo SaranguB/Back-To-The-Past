@@ -36,6 +36,11 @@ namespace Enemy
             ChangeState(EnemyStates.Catching);
         }
 
+        public override void PlayerExitRanged()
+        {
+            base.PlayerExitRanged();
+            ChangeState(EnemyStates.Idle);
+        }
         public override bool IsInCastingState()
         {
             return GetCurrentState() is catchingState<PigController>;

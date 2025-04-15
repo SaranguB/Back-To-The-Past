@@ -34,13 +34,15 @@ namespace Player
 
         private void Update()
         {
-            playerController.HandleInput();
             playerController.OnPlayerPositionChanged(playerTransform.position);
+            playerController.HandleInput();
+            playerController.HandleDashing();
         }
 
         private void FixedUpdate()
         {
             playerController.HandleMovement();
+            playerController.ExecuteDashing();
         }
 
         public void SetController(PlayerController playerController)

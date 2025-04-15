@@ -16,6 +16,6 @@ MonoBehaviour:
   damage: 10
   speed: 2
   inPast: 0
-  inPresent: 0
+  inPresent: 1
   attackRange: 1.5
   attackDelay: 1

@@ -48,5 +48,10 @@ namespace Enemy
         public abstract float GetAttackDelay();
 
         public abstract void FixedUpdateStateMachine();
+
+        public virtual void PlayerExitRanged()
+        {
+            
+        }
     }
 }
