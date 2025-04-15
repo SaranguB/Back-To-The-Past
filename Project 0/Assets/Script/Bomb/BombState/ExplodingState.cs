@@ -24,7 +24,10 @@ namespace Wepons.Bomb
         public void UpdateState()
         {
         }
+        public void FixedUpdateState()
+        {
 
+        }
         public void OnStateExit()
         {
         }

@@ -21,9 +21,21 @@ namespace Player
 
         [Header("Move")]
         public float horizontalInput;
+        public float verticalInput;
         public float movementSpeed;
 
+        //Dashing
+        public float dashSpeed;
+        public float dashDuration;
+        public int maxDashes;
+        public int currentDashes;
+        public bool isDashing = false;
+        public float dashTimer = 0f;
+        public Vector2 inputDirection;
+        public bool canPlayerAirDash = false;
+        public float currentAirDashes;
         public bool canDeployBomb = true;
+
         public PlayerModel(PlayerSO playerS0)
         {
             this.playerSO = playerS0;
@@ -32,6 +44,13 @@ namespace Player
             jumpForce = playerS0.jumpForce;
             health = playerS0.health;
             fallingSpeed = playerS0.fallingSpeed;
+
+            dashSpeed = playerS0.dashSpeed;
+            dashDuration = playerS0.dashDuration;
+            maxDashes = playerS0.maxDashes;
+            currentDashes = playerS0.currentDashes;
+            currentAirDashes = playerS0.currentAirDashes;
+
         }
     }
 }

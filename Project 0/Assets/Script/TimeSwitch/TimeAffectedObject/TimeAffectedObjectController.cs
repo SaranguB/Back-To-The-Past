@@ -20,17 +20,22 @@ namespace TimeSwitching
 
         public void SetPastProperties()
         {
-            objectRB.bodyType = objectData.isMovableInPast ? RigidbodyType2D.Dynamic : RigidbodyType2D.Kinematic;
-            objectSprite.sprite = objectData.pastSprite;
-            Updatecollider();
+            if (objectData != null)
+            {
+                objectRB.bodyType = objectData.isMovableInPast ? RigidbodyType2D.Dynamic : RigidbodyType2D.Kinematic;
+                objectSprite.sprite = objectData.pastSprite;
+                Updatecollider();
+            }
         }
 
         public void SetPresentProperties()
         {
-  
-            objectRB.bodyType = objectData.isMovableInPresent ? RigidbodyType2D.Dynamic : RigidbodyType2D.Kinematic;
-            objectSprite.sprite = objectData.presentSprite;
-            Updatecollider();
+            if (objectData != null)
+            {
+                objectRB.bodyType = objectData.isMovableInPresent ? RigidbodyType2D.Dynamic : RigidbodyType2D.Kinematic;
+                objectSprite.sprite = objectData.presentSprite;
+                Updatecollider();
+            }
         }
 
         private void Updatecollider()

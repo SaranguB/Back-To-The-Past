@@ -9,5 +9,10 @@ namespace Player
         public int health;
         public float jumpForce;
         public float fallingSpeed;
+        public float dashSpeed;
+        public float dashDuration;
+        public int maxDashes;
+        public int currentDashes;
+        public int currentAirDashes;
     }
 }

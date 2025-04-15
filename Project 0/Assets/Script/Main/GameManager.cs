@@ -4,6 +4,7 @@ using Utilities;
 using TimeSwitching;
 using Events;
 using Wepons.Bomb;
+using Enemy;
 
 namespace Main
 {
@@ -12,6 +13,7 @@ namespace Main
         public PlayerService playerService;
         public TimeSwitchService timeSwitchService;
         public EventService eventService;
+        public EnemyService enemyService;
 
         [Header("Player")]
         [SerializeField] private PlayerView playerView;
@@ -24,12 +26,16 @@ namespace Main
         [SerializeField] private BombView bombView;
         [SerializeField] private BombSO bombSO;
 
+        [Header("Enemy")]
+        [SerializeField] private EnemyViewCollection enemyViewCollection;
+
         protected override void Awake()
         {
             base.Awake();
             eventService = new EventService();
-            playerService = new PlayerService(playerView, playerS0, bombSO, bombView);
             timeSwitchService = new TimeSwitchService(timeSwitchView);
+            playerService = new PlayerService(playerView, playerS0, bombSO, bombView);
+            enemyService = new EnemyService(enemyViewCollection);
         }
     }
 }

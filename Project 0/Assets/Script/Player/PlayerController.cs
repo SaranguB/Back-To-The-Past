@@ -15,13 +15,26 @@ namespace Player
         private TimeSwitchUIController timeSwitchUIController;
         private Animator playerAnimator;
         private BombPool bombPool;
+        private PlayerStateMachine playerStateMachine;
         public PlayerController(PlayerView playerView, PlayerSO playerS0, BombPool bombPool)
         {
             this.playerView = playerView;
             playerModel = new PlayerModel(playerS0);
-
             this.playerView.SetController(this);
+
+            CreatePlayerStateMachine();
+            ChangePlayerState(PlayerState.Alive);
             this.bombPool = bombPool;
+        }
+
+        private void ChangePlayerState(PlayerState state)
+        {
+            playerStateMachine.ChangeState(state);
+        }
+
+        private void CreatePlayerStateMachine()
+        {
+            playerStateMachine = new PlayerStateMachine(this);
         }
 
         public void HandleInput()
@@ -34,7 +47,7 @@ namespace Player
 
         private void SetBombDeployInput()
         {
-            if (Input.GetKeyDown(KeyCode.LeftShift) && playerModel.canDeployBomb)
+            if (Input.GetKeyDown(KeyCode.LeftControl) && playerModel.canDeployBomb)
             {
                 DeployBomb();
             }
@@ -54,11 +67,6 @@ namespace Player
                 if (!playerModel.isTimeSwitching)
                 {
                     HandleTimeSwitching(Time.deltaTime);
-                }
-                else
-                {
-                    Debug.Log("Yes");
-                    //StopPlayerActions();
                 }
             }
 
@@ -118,6 +126,11 @@ namespace Player
         public void HandleMovement()
         {
             Move(playerModel.horizontalInput);
+
+            if (IsGrounded())
+            {
+                playerModel.canPlayerAirDash = true;
+            }
 
             if (playerModel.isJumping && IsGrounded())
             {
@@ -207,6 +220,79 @@ namespace Player
         public void SetAnimatorBool(string stringValue, bool boolValue)
         {
             playerAnimator.SetBool(stringValue, boolValue);
+        }
+
+        public void OnPlayerPositionChanged(Vector2 position)
+        {
+            GameManager.Instance.eventService.onPlayerPositionChanged.InvokeEvent(position);
+        }
+
+        public void HandleDashing()
+        {
+            playerModel.inputDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
+
+            if (!playerModel.isDashing && Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                if (playerModel.currentDashes > 0 && IsGrounded())
+                {
+                    GroundDash();
+                }
+                else if (!IsGrounded() && playerModel.canPlayerAirDash)
+                {
+                    AirDash();
+                }
+            }
+
+            if (playerModel.isDashing)
+            {
+                playerModel.dashTimer -= Time.deltaTime;
+
+                if (playerModel.dashTimer < 0)
+                    EndDashing();
+            }
+
+        }
+
+        private void AirDash()
+        {
+            StartDashing();
+            playerModel.canPlayerAirDash = false;
+        }
+
+        private void GroundDash()
+        {
+            StartDashing();
+            playerModel.currentDashes--;
+            playerModel.canPlayerAirDash = true;
+        }
+
+        private void StartDashing()
+        {
+            playerAnimator.SetBool("IsDashing", true);
+            playerModel.isDashing = true;
+            playerModel.dashTimer = playerModel.dashDuration;
+        }
+
+        private void EndDashing()
+        {
+            playerAnimator.SetBool("IsDashing", false);
+            playerModel.isDashing = false;
+
+            playerRB.linearVelocity = new Vector2(playerModel.horizontalInput * playerModel.movementSpeed, 0);
+        }
+
+        public void ExecuteDashing()
+        {
+            if (playerModel.isDashing)
+            {
+                if (playerModel.inputDirection == Vector2.zero)
+                {
+                    float facingDirection = Mathf.Sign(playerView.transform.localScale.x);
+                    playerModel.inputDirection = new Vector2(facingDirection, 0);
+                }
+
+                playerRB.linearVelocity = playerModel.inputDirection * playerModel.dashSpeed;
+            }
         }
     }
 }
