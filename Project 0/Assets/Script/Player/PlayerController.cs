@@ -1,9 +1,11 @@
 using Main;
+using Player.UI;
 using System;
 using TimeSwitching;
 using UI;
 using UnityEngine;
 using Wepons.Bomb;
+using static UnityEngine.Rendering.DebugUI;
 
 namespace Player
 {
@@ -13,6 +15,7 @@ namespace Player
         private PlayerModel playerModel;
         private Rigidbody2D playerRB;
         private TimeSwitchUIController timeSwitchUIController;
+        private PlayerUIController playerUIController;
         private Animator playerAnimator;
         private BombPool bombPool;
         private PlayerStateMachine playerStateMachine;
@@ -53,12 +56,14 @@ namespace Player
 
                 if (Input.GetKeyDown(KeyCode.LeftControl))
                 {
+                    playerUIController.EnableBombThrowChargingBar(true);
                     playerModel.isHoldingBombKey = true;
                     playerModel.bombHoldTimer = 0f;
                 }
 
                 if (Input.GetKey(KeyCode.LeftControl))
                 {
+                    DisplayBombThrowIndicator(true);
                     playerModel.bombHoldTimer += Time.deltaTime;
                 }
 
@@ -72,8 +77,15 @@ namespace Player
                     {
                         DeployBomb();
                     }
+                    playerUIController.ResetUI();
+
                 }
             }
+        }
+
+        private void DisplayBombThrowIndicator(bool value)
+        {
+            playerUIController.UpdateBombThrowUISlider(value, playerModel.bombThreshold);
         }
 
         private void ThrowBomb()
@@ -329,6 +341,11 @@ namespace Player
 
                 playerRB.linearVelocity = playerModel.inputDirection * playerModel.dashSpeed;
             }
+        }
+
+        public void SetPlayerUI(PlayerUIController playerUIController)
+        {
+            this.playerUIController = playerUIController;
         }
     }
 }
