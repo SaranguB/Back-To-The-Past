@@ -8,18 +8,18 @@ namespace Player
 
         public int health;
 
-        [Header("Jump")]
+       //Jump
         public bool isJumping = false;
         public float jumpForce;
         public float fallingSpeed;
         public float groundCheckDistance = .2f;
 
-        [Header("TimeSwitching Switch")]
+        //TimeSwitching Switch
         public float timeSwitchingDuration;
         public float timeRequiredForSwitching = 2f;
         public bool isTimeSwitching = false;
 
-        [Header("Move")]
+        //Move
         public float horizontalInput;
         public float verticalInput;
         public float movementSpeed;
@@ -36,6 +36,13 @@ namespace Player
         public float currentAirDashes;
         public bool canDeployBomb = true;
 
+        //Bomb
+        public bool isHoldingBombKey = false;
+        public float bombHoldTimer = 0f;
+        public float bombThreshold;
+        public float bombThrowForceX;
+        public float bombThrowForceY;
+
         public PlayerModel(PlayerSO playerS0)
         {
             this.playerSO = playerS0;
@@ -50,6 +57,9 @@ namespace Player
             maxDashes = playerS0.maxDashes;
             currentDashes = playerS0.currentDashes;
             currentAirDashes = playerS0.currentAirDashes;
+            bombThreshold = playerS0.bombThreshold;
+            bombThrowForceX = playerS0.BombThrowForceX;
+            bombThrowForceY = playerS0.BombThrowForceY;
 
         }
     }

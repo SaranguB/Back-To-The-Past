@@ -72,5 +72,11 @@ namespace Wepons.Bomb
             bombView.gameObject.SetActive(false);
             GameManager.Instance.playerService.ReturneBombToPool(this);
         }
+
+        public void LaunchBomb(Vector2 throwDirection, float bombThrowForceX, float bombThrowForceY)
+        {
+            Vector2 throwForce = new Vector2(throwDirection.x * bombThrowForceX, bombThrowForceY);
+            bombView.bombRB.AddForce(throwForce, ForceMode2D.Impulse);
+        }
     }
 }

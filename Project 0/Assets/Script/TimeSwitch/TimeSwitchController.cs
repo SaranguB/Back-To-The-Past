@@ -51,12 +51,18 @@ namespace TimeSwitching
 
         public void SetPastProperties(TimeAffectedObjectController affectedObject)
         {
-            affectedObject.SetPastProperties();
+            if (affectedObject != null && affectedObject.gameObject.activeInHierarchy)
+            {
+                affectedObject.SetPastProperties();
+            }
         }
 
         public void SetPresentproperties(TimeAffectedObjectController affectedObject)
         {
-            affectedObject.SetPresentProperties();
+            if (affectedObject != null && affectedObject.gameObject.activeInHierarchy)
+            {
+                affectedObject.SetPresentProperties();
+            }
         }
 
         private void SetController()

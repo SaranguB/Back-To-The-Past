@@ -20,3 +20,7 @@ MonoBehaviour:
   dashDuration: 0.2
   maxDashes: 1
   currentDashes: 25
+  currentAirDashes: 0
+  bombThreshold: 0.2
+  BombThrowForceX: 4
+  BombThrowForceY: 4

@@ -14,5 +14,9 @@ namespace Player
         public int maxDashes;
         public int currentDashes;
         public int currentAirDashes;
+
+        public float bombThreshold;
+        public float BombThrowForceX;
+        public float BombThrowForceY;
     }
 }

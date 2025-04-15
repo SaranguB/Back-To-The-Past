@@ -39,6 +39,7 @@ public class BombDamageArea : MonoBehaviour
 
     public void ChangeColliderState(bool value)
     {
+        if(damageAreaCollider != null) 
         damageAreaCollider.enabled = value;
     }
 }

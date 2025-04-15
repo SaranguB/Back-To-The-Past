@@ -47,17 +47,53 @@ namespace Player
 
         private void SetBombDeployInput()
         {
-            if (Input.GetKeyDown(KeyCode.LeftControl) && playerModel.canDeployBomb)
+ 
+            if (playerModel.canDeployBomb)
             {
-                DeployBomb();
-            }
 
+                if (Input.GetKeyDown(KeyCode.LeftControl))
+                {
+                    playerModel.isHoldingBombKey = true;
+                    playerModel.bombHoldTimer = 0f;
+                }
+
+                if (Input.GetKey(KeyCode.LeftControl))
+                {
+                    playerModel.bombHoldTimer += Time.deltaTime;
+                }
+
+                if (Input.GetKeyUp(KeyCode.LeftControl))
+                {
+                    if (playerModel.bombHoldTimer >= playerModel.bombThreshold)
+                    {
+                        ThrowBomb();
+                    }
+                    else
+                    {
+                        DeployBomb();
+                    }
+                }
+            }
+        }
+
+        private void ThrowBomb()
+        {
+            BombController bombToDeploy = CreateBomb();
+            
+            Vector2 throwDirection = playerView.transform.localScale.x > 0 ? Vector2.right : Vector2.left;
+            bombToDeploy.LaunchBomb(throwDirection, playerModel.bombThrowForceX, playerModel.bombThrowForceY);
         }
 
         private void DeployBomb()
         {
+            CreateBomb();
+        }
+
+        private BombController CreateBomb()
+        {
             BombController bombToDeploy = bombPool.GetBomb();
             bombToDeploy.ConfigureBomb(playerView.bombBagPosition);
+            return bombToDeploy;
         }
 
         private void SetTimeSwitchInput()
