@@ -9,6 +9,7 @@ namespace UI
         private TimeSwitchUIView timeSwitchUIView;
         private Image timeSwitchRingImage;
         private float currentFillTime;
+
         public TimeSwitchUIController(TimeSwitchUIView timeSwitchUIView)
         {
             this.timeSwitchUIView = timeSwitchUIView;

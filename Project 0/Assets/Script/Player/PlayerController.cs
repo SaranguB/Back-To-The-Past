@@ -1,9 +1,11 @@
 using Main;
+using Player.UI;
 using System;
 using TimeSwitching;
 using UI;
 using UnityEngine;
 using Wepons.Bomb;
+using static UnityEngine.Rendering.DebugUI;
 
 namespace Player
 {
@@ -13,6 +15,7 @@ namespace Player
         private PlayerModel playerModel;
         private Rigidbody2D playerRB;
         private TimeSwitchUIController timeSwitchUIController;
+        private PlayerUIController playerUIController;
         private Animator playerAnimator;
         private BombPool bombPool;
         private PlayerStateMachine playerStateMachine;
@@ -47,17 +50,62 @@ namespace Player
 
         private void SetBombDeployInput()
         {
-            if (Input.GetKeyDown(KeyCode.LeftControl) && playerModel.canDeployBomb)
+ 
+            if (playerModel.canDeployBomb)
             {
-                DeployBomb();
-            }
 
+                if (Input.GetKeyDown(KeyCode.LeftControl))
+                {
+                    playerUIController.EnableBombThrowChargingBar(true);
+                    playerModel.isHoldingBombKey = true;
+                    playerModel.bombHoldTimer = 0f;
+                }
+
+                if (Input.GetKey(KeyCode.LeftControl))
+                {
+                    DisplayBombThrowIndicator(true);
+                    playerModel.bombHoldTimer += Time.deltaTime;
+                }
+
+                if (Input.GetKeyUp(KeyCode.LeftControl))
+                {
+                    if (playerModel.bombHoldTimer >= playerModel.bombThreshold)
+                    {
+                        ThrowBomb();
+                    }
+                    else
+                    {
+                        DeployBomb();
+                    }
+                    playerUIController.ResetUI();
+
+                }
+            }
+        }
+
+        private void DisplayBombThrowIndicator(bool value)
+        {
+            playerUIController.UpdateBombThrowUISlider(value, playerModel.bombThreshold);
+        }
+
+        private void ThrowBomb()
+        {
+            BombController bombToDeploy = CreateBomb();
+            
+            Vector2 throwDirection = playerView.transform.localScale.x > 0 ? Vector2.right : Vector2.left;
+            bombToDeploy.LaunchBomb(throwDirection, playerModel.bombThrowForceX, playerModel.bombThrowForceY);
         }
 
         private void DeployBomb()
         {
+            CreateBomb();
+        }
+
+        private BombController CreateBomb()
+        {
             BombController bombToDeploy = bombPool.GetBomb();
             bombToDeploy.ConfigureBomb(playerView.bombBagPosition);
+            return bombToDeploy;
         }
 
         private void SetTimeSwitchInput()
@@ -293,6 +341,11 @@ namespace Player
 
                 playerRB.linearVelocity = playerModel.inputDirection * playerModel.dashSpeed;
             }
+        }
+
+        public void SetPlayerUI(PlayerUIController playerUIController)
+        {
+            this.playerUIController = playerUIController;
         }
     }
 }

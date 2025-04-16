@@ -31,14 +31,15 @@ public class BombDamageArea : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-            if (other.TryGetComponent<IDamagableFromBomb>(out var damagable))
-            {
-                damagable.TakeDamageFromBomb(bombDamage);
-            }
+        if (other.TryGetComponent<IDamagableFromBomb>(out var damagable))
+        {
+            damagable.TakeDamageFromBomb(bombDamage);
+        }
     }
 
     public void ChangeColliderState(bool value)
     {
-        damageAreaCollider.enabled = value;
+        if (damageAreaCollider != null)
+            damageAreaCollider.enabled = value;
     }
 }

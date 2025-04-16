@@ -1,3 +1,5 @@
+using Player.UI;
+using System;
 using TimeSwitching;
 using UI;
 using UnityEngine;
@@ -24,5 +26,10 @@ namespace Player
 
         public void ReturneBombToPool(BombController bombToReturn)
             => bombPool.ReturnItem(bombToReturn);
+
+        public void SetPlayerUI(PlayerUIController playerUIController)
+        {
+           playerController.SetPlayerUI(playerUIController);
+        }
     }
 }
