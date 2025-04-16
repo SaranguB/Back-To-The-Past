@@ -54,10 +54,8 @@ public class DestroyableObjectView : MonoBehaviour, IDamagableFromBomb
 
     public void TakeDamageFromBomb(float damage)
     {
-        Debug.Log("yes1");
         if (!destroyableObjectController.GetIsPresentTime())
         {
-            Debug.Log("yes2");
             boxCollider.enabled = false;
             Destroy(pastWall.gameObject);
             Destroy(presentWall.gameObject);

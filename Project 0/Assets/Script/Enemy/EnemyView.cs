@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Wepons.Bomb;
 
 namespace Enemy
 {
-    public class EnemyView : MonoBehaviour
+    public class EnemyView : MonoBehaviour, IDamagableFromBomb
     {
         private EnemyController enemyController;
 
@@ -24,6 +25,11 @@ namespace Enemy
         private void FixedUpdate()
         {
             enemyController.FixedUpdateStateMachine();
+        }
+
+        public void TakeDamageFromBomb(float damage)
+        {
+            enemyController.TakeDamage(damage);
         }
     }
 }

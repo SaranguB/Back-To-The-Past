@@ -74,5 +74,10 @@ namespace Enemy
 
         public override float GetAttackDelay()
             => enemyData.attackDelay;
+
+        public override void TakeDamage(float damage)
+        {
+           
+        }
     }
 }

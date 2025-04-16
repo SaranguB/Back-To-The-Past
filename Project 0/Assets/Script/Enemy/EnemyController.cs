@@ -53,5 +53,6 @@ namespace Enemy
         {
             
         }
+        public abstract void TakeDamage(float damage);
     }
 }

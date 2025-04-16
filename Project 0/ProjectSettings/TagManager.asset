@@ -50,6 +50,9 @@ TagManager:
   - name: Objects
     uniqueID: 852844931
     locked: 0
+  - name: Door
+    uniqueID: 3077240791
+    locked: 0
   - name: Ground
     uniqueID: 4268614575
     locked: 0
