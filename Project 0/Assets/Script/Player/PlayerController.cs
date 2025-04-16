@@ -5,7 +5,6 @@ using TimeSwitching;
 using UI;
 using UnityEngine;
 using Wepons.Bomb;
-using static UnityEngine.Rendering.DebugUI;
 
 namespace Player
 {
@@ -19,6 +18,8 @@ namespace Player
         private Animator playerAnimator;
         private BombPool bombPool;
         private PlayerStateMachine playerStateMachine;
+        private HealthUIController healthUIController;
+
         public PlayerController(PlayerView playerView, PlayerSO playerS0, BombPool bombPool)
         {
             this.playerView = playerView;
@@ -370,9 +371,21 @@ namespace Player
             playerModel.isPlayerHasKey = true;
         }
 
-        public void isInfrontOfFinalDoor(bool value)
+        public void IsInfrontOfFinalDoor(bool value)
         {
             playerModel.canUnlockDoor = value;
+        }
+
+        public void SetHealthUI(HealthUIController healthUIController)
+        {
+            this.healthUIController = healthUIController;
+            healthUIController.SetNumberOfLives(playerModel.numberOfLives);
+        }
+
+        public void TakeDamageFromBomb(int damage)
+        {
+            
+            healthUIController.RemoveLives(damage);
         }
     }
 }

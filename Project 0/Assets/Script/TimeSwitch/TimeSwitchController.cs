@@ -1,3 +1,4 @@
+using Enemy;
 using Main;
 using System;
 using UI;
@@ -10,12 +11,12 @@ namespace TimeSwitching
         private TimeSwitchView timeSwitchView;
         private TimeSwitchModel timeSwitchModel;
         private TimeStateMachine timeStateMachine;
-
         public TimeSwitchController(TimeSwitchView timeSwitchView)
         {
             InitializeVariable(timeSwitchView);
             SetController();
             CreateStateMachine();
+            
 
             SubcribeToEvents();
             SwitchTimeToPresent();

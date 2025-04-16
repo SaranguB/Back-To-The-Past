@@ -15,17 +15,21 @@ namespace UI
         private PlayerUIController playerUIController;
         [SerializeField] PlayerUIView playerUIView;
 
+        [Header("HealthUI")]
+        private HealthUIController healthUIController;
+        [SerializeField] HealthUIView healthUIView;
+
         private void Start()
         {
             timeSwitchUIController = new TimeSwitchUIController(timeSwitchUIView);
             playerUIController = new PlayerUIController(playerUIView);
+            healthUIController = new HealthUIController(healthUIView);
             InitializeUI();
         }
 
         private void InitializeUI()
         {
-            GameManager.Instance.playerService.SetTimeSwitchUI(GetTimeSwitchUI());
-            GameManager.Instance.playerService.SetPlayerUI(GetPlayerUI());
+            GameManager.Instance.playerService.SetUI(GetTimeSwitchUI(), GetPlayerUI(), GetHealthUI());
         }
 
         public PlayerUIController GetPlayerUI()
@@ -33,5 +37,8 @@ namespace UI
 
         public TimeSwitchUIController GetTimeSwitchUI()
             => timeSwitchUIController;
+
+        public HealthUIController GetHealthUI()
+             => healthUIController;
     }
 }

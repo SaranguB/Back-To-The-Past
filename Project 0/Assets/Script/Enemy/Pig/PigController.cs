@@ -1,3 +1,4 @@
+using Main;
 using StateMachine;
 using System;
 using UnityEngine;
@@ -6,15 +7,22 @@ namespace Enemy
 {
     public class PigController : EnemyController
     {
-        private EnemySO enemyData;
+        public EnemySO enemyData;
         private EnemyView enemyView;
         private PigStateMachine pigStateMachine;
-
+        private bool isEnemyInPresent;
+        public bool WasInitiallyActive  =true;
         public PigController(EnemyView enemyView)
         {
             SetEnemyView(enemyView);
             CreateStateMachine();
             ChangeState(EnemyStates.Idle);
+            SubscribeToEvents();
+        }
+
+        public void SubscribeToEvents()
+        {
+            GameManager.Instance.eventService.OnTimeSwitchWithBoolParam.AddListener(TimeSwitched);
         }
 
         private void SetEnemyView(EnemyView enemyView)
@@ -75,9 +83,26 @@ namespace Enemy
         public override float GetAttackDelay()
             => enemyData.attackDelay;
 
-        public override void TakeDamage(float damage)
+        public override EnemySO GetEnemyData()
+                =>enemyData;
+
+        public override void TakeDamage(int damage)
         {
            
+        }
+
+        private void TimeSwitched(bool value)
+        {
+            isEnemyInPresent = value;
+
+            if (isEnemyInPresent)
+            {
+                enemyView.TimeSwitchedToPresent();
+            }
+            else
+            {
+                enemyView.TimeSwitchedToPast();
+            }
         }
 
         public override bool IsEnemyViewActiveAndEnabled()

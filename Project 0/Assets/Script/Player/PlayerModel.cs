@@ -6,9 +6,11 @@ namespace Player
     {
         private PlayerSO playerSO;
 
-        public int health;
+        //Health
+        public int numberOfLives;
+        public int currentLives;
 
-       //Jump
+        //Jump
         public bool isJumping = false;
         public float jumpForce;
         public float fallingSpeed;
@@ -45,7 +47,7 @@ namespace Player
 
         //Key
         public bool isPlayerHasKey = false;
-        public bool canUnlockDoor   = true;
+        public bool canUnlockDoor = true;
 
         public PlayerModel(PlayerSO playerS0)
         {
@@ -53,14 +55,17 @@ namespace Player
 
             movementSpeed = playerS0.movementSpeed;
             jumpForce = playerS0.jumpForce;
-            health = playerS0.health;
             fallingSpeed = playerS0.fallingSpeed;
+
+            numberOfLives = playerS0.numberOfLives;
+            currentLives = numberOfLives;
 
             dashSpeed = playerS0.dashSpeed;
             dashDuration = playerS0.dashDuration;
             maxDashes = playerS0.maxDashes;
             currentDashes = playerS0.currentDashes;
             currentAirDashes = playerS0.currentAirDashes;
+
             bombThreshold = playerS0.bombThreshold;
             bombThrowForceX = playerS0.BombThrowForceX;
             bombThrowForceY = playerS0.BombThrowForceY;

@@ -1,3 +1,4 @@
+using Enemy;
 using Player;
 using System;
 using UI;
@@ -16,7 +17,6 @@ namespace TimeSwitching
 
         private TimeSwitchController timeSwitchController;
 
-
         private void OnDisable()
         {
             timeSwitchController.UnSubcribeToEvents();
@@ -26,6 +26,7 @@ namespace TimeSwitching
         public void SetController(TimeSwitchController timeSwitchController)
         {
             this.timeSwitchController = timeSwitchController;
+           
         }
 
         public TimeAffectedObjectController[] GetAffectedObjects()
@@ -41,7 +42,6 @@ namespace TimeSwitching
         {
             EnablePastPlatform();
             DisablePresentPlatform();
-
         }
 
         private void DisablePastPlatform()

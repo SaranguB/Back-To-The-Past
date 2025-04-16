@@ -10,6 +10,7 @@ namespace Enemy
         private EnemyViewCollection enemyViewCollection;
 
         protected Vector2 playerPosition;
+       
 
         public EnemyController()
         {
@@ -54,8 +55,11 @@ namespace Enemy
         {
             
         }
-        public abstract void TakeDamage(float damage);
+        public abstract void TakeDamage(int damage);
 
         public abstract bool IsEnemyViewActiveAndEnabled();
+
+        public abstract EnemySO GetEnemyData();
+
     }
 }

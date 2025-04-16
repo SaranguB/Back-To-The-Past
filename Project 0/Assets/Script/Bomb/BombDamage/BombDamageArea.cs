@@ -4,17 +4,17 @@ using Wepons.Bomb;
 
 public class BombDamageArea : MonoBehaviour
 {
-    private float bombDamage;
+    private int bombDamage;
     private CapsuleCollider2D damageAreaCollider;
 
 
-    public void SetDamageValues(float damageRadius, float bombDamage)
+    public void SetDamageValues(float damageRadius, int bombDamage)
     {
         SetDamageRadius(damageRadius);
         SetBombDamage(bombDamage);
     }
 
-    private void SetBombDamage(float bombDamage)
+    private void SetBombDamage(int bombDamage)
     {
         this.bombDamage = bombDamage;
     }

@@ -19,6 +19,12 @@ namespace Player
 
         public PlayerController GetPlayer() => playerController;
 
+        public void SetUI(TimeSwitchUIController timeSwitchUIController, PlayerUIController playerUIController, HealthUIController healthUIController)
+        {
+            SetTimeSwitchUI(timeSwitchUIController);
+            SetPlayerUI(playerUIController);
+            SetHealthUI(healthUIController);
+        }
         public void SetTimeSwitchUI(TimeSwitchUIController timeSwitchUIController)
         {
             playerController.SetTimeSwitchUI(timeSwitchUIController);
@@ -31,5 +37,12 @@ namespace Player
         {
            playerController.SetPlayerUI(playerUIController);
         }
+
+        public void SetHealthUI(HealthUIController healthUIController)
+        {
+            playerController.SetHealthUI(healthUIController);
+        }
+
+        
     }
 }

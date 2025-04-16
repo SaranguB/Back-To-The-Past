@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 665aebf36af88db43ab1563c7a88c7ee, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
+  numberOfLives: 3
   movementSpeed: 4
-  health: 100
   jumpForce: 8
   fallingSpeed: 4
   dashSpeed: 20

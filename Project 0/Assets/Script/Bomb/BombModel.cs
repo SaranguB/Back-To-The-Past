@@ -6,7 +6,7 @@ namespace Wepons.Bomb
     {
         private BombSO bombSO;
 
-        public float bombDamage;
+        public int bombDamage;
         public float DamageRadius;
         public float primingTime;
         public BombModel(BombSO bombSO)

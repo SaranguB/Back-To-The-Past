@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using UnityEngine;
 using Wepons.Bomb;
 
@@ -12,6 +11,8 @@ namespace Enemy
         public EnemySO enemyData;
         public Animator enemyAnimator;
         public EnemyTriggerManager enemyTriggerManager;
+        public bool WasActiveInitially = true;
+
         public void SetController(EnemyController enemyController)
         {
             this.enemyController = enemyController;
@@ -27,7 +28,7 @@ namespace Enemy
             enemyController.FixedUpdateStateMachine();
         }
 
-        public void TakeDamageFromBomb(float damage)
+        public void TakeDamageFromBomb(int damage)
         {
             enemyController.TakeDamage(damage);
         }
@@ -35,6 +36,42 @@ namespace Enemy
         public bool IsEnemyViewActiveAndEnabled()
         {
             return this.isActiveAndEnabled;
+        }
+
+       
+        public void TimeSwitchedToPresent()
+        {
+            if (WasActiveInitially)
+            {
+                if (enemyController.GetEnemyData().inPresent)
+                {
+                    this.gameObject.SetActive(true);
+                }
+                else
+                {
+                    this.gameObject.SetActive(false);
+                }
+            }
+        }
+
+        public void TimeSwitchedToPast()
+        {
+            if (WasActiveInitially)
+            {
+                if (enemyController.GetEnemyData().inPast)
+                {
+                    this.gameObject.SetActive(true);
+                }
+                else
+                {
+                    this.gameObject.SetActive(false);
+                }
+            }
+        }
+
+        public void SetOriginallyActive()
+        {
+            WasActiveInitially = true;
         }
     }
 }

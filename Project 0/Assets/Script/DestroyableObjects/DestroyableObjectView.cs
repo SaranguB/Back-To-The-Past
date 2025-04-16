@@ -52,7 +52,7 @@ public class DestroyableObjectView : MonoBehaviour, IDamagableFromBomb
             pastWall.SetActive(false);
     }
 
-    public void TakeDamageFromBomb(float damage)
+    public void TakeDamageFromBomb(int damage)
     {
         if (!destroyableObjectController.GetIsPresentTime())
         {

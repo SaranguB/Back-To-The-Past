@@ -57,9 +57,10 @@ namespace Player
             transform.localScale = scale;
         }
 
-        public void TakeDamageFromBomb(float damage)
+        public void TakeDamageFromBomb(int damage)
         {
-            Debug.Log("Player took damage");
+            Debug.Log("Player took damage" + damage);
+            playerController.TakeDamageFromBomb(damage);
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -76,7 +77,7 @@ namespace Player
             {
                 if (other.CompareTag("FinalDoor"))
                 {
-                    playerController.isInfrontOfFinalDoor(true);
+                    playerController.IsInfrontOfFinalDoor(true);
                 }
             }
 
@@ -86,7 +87,7 @@ namespace Player
         {
             if (other.CompareTag("FinalDoor"))
             {
-                playerController.isInfrontOfFinalDoor(false);
+                playerController.IsInfrontOfFinalDoor(false);
             }
         }
 
