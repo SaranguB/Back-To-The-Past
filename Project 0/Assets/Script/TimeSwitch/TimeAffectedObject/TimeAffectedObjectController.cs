@@ -42,11 +42,8 @@ namespace TimeSwitching
         {
 
             if (objectSprite == null || objectCollider == null)
-            {
-                Debug.Log("null");
                 return;
 
-            }
 
             if (objectCollider is BoxCollider2D boxCollider)
             {

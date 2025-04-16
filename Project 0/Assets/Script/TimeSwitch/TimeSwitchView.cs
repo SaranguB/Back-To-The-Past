@@ -8,6 +8,7 @@ namespace TimeSwitching
     public class TimeSwitchView : MonoBehaviour
     {
         [SerializeField] private TimeAffectedObjectController[] objectController;
+
         [SerializeField] private GameObject pastPlatform;
         [SerializeField] private GameObject presentPlatform;
         [SerializeField] private GameObject pastBackgroundImage;

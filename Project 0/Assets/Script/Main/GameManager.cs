@@ -5,6 +5,8 @@ using TimeSwitching;
 using Events;
 using Wepons.Bomb;
 using Enemy;
+using System;
+using Objects.Destroyable;
 
 namespace Main
 {
@@ -29,6 +31,10 @@ namespace Main
         [Header("Enemy")]
         [SerializeField] private EnemyViewCollection enemyViewCollection;
 
+        [Header("Destroyable Objects")]
+        [SerializeField] private DestroyableObjectViewCollection destroyableObjectViewCollection;
+
+
         protected override void Awake()
         {
             base.Awake();
@@ -36,6 +42,16 @@ namespace Main
             timeSwitchService = new TimeSwitchService(timeSwitchView);
             playerService = new PlayerService(playerView, playerS0, bombSO, bombView);
             enemyService = new EnemyService(enemyViewCollection);
+
+            InitializeDestroyabelObjectController();
+        }
+
+        private void InitializeDestroyabelObjectController()
+        {
+            foreach (DestroyableObjectView destroyableObjectView in destroyableObjectViewCollection.destroyableObjectViews)
+            {
+                DestroyableObjectController destroyableObjectController = new DestroyableObjectController(destroyableObjectView);
+            }
         }
     }
 }

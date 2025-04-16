@@ -84,8 +84,8 @@ namespace TimeSwitching
             {
                 ChangeTimeToPast();
                 timeSwitchView.SwitchTimeToPast();
-
             }
+            GameManager.Instance.eventService.OnTimeSwitchWithBoolParam.InvokeEvent(currentState is PastState);
         }
 
         public void ChangeTimeToPast()

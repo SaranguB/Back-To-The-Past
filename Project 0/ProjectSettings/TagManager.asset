@@ -53,6 +53,12 @@ TagManager:
   - name: Ground
     uniqueID: 4268614575
     locked: 0
+  - name: Destroyable
+    uniqueID: 3849812953
+    locked: 0
+  - name: UI
+    uniqueID: 2119625803
+    locked: 0
   - name: Player
     uniqueID: 12997045
     locked: 0
