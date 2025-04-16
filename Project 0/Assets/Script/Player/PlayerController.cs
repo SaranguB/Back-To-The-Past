@@ -42,15 +42,29 @@ namespace Player
 
         public void HandleInput()
         {
-            SetMoveInput();
-            SetJumpInput();
-            SetTimeSwitchInput();
-            SetBombDeployInput();
+            ConfigureMoveInput();
+            ConfigureJumpInput();
+            ConfigureTimeSwitchInput();
+            ConfigureBombDeployInput();
+            ConfigureTransitionToNextLevelInput();
         }
 
-        private void SetBombDeployInput()
+        private void ConfigureTransitionToNextLevelInput()
         {
- 
+            if (Input.GetKeyDown(KeyCode.UpArrow) && playerModel.isPlayerHasKey && playerModel.canUnlockDoor)
+            {
+                UnlockDoor();
+            }
+        }
+
+        private void UnlockDoor()
+        {
+           playerModel.canUnlockDoor = false;
+        }
+
+        private void ConfigureBombDeployInput()
+        {
+
             if (playerModel.canDeployBomb)
             {
 
@@ -91,7 +105,7 @@ namespace Player
         private void ThrowBomb()
         {
             BombController bombToDeploy = CreateBomb();
-            
+
             Vector2 throwDirection = playerView.transform.localScale.x > 0 ? Vector2.right : Vector2.left;
             bombToDeploy.LaunchBomb(throwDirection, playerModel.bombThrowForceX, playerModel.bombThrowForceY);
         }
@@ -108,7 +122,7 @@ namespace Player
             return bombToDeploy;
         }
 
-        private void SetTimeSwitchInput()
+        private void ConfigureTimeSwitchInput()
         {
             if (Input.GetKey(KeyCode.Tab))
             {
@@ -165,7 +179,7 @@ namespace Player
             timeSwitchUIController.UpdateTimeSwitchUISlider(isKeyHeld, timeRequiredForSwitching);
         }
 
-        private void SetMoveInput()
+        private void ConfigureMoveInput()
         {
             playerModel.horizontalInput = Input.GetAxis("Horizontal");
             SetAnimatorFloatValue("Speed", playerModel.horizontalInput);
@@ -198,7 +212,7 @@ namespace Player
                 playerView.FlipOnDirection(horizontalInput);
         }
 
-        private void SetJumpInput()
+        private void ConfigureJumpInput()
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -346,6 +360,19 @@ namespace Player
         public void SetPlayerUI(PlayerUIController playerUIController)
         {
             this.playerUIController = playerUIController;
+        }
+
+        public bool IsPlayerHasKey()
+             => playerModel.isPlayerHasKey;
+
+        public void OnKeyCollected()
+        {
+            playerModel.isPlayerHasKey = true;
+        }
+
+        public void isInfrontOfFinalDoor(bool value)
+        {
+            playerModel.canUnlockDoor = value;
         }
     }
 }

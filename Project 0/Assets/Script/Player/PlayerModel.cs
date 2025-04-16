@@ -43,6 +43,10 @@ namespace Player
         public float bombThrowForceX;
         public float bombThrowForceY;
 
+        //Key
+        public bool isPlayerHasKey = false;
+        public bool canUnlockDoor   = true;
+
         public PlayerModel(PlayerSO playerS0)
         {
             this.playerSO = playerS0;

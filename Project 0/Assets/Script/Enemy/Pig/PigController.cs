@@ -79,5 +79,10 @@ namespace Enemy
         {
            
         }
+
+        public override bool IsEnemyViewActiveAndEnabled()
+        {
+           return enemyView.IsEnemyViewActiveAndEnabled();
+        }
     }
 }

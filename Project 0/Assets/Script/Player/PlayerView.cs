@@ -62,5 +62,33 @@ namespace Player
             Debug.Log("Player took damage");
         }
 
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (!playerController.IsPlayerHasKey())
+            {
+                if (other.CompareTag("Key"))
+                {
+                    playerController.OnKeyCollected();
+                }
+            }
+
+            if (playerController.IsPlayerHasKey())
+            {
+                if (other.CompareTag("FinalDoor"))
+                {
+                    playerController.isInfrontOfFinalDoor(true);
+                }
+            }
+
+        }
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.CompareTag("FinalDoor"))
+            {
+                playerController.isInfrontOfFinalDoor(false);
+            }
+        }
+
     }
 }

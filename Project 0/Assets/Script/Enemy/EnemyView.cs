@@ -31,5 +31,10 @@ namespace Enemy
         {
             enemyController.TakeDamage(damage);
         }
+
+        public bool IsEnemyViewActiveAndEnabled()
+        {
+            return this.isActiveAndEnabled;
+        }
     }
 }
