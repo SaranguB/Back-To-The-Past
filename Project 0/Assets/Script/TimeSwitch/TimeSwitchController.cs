@@ -1,3 +1,4 @@
+using Enemy;
 using Main;
 using System;
 using UI;
@@ -10,12 +11,12 @@ namespace TimeSwitching
         private TimeSwitchView timeSwitchView;
         private TimeSwitchModel timeSwitchModel;
         private TimeStateMachine timeStateMachine;
-
         public TimeSwitchController(TimeSwitchView timeSwitchView)
         {
             InitializeVariable(timeSwitchView);
             SetController();
             CreateStateMachine();
+            
 
             SubcribeToEvents();
             SwitchTimeToPresent();
@@ -51,12 +52,18 @@ namespace TimeSwitching
 
         public void SetPastProperties(TimeAffectedObjectController affectedObject)
         {
-            affectedObject.SetPastProperties();
+            if (affectedObject != null && affectedObject.gameObject.activeInHierarchy)
+            {
+                affectedObject.SetPastProperties();
+            }
         }
 
         public void SetPresentproperties(TimeAffectedObjectController affectedObject)
         {
-            affectedObject.SetPresentProperties();
+            if (affectedObject != null && affectedObject.gameObject.activeInHierarchy)
+            {
+                affectedObject.SetPresentProperties();
+            }
         }
 
         private void SetController()
@@ -78,8 +85,8 @@ namespace TimeSwitching
             {
                 ChangeTimeToPast();
                 timeSwitchView.SwitchTimeToPast();
-
             }
+            GameManager.Instance.eventService.OnTimeSwitchWithBoolParam.InvokeEvent(currentState is PastState);
         }
 
         public void ChangeTimeToPast()

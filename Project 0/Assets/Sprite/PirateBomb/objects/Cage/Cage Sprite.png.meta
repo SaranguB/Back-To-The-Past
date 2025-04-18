@@ -1,0 +1,1080 @@
+fileFormatVersion: 2
+guid: f5039a6990600c34489997a8ae9cb088
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7078178141013743938
+    second: Cage Sprite_0
+  - first:
+      213: -8886602525333342226
+    second: Cage Sprite_1
+  - first:
+      213: -2332488230139335553
+    second: Cage Sprite_2
+  - first:
+      213: -277387892613793088
+    second: Cage Sprite_3
+  - first:
+      213: 7701846259216219939
+    second: Cage Sprite_4
+  - first:
+      213: 5522317562320900865
+    second: Cage Sprite_5
+  - first:
+      213: -5994996091827834955
+    second: Cage Sprite_6
+  - first:
+      213: 6173570477948911961
+    second: Cage Sprite_7
+  - first:
+      213: 2265005961251570589
+    second: Cage Sprite_8
+  - first:
+      213: -7178511832632659374
+    second: Cage Sprite_9
+  - first:
+      213: 4311003151702894515
+    second: Cage Sprite_10
+  - first:
+      213: 5073411574889793124
+    second: Cage Sprite_11
+  - first:
+      213: 5963974271922991387
+    second: Cage Sprite_12
+  - first:
+      213: -381134035794554814
+    second: Cage Sprite_13
+  - first:
+      213: -8590385962605778043
+    second: Cage Sprite_14
+  - first:
+      213: -5323840491378986829
+    second: Cage Sprite_15
+  - first:
+      213: 7632907692538697571
+    second: Cage Sprite_16
+  - first:
+      213: 5311741237418431004
+    second: Cage Sprite_17
+  - first:
+      213: -1298847347961266945
+    second: Cage Sprite_18
+  - first:
+      213: 7109554550207977370
+    second: Cage Sprite_19
+  - first:
+      213: 200563849449548155
+    second: Cage Sprite_20
+  - first:
+      213: -5597272268977686090
+    second: Cage Sprite_21
+  - first:
+      213: 3295267371510964228
+    second: Cage Sprite_22
+  - first:
+      213: 2534468886923466791
+    second: Cage Sprite_23
+  - first:
+      213: 7834270759134796911
+    second: Cage Sprite_24
+  - first:
+      213: 6031518580522651117
+    second: Cage Sprite_25
+  - first:
+      213: 2171997092495408915
+    second: Cage Sprite_26
+  - first:
+      213: -5712642807317875797
+    second: Cage Sprite_27
+  - first:
+      213: -6531251669489074508
+    second: Cage Sprite_28
+  - first:
+      213: -2637258780574410197
+    second: Cage Sprite_29
+  - first:
+      213: 3162069406686438507
+    second: Cage Sprite_30
+  - first:
+      213: -7478897662380555409
+    second: Cage Sprite_31
+  - first:
+      213: 9165999499858263069
+    second: Cage Sprite_32
+  - first:
+      213: -4038533246614688334
+    second: Cage Sprite_33
+  - first:
+      213: -607534978605920556
+    second: Cage Sprite_34
+  - first:
+      213: -2180070357357938039
+    second: Cage Sprite_35
+  - first:
+      213: 7626790449696818797
+    second: Cage Sprite_36
+  - first:
+      213: 7909375621172096392
+    second: Cage Sprite_37
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Cage Sprite_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 185
+        height: 783
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2491f08748dba3260800000000000000
+      internalID: 7078178141013743938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_1
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 472
+        width: 230
+        height: 552
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee7ba6126127ca480800000000000000
+      internalID: -8886602525333342226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_2
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 968
+        width: 8
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7ce3cf005651afd0800000000000000
+      internalID: -2332488230139335553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_3
+      rect:
+        serializedVersion: 2
+        x: 203
+        y: 0
+        width: 438
+        height: 557
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0cab2cb6e25862cf0800000000000000
+      internalID: -277387892613793088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_4
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 437
+        width: 407
+        height: 587
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32ff04bdd5472ea60800000000000000
+      internalID: 7701846259216219939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_5
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 567
+        width: 60
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 103d90f709633ac40800000000000000
+      internalID: 5522317562320900865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_6
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 503
+        width: 69
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bf2fbc31de7dcca0800000000000000
+      internalID: -5994996091827834955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_7
+      rect:
+        serializedVersion: 2
+        x: 571
+        y: 623
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 951cbf504adeca550800000000000000
+      internalID: 6173570477948911961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_8
+      rect:
+        serializedVersion: 2
+        x: 652
+        y: 0
+        width: 884
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d93ca86dbeaee6f10800000000000000
+      internalID: 2265005961251570589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_9
+      rect:
+        serializedVersion: 2
+        x: 711
+        y: 407
+        width: 90
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 252fdf7858dc06c90800000000000000
+      internalID: -7178511832632659374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_10
+      rect:
+        serializedVersion: 2
+        x: 767
+        y: 471
+        width: 82
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b727da9682c3db30800000000000000
+      internalID: 4311003151702894515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_11
+      rect:
+        serializedVersion: 2
+        x: 846
+        y: 526
+        width: 93
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46649a082f0686640800000000000000
+      internalID: 5073411574889793124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_12
+      rect:
+        serializedVersion: 2
+        x: 858
+        y: 383
+        width: 183
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b11f987700b44c250800000000000000
+      internalID: 5963974271922991387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_13
+      rect:
+        serializedVersion: 2
+        x: 959
+        y: 334
+        width: 106
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24097a02d90f5baf0800000000000000
+      internalID: -381134035794554814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_14
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 736
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58b61671b71d8c880800000000000000
+      internalID: -8590385962605778043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_15
+      rect:
+        serializedVersion: 2
+        x: 995
+        y: 946
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b0b38ea74bed16b0800000000000000
+      internalID: -5323840491378986829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_16
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 999
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3679d110b198de960800000000000000
+      internalID: 7632907692538697571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_17
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 992
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c129e1b338817b940800000000000000
+      internalID: 5311741237418431004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_18
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 871
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ffc7f47f73199fde0800000000000000
+      internalID: -1298847347961266945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_19
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 807
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a97986402363aa260800000000000000
+      internalID: 7109554550207977370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_20
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 720
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b79a93922cb88c200800000000000000
+      internalID: 200563849449548155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_21
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 703
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b9b078e68e7252b0800000000000000
+      internalID: -5597272268977686090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_22
+      rect:
+        serializedVersion: 2
+        x: 1268
+        y: 419
+        width: 61
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 400a8de17342bbd20800000000000000
+      internalID: 3295267371510964228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_23
+      rect:
+        serializedVersion: 2
+        x: 711
+        y: 336
+        width: 42
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7285a53460e3c2320800000000000000
+      internalID: 2534468886923466791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_24
+      rect:
+        serializedVersion: 2
+        x: 1199
+        y: 375
+        width: 74
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6c95786fbbe8bc60800000000000000
+      internalID: 7834270759134796911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_25
+      rect:
+        serializedVersion: 2
+        x: 1399
+        y: 391
+        width: 42
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ded8830513244b350800000000000000
+      internalID: 6031518580522651117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_26
+      rect:
+        serializedVersion: 2
+        x: 703
+        y: 136
+        width: 359
+        height: 164
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31fbe5f09db742e10800000000000000
+      internalID: 2171997092495408915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_27
+      rect:
+        serializedVersion: 2
+        x: 759
+        y: 269
+        width: 76
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba3b02532ad98b0b0800000000000000
+      internalID: -5712642807317875797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_28
+      rect:
+        serializedVersion: 2
+        x: 938
+        y: 249
+        width: 63
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4be3d6de5355c55a0800000000000000
+      internalID: -6531251669489074508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_29
+      rect:
+        serializedVersion: 2
+        x: 1166
+        y: 215
+        width: 123
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2a1513ac13966bd0800000000000000
+      internalID: -2637258780574410197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_30
+      rect:
+        serializedVersion: 2
+        x: 1173
+        y: 293
+        width: 44
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b64ecac3f5de1eb20800000000000000
+      internalID: 3162069406686438507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_31
+      rect:
+        serializedVersion: 2
+        x: 1391
+        y: 247
+        width: 76
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f63ce42733e953890800000000000000
+      internalID: -7478897662380555409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_32
+      rect:
+        serializedVersion: 2
+        x: 1459
+        y: 294
+        width: 46
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1cb5784bfb243f70800000000000000
+      internalID: 9165999499858263069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_33
+      rect:
+        serializedVersion: 2
+        x: 1165
+        y: 151
+        width: 198
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2bd2de5c86f34f7c0800000000000000
+      internalID: -4038533246614688334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_34
+      rect:
+        serializedVersion: 2
+        x: 1319
+        y: 207
+        width: 65
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4dec193e72a9197f0800000000000000
+      internalID: -607534978605920556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_35
+      rect:
+        serializedVersion: 2
+        x: 1363
+        y: 159
+        width: 142
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98a325c7f85deb1e0800000000000000
+      internalID: -2180070357357938039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_36
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 143
+        width: 65
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d66458a618dc7d960800000000000000
+      internalID: 7626790449696818797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cage Sprite_37
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 61
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88de817c83fb3cd60800000000000000
+      internalID: 7909375621172096392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable: {}
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

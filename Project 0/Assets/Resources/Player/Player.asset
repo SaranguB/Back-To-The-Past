@@ -12,7 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 665aebf36af88db43ab1563c7a88c7ee, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
+  numberOfLives: 3
   movementSpeed: 4
-  health: 100
   jumpForce: 8
   fallingSpeed: 4
+  dashSpeed: 20
+  dashDuration: 0.2
+  maxDashes: 1
+  currentDashes: 25
+  currentAirDashes: 0
+  bombThreshold: 0.2
+  BombThrowForceX: 4
+  BombThrowForceY: 4

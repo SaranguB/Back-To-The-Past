@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Key
+  - FinalDoor
   layers:
   - Default
   - TransparentFX
@@ -14,9 +16,9 @@ TagManager:
   - Player
   - Bomb
   - BombDamageArea
-  - 
-  - 
-  - 
+  - Environment
+  - Enemy
+  - MovableObjects
   - 
   - 
   - 
@@ -44,20 +46,44 @@ TagManager:
   - name: Background
     uniqueID: 3273055811
     locked: 0
-  - name: Player
-    uniqueID: 4268614575
-    locked: 0
-  - name: Environment
-    uniqueID: 12997045
+  - name: Decoration
+    uniqueID: 2333476581
     locked: 0
   - name: Objects
     uniqueID: 852844931
+    locked: 0
+  - name: Door
+    uniqueID: 3077240791
+    locked: 0
+  - name: BoxOfEnemy
+    uniqueID: 58288265
+    locked: 0
+  - name: Rescuee
+    uniqueID: 2119453859
+    locked: 0
+  - name: Level
+    uniqueID: 2289562927
+    locked: 0
+  - name: Ground
+    uniqueID: 4268614575
+    locked: 0
+  - name: Destroyable
+    uniqueID: 3849812953
+    locked: 0
+  - name: UI
+    uniqueID: 2119625803
+    locked: 0
+  - name: Player
+    uniqueID: 12997045
     locked: 0
   - name: Bomb
     uniqueID: 559389947
     locked: 0
   - name: Enemy
     uniqueID: 3346897823
+    locked: 0
+  - name: Crates
+    uniqueID: 390953359
     locked: 0
   m_RenderingLayers:
   - Default

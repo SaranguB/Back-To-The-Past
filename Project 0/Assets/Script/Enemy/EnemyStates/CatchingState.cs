@@ -17,7 +17,8 @@ namespace Enemy
 
         public void OnStateEnter()
         {
-            enemyAnimator.SetBool("IsCatching", true);
+            if (owner.IsEnemyViewActiveAndEnabled())
+                enemyAnimator.SetBool("IsCatching", true);
         }
 
         public void UpdateState()

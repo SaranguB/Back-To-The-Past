@@ -1,3 +1,4 @@
+using Main;
 using StateMachine;
 using System;
 using UnityEngine;
@@ -6,15 +7,38 @@ namespace Enemy
 {
     public class PigController : EnemyController
     {
-        private EnemySO enemyData;
+        public EnemySO enemyData;
         private EnemyView enemyView;
         private PigStateMachine pigStateMachine;
+
+        private bool isEnemyInPresent;
+        public bool WasInitiallyActive = true;
+        private int pigHealth;
 
         public PigController(EnemyView enemyView)
         {
             SetEnemyView(enemyView);
+
             CreateStateMachine();
             ChangeState(EnemyStates.Idle);
+            SubscribeToEvents();
+
+            InitializeValues();
+        }
+
+        private void InitializeValues()
+        {
+            pigHealth = enemyData.health;
+        }
+
+        public void SubscribeToEvents()
+        {
+            GameManager.Instance.eventService.OnTimeSwitchWithBoolParam.AddListener(TimeSwitched);
+        }
+
+        public override void UnsubscribeToEvents()
+        {
+            GameManager.Instance.eventService.OnTimeSwitchWithBoolParam.RemoveListener(TimeSwitched);
         }
 
         private void SetEnemyView(EnemyView enemyView)
@@ -36,6 +60,11 @@ namespace Enemy
             ChangeState(EnemyStates.Catching);
         }
 
+        public override void PlayerExitRanged()
+        {
+            base.PlayerExitRanged();
+            ChangeState(EnemyStates.Idle);
+        }
         public override bool IsInCastingState()
         {
             return GetCurrentState() is catchingState<PigController>;
@@ -69,5 +98,38 @@ namespace Enemy
 
         public override float GetAttackDelay()
             => enemyData.attackDelay;
+
+        public override EnemySO GetEnemyData()
+                => enemyData;
+
+        public override void TakeDamage(int damage)
+        {
+            pigHealth -= damage;
+
+            if (pigHealth <= 0)
+                enemyView.EnemyIsDead();
+        }
+
+        private void TimeSwitched(bool value)
+        {
+            isEnemyInPresent = value;
+
+            if (isEnemyInPresent)
+            {
+                enemyView.TimeSwitchedToPresent();
+            }
+            else
+            {
+                enemyView.TimeSwitchedToPast();
+            }
+        }
+
+        public override bool IsEnemyViewActiveAndEnabled()
+        {
+            if (enemyView != null)
+                return enemyView.IsEnemyViewActiveAndEnabled();
+
+            return false;
+        }
     }
 }

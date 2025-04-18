@@ -10,6 +10,8 @@ namespace Enemy
         private EnemyViewCollection enemyViewCollection;
 
         protected Vector2 playerPosition;
+       
+
         public EnemyController()
         {
             SubscribeToEvents();
@@ -48,5 +50,18 @@ namespace Enemy
         public abstract float GetAttackDelay();
 
         public abstract void FixedUpdateStateMachine();
+
+        public virtual void PlayerExitRanged()
+        {
+            
+        }
+        public abstract void TakeDamage(int damage);
+
+        public abstract bool IsEnemyViewActiveAndEnabled();
+
+        public abstract EnemySO GetEnemyData();
+
+        public abstract void UnsubscribeToEvents();
+
     }
 }

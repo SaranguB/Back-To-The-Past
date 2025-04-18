@@ -4,17 +4,17 @@ using Wepons.Bomb;
 
 public class BombDamageArea : MonoBehaviour
 {
-    private float bombDamage;
+    private int bombDamage;
     private CapsuleCollider2D damageAreaCollider;
 
 
-    public void SetDamageValues(float damageRadius, float bombDamage)
+    public void SetDamageValues(float damageRadius, int bombDamage)
     {
         SetDamageRadius(damageRadius);
         SetBombDamage(bombDamage);
     }
 
-    private void SetBombDamage(float bombDamage)
+    private void SetBombDamage(int bombDamage)
     {
         this.bombDamage = bombDamage;
     }
@@ -31,14 +31,15 @@ public class BombDamageArea : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-            if (other.TryGetComponent<IDamagableFromBomb>(out var damagable))
-            {
-                damagable.TakeDamageFromBomb(bombDamage);
-            }
+        if (other.TryGetComponent<IDamagableFromBomb>(out var damagable))
+        {
+            damagable.TakeDamageFromBomb(bombDamage);
+        }
     }
 
     public void ChangeColliderState(bool value)
     {
-        damageAreaCollider.enabled = value;
+        if (damageAreaCollider != null)
+            damageAreaCollider.enabled = value;
     }
 }

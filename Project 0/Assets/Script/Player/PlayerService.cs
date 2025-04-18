@@ -1,3 +1,5 @@
+using Player.UI;
+using System;
 using TimeSwitching;
 using UI;
 using UnityEngine;
@@ -17,6 +19,12 @@ namespace Player
 
         public PlayerController GetPlayer() => playerController;
 
+        public void SetUI(TimeSwitchUIController timeSwitchUIController, PlayerUIController playerUIController, HealthUIController healthUIController)
+        {
+            SetTimeSwitchUI(timeSwitchUIController);
+            SetPlayerUI(playerUIController);
+            SetHealthUI(healthUIController);
+        }
         public void SetTimeSwitchUI(TimeSwitchUIController timeSwitchUIController)
         {
             playerController.SetTimeSwitchUI(timeSwitchUIController);
@@ -24,5 +32,17 @@ namespace Player
 
         public void ReturneBombToPool(BombController bombToReturn)
             => bombPool.ReturnItem(bombToReturn);
+
+        public void SetPlayerUI(PlayerUIController playerUIController)
+        {
+           playerController.SetPlayerUI(playerUIController);
+        }
+
+        public void SetHealthUI(HealthUIController healthUIController)
+        {
+            playerController.SetHealthUI(healthUIController);
+        }
+
+        
     }
 }

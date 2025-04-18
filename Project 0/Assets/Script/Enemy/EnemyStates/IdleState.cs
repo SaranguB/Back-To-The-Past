@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Enemy
 {
-    public class IdleState<T> : IState<T> where T :EnemyController
+    public class IdleState<T> : IState<T> where T : EnemyController
     {
         public T owner { get; set; }
 
@@ -17,12 +17,13 @@ namespace Enemy
 
         public void OnStateEnter()
         {
-           
+             if (owner.IsEnemyViewActiveAndEnabled())
+                enemyAnimator.SetBool("IsCatching", false);
         }
 
         public void UpdateState()
         {
-            
+
         }
         public void FixedUpdateState()
         {

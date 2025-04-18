@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using Wepons.Bomb;
 
@@ -34,13 +35,15 @@ namespace Player
 
         private void Update()
         {
-            playerController.HandleInput();
             playerController.OnPlayerPositionChanged(playerTransform.position);
+            playerController.HandleInput();
+            playerController.HandleDashing();
         }
 
         private void FixedUpdate()
         {
             playerController.HandleMovement();
+            playerController.ExecuteDashing();
         }
 
         public void SetController(PlayerController playerController)
@@ -55,10 +58,49 @@ namespace Player
             transform.localScale = scale;
         }
 
-        public void TakeDamageFromBomb(float damage)
+        public void TakeDamageFromBomb(int damage)
         {
-            Debug.Log("Player took damage");
+            playerController.TakeDamageFromBomb(damage);
         }
 
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (!playerController.IsPlayerHasKey())
+            {
+                if (other.CompareTag("Key"))
+                {
+                    playerController.OnKeyCollected();
+                }
+            }
+
+            if (playerController.IsPlayerHasKey())
+            {
+                if (other.CompareTag("FinalDoor"))
+                {
+                    playerController.IsInfrontOfFinalDoor(true);
+                }
+            }
+
+        }
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.CompareTag("FinalDoor"))
+            {
+                playerController.IsInfrontOfFinalDoor(false);
+            }
+        }
+
+        public void LevelFinished()
+        {
+            StartCoroutine(DisablePlayer());
+        }
+
+        private IEnumerator DisablePlayer()
+        {
+            yield return new WaitForSeconds(.5f);
+
+            gameObject.SetActive(false);
+        }
     }
 }

@@ -1,3 +1,4 @@
+using Enemy;
 using Player;
 using System;
 using UI;
@@ -8,13 +9,13 @@ namespace TimeSwitching
     public class TimeSwitchView : MonoBehaviour
     {
         [SerializeField] private TimeAffectedObjectController[] objectController;
+
         [SerializeField] private GameObject pastPlatform;
         [SerializeField] private GameObject presentPlatform;
         [SerializeField] private GameObject pastBackgroundImage;
         [SerializeField] private GameObject presentBackgroundImage;
 
         private TimeSwitchController timeSwitchController;
-
 
         private void OnDisable()
         {
@@ -25,6 +26,7 @@ namespace TimeSwitching
         public void SetController(TimeSwitchController timeSwitchController)
         {
             this.timeSwitchController = timeSwitchController;
+           
         }
 
         public TimeAffectedObjectController[] GetAffectedObjects()
@@ -40,7 +42,6 @@ namespace TimeSwitching
         {
             EnablePastPlatform();
             DisablePresentPlatform();
-
         }
 
         private void DisablePastPlatform()
