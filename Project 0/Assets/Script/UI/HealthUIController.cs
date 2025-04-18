@@ -30,15 +30,12 @@ namespace UI
 
         public void RemoveLives(int damage)
         {
-            Debug.Log("entered");
+            
             for (int i = 1; i <= damage; i++)
             {
-                Debug.Log("entered loop");
-
                 if (numberOfHearts > 0)
                 {
-                    Debug.Log("removed");
-
+                   
                     numberOfHearts--;
                     healthUIView.hearts[numberOfHearts].SetActive(false);
                 }

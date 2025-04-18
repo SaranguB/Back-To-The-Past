@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using Wepons.Bomb;
 
@@ -59,7 +60,6 @@ namespace Player
 
         public void TakeDamageFromBomb(int damage)
         {
-            Debug.Log("Player took damage" + damage);
             playerController.TakeDamageFromBomb(damage);
         }
 
@@ -91,5 +91,16 @@ namespace Player
             }
         }
 
+        public void LevelFinished()
+        {
+            StartCoroutine(DisablePlayer());
+        }
+
+        private IEnumerator DisablePlayer()
+        {
+            yield return new WaitForSeconds(.5f);
+
+            gameObject.SetActive(false);
+        }
     }
 }

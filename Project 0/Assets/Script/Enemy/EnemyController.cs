@@ -61,5 +61,7 @@ namespace Enemy
 
         public abstract EnemySO GetEnemyData();
 
+        public abstract void UnsubscribeToEvents();
+
     }
 }

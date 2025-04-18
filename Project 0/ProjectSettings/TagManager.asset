@@ -17,8 +17,8 @@ TagManager:
   - Bomb
   - BombDamageArea
   - Environment
-  - 
-  - 
+  - Enemy
+  - MovableObjects
   - 
   - 
   - 
@@ -55,6 +55,15 @@ TagManager:
   - name: Door
     uniqueID: 3077240791
     locked: 0
+  - name: BoxOfEnemy
+    uniqueID: 58288265
+    locked: 0
+  - name: Rescuee
+    uniqueID: 2119453859
+    locked: 0
+  - name: Level
+    uniqueID: 2289562927
+    locked: 0
   - name: Ground
     uniqueID: 4268614575
     locked: 0
@@ -63,9 +72,6 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 2119625803
-    locked: 0
-  - name: Level
-    uniqueID: 2289562927
     locked: 0
   - name: Player
     uniqueID: 12997045

@@ -60,12 +60,14 @@ namespace Enemy
 
         private void Attack()
         {
-            enemyAnimator.SetTrigger("Attack");
+            if (enemyAnimator != null)
+                enemyAnimator.SetTrigger("Attack");
         }
 
         public void OnStateExit()
         {
-            enemyAnimator.SetBool("IsAttacking", false);
+            if (enemyAnimator != null)
+                enemyAnimator.SetBool("IsAttacking", false);
         }
 
     }

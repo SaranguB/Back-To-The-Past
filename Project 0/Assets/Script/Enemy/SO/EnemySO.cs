@@ -6,6 +6,7 @@ namespace Enemy
     public class EnemySO : ScriptableObject
     {
         public EnemyType enemyType;
+        public int health;
         public int damage;
         public float speed;
         public bool inPast;

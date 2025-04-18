@@ -10,19 +10,35 @@ namespace Enemy
         public EnemySO enemyData;
         private EnemyView enemyView;
         private PigStateMachine pigStateMachine;
+
         private bool isEnemyInPresent;
-        public bool WasInitiallyActive  =true;
+        public bool WasInitiallyActive = true;
+        private int pigHealth;
+
         public PigController(EnemyView enemyView)
         {
             SetEnemyView(enemyView);
+
             CreateStateMachine();
             ChangeState(EnemyStates.Idle);
             SubscribeToEvents();
+
+            InitializeValues();
+        }
+
+        private void InitializeValues()
+        {
+            pigHealth = enemyData.health;
         }
 
         public void SubscribeToEvents()
         {
             GameManager.Instance.eventService.OnTimeSwitchWithBoolParam.AddListener(TimeSwitched);
+        }
+
+        public override void UnsubscribeToEvents()
+        {
+            GameManager.Instance.eventService.OnTimeSwitchWithBoolParam.RemoveListener(TimeSwitched);
         }
 
         private void SetEnemyView(EnemyView enemyView)
@@ -84,11 +100,14 @@ namespace Enemy
             => enemyData.attackDelay;
 
         public override EnemySO GetEnemyData()
-                =>enemyData;
+                => enemyData;
 
         public override void TakeDamage(int damage)
         {
-           
+            pigHealth -= damage;
+
+            if (pigHealth <= 0)
+                enemyView.EnemyIsDead();
         }
 
         private void TimeSwitched(bool value)
@@ -107,7 +126,10 @@ namespace Enemy
 
         public override bool IsEnemyViewActiveAndEnabled()
         {
-           return enemyView.IsEnemyViewActiveAndEnabled();
+            if (enemyView != null)
+                return enemyView.IsEnemyViewActiveAndEnabled();
+
+            return false;
         }
     }
 }

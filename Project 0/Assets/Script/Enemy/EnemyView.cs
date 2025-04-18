@@ -38,20 +38,22 @@ namespace Enemy
             return this.isActiveAndEnabled;
         }
 
-       
+
         public void TimeSwitchedToPresent()
         {
-            if (WasActiveInitially)
-            {
-                if (enemyController.GetEnemyData().inPresent)
+            
+                if (WasActiveInitially)
                 {
-                    this.gameObject.SetActive(true);
+                    if (enemyController.GetEnemyData().inPresent)
+                    {
+                        this.gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        this.gameObject.SetActive(false);
+                    }
                 }
-                else
-                {
-                    this.gameObject.SetActive(false);
-                }
-            }
+            
         }
 
         public void TimeSwitchedToPast()
@@ -72,6 +74,13 @@ namespace Enemy
         public void SetOriginallyActive()
         {
             WasActiveInitially = true;
+        }
+
+        public void EnemyIsDead()
+        {
+            enemyController.UnsubscribeToEvents();
+            Destroy(this.gameObject);
+
         }
     }
 }

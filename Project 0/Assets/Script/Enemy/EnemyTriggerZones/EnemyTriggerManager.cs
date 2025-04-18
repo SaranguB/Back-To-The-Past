@@ -12,6 +12,7 @@ namespace Enemy
            this.enemy = enemyController;
         }
 
+
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.GetComponent<PlayerView>() != null)

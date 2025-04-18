@@ -52,7 +52,7 @@ namespace Player
 
         private void ConfigureTransitionToNextLevelInput()
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow) && playerModel.isPlayerHasKey && playerModel.canUnlockDoor)
+            if (Input.GetKeyDown(KeyCode.F) && playerModel.isPlayerHasKey && playerModel.canUnlockDoor)
             {
                 UnlockDoor();
             }
@@ -60,7 +60,9 @@ namespace Player
 
         private void UnlockDoor()
         {
-           playerModel.canUnlockDoor = false;
+            playerModel.canUnlockDoor = false;
+            GameManager.Instance.eventService.OnPlayerFinishedLevel.InvokeEvent();
+            playerView.LevelFinished();
         }
 
         private void ConfigureBombDeployInput()
@@ -369,6 +371,7 @@ namespace Player
         public void OnKeyCollected()
         {
             playerModel.isPlayerHasKey = true;
+            GameManager.Instance.eventService.OnPlayerGotKey.InvokeEvent();
         }
 
         public void IsInfrontOfFinalDoor(bool value)
@@ -384,7 +387,7 @@ namespace Player
 
         public void TakeDamageFromBomb(int damage)
         {
-            
+
             healthUIController.RemoveLives(damage);
         }
     }
