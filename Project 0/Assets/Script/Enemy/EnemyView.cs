@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using Wepons.Bomb;
 
@@ -12,6 +13,9 @@ namespace Enemy
         public Animator enemyAnimator;
         public EnemyTriggerManager enemyTriggerManager;
         public bool WasActiveInitially = true;
+
+        [Header("EnemyWithAWepon")]
+        public Transform firePoint;
 
         public void SetController(EnemyController enemyController)
         {
@@ -38,7 +42,6 @@ namespace Enemy
             return this.isActiveAndEnabled;
         }
 
-
         public void TimeSwitchedToPresent()
         {
             
@@ -53,7 +56,6 @@ namespace Enemy
                         this.gameObject.SetActive(false);
                     }
                 }
-            
         }
 
         public void TimeSwitchedToPast()
@@ -81,6 +83,11 @@ namespace Enemy
             enemyController.UnsubscribeToEvents();
             Destroy(this.gameObject);
 
+        }
+
+        public void FireCanon()
+        {
+            enemyController.Fire();
         }
     }
 }

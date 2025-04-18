@@ -13,5 +13,10 @@ namespace Enemy
         public bool inPresent;
         public float attackRange;
         public float attackDelay;
+
+        public float bombThrowForceX;
+        public float bombThrowForceY;
+        public float enemyWeponDelay;
+        
     }
 }

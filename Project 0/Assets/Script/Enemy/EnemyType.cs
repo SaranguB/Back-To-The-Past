@@ -5,6 +5,6 @@ namespace Enemy
     public enum EnemyType
     {
         Pig,
-        PigInTheBox
+        PigWithACanon,
     }
 }

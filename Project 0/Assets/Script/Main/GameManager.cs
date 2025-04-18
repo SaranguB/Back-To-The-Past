@@ -46,7 +46,7 @@ namespace Main
             levelService = new LevelService(levelView);
             timeSwitchService = new TimeSwitchService(timeSwitchView);
             playerService = new PlayerService(playerView, playerS0, bombSO, bombView);
-            enemyService = new EnemyService(enemyViewCollection);
+            enemyService = new EnemyService(enemyViewCollection, bombSO, bombView);
 
             InitializeDestroyabelObjectController();
         }

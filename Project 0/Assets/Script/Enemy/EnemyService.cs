@@ -1,4 +1,5 @@
 using UnityEngine;
+using Wepons.Bomb;
 
 namespace Enemy
 {
@@ -6,10 +7,12 @@ namespace Enemy
     {
         private EnemyController enemy;
         private EnemyViewCollection enemyViewCollection;
-        public EnemyService(EnemyViewCollection enemyViewCollection)
+        private BombPool bombPool;
+        public EnemyService(EnemyViewCollection enemyViewCollection, BombSO bombSO, BombView bombPrefab)
         {
+            bombPool = new BombPool(bombSO, bombPrefab);
             this.enemyViewCollection = enemyViewCollection;
-           CreateEnemies();
+            CreateEnemies();
         }
 
         private void CreateEnemies()
@@ -19,7 +22,10 @@ namespace Enemy
                 switch (view.enemyData.enemyType)
                 {
                     case EnemyType.Pig:
-                        enemy =  new PigController(view);
+                        enemy = new PigController(view);
+                        break;
+                    case EnemyType.PigWithACanon:
+                        enemy = new PigWithACanonController(view, bombPool);
                         break;
                 }
             }

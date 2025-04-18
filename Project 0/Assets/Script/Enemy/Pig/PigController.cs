@@ -66,9 +66,8 @@ namespace Enemy
             ChangeState(EnemyStates.Idle);
         }
         public override bool IsInCastingState()
-        {
-            return GetCurrentState() is catchingState<PigController>;
-        }
+            => GetCurrentState() is catchingState<PigController>;
+
         public IState<PigController> GetCurrentState()
             => pigStateMachine.GetCurrentState();
 
