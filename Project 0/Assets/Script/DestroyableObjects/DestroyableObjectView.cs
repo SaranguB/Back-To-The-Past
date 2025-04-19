@@ -57,7 +57,6 @@ public class DestroyableObjectView : MonoBehaviour, IDamagableFromBomb
 
         if (!destroyableObjectController.GetIsPresentTime() && CanDestroyInPast)
         {
-            Debug.Log("Destroy in past");
             boxCollider.enabled = false;
             Destroy(pastObject.gameObject);
             Destroy(presentObject.gameObject);

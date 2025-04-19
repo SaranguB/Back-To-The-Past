@@ -52,7 +52,10 @@ namespace Main
             eventService = new EventService();
             levelService = new LevelService(levelView);
             timeSwitchService = new TimeSwitchService(timeSwitchView);
-            trapService = new TrapService(trapViewCollection);
+
+            if (trapViewCollection != null)
+                trapService = new TrapService(trapViewCollection);
+
             playerService = new PlayerService(playerView, playerS0, bombSO, bombView);
             enemyService = new EnemyService(enemyViewCollection, bombSO, bombView);
 

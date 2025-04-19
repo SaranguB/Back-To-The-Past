@@ -3974,9 +3974,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f508a6a04efa79147b7d3bf85448685f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  presentWall: {fileID: 838499492}
-  pastWall: {fileID: 1919979767}
+  presentObject: {fileID: 838499492}
+  pastObject: {fileID: 1919979767}
   boxCollider: {fileID: 265167658}
+  CanDestroyInPast: 1
 --- !u!61 &265167658
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13372,7 +13373,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 19.581799, y: 13.866265, z: -10}
+  m_LocalPosition: {x: 0.17187881, y: -0.84000444, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13871,7 +13872,7 @@ Transform:
   m_GameObject: {fileID: 792812097}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 16.045582, y: 14.927849, z: 0.07721996}
+  m_LocalPosition: {x: -10.504417, y: -3.1821518, z: 0.07721996}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15080,6 +15081,7 @@ MonoBehaviour:
   enemyViewCollection: {fileID: 299389923}
   destroyableObjectViewCollection: {fileID: 686638868}
   levelView: {fileID: 709517333}
+  trapViewCollection: {fileID: 0}
 --- !u!4 &1522333370
 Transform:
   m_ObjectHideFlags: 0
@@ -20286,17 +20288,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5929827514563647122, guid: b6be7e767ae782d4e95329c8f11ae7ac, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 4104
+      objectReference: {fileID: 0}
     - target: {fileID: 6477960034497839151, guid: b6be7e767ae782d4e95329c8f11ae7ac, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7525151381986033123, guid: b6be7e767ae782d4e95329c8f11ae7ac, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 20.57
+      value: -5.98
       objectReference: {fileID: 0}
     - target: {fileID: 7525151381986033123, guid: b6be7e767ae782d4e95329c8f11ae7ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 17.02
+      value: -1.09
       objectReference: {fileID: 0}
     - target: {fileID: 7525151381986033123, guid: b6be7e767ae782d4e95329c8f11ae7ac, type: 3}
       propertyPath: m_LocalPosition.z
