@@ -17,10 +17,17 @@ namespace Enemy
 
         public void OnStateEnter()
         {
-             if (owner.IsEnemyViewActiveAndEnabled())
-                enemyAnimator.SetBool("IsCatching", false);
-        }
+            if (owner.IsEnemyViewActiveAndEnabled())
+            {
 
+                if (!(owner.GetEnemyData().enemyType == EnemyType.PigWithACanon))
+                    enemyAnimator.SetBool("IsCatching", false);
+
+                else
+                    enemyAnimator.SetBool("IsAttacking", false);
+
+            }
+        }
         public void UpdateState()
         {
 

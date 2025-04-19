@@ -2,6 +2,7 @@ using Enemy;
 using StateMachine;
 using System;
 using UnityEngine;
+using Wepons.Bomb;
 
 namespace Enemy
 {
@@ -12,6 +13,7 @@ namespace Enemy
         private Animator enemyAnimator;
         private float attackTimer = 0f;
         private float attackDelay;
+        private BombPool bombPool;
 
         public AttackState(Animator enemyAnimator)
         {
@@ -62,6 +64,15 @@ namespace Enemy
         {
             if (enemyAnimator != null)
                 enemyAnimator.SetTrigger("Attack");
+
+            EnemySO enemyData = owner.GetEnemyData();
+
+            switch (enemyData.enemyType)
+            {
+                case EnemyType.PigWithACanon:
+                    owner.FireBomb();
+                    break;
+            }
         }
 
         public void OnStateExit()

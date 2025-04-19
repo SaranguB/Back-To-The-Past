@@ -7,6 +7,7 @@ namespace Wepons.Bomb
     {
         private BombView bombPrefab;
         private BombSO bombSO;
+
         public BombPool(BombSO bombSO, BombView bombPrefab)
         {
             this.bombSO = bombSO;

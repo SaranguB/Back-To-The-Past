@@ -63,5 +63,18 @@ namespace Enemy
 
         public abstract void UnsubscribeToEvents();
 
+        public virtual void FireBomb()
+        {
+           
+        }
+
+        public virtual void FireCanon()
+        {
+        }
+
+        public virtual void Fire()
+        {
+            
+        }
     }
 }
