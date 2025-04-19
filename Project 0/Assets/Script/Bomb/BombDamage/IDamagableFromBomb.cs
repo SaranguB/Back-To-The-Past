@@ -4,6 +4,6 @@ namespace Wepons.Bomb
 {
     public interface IDamagableFromBomb
     {
-        void TakeDamageFromBomb(int damage);
+        void TakeDamage(int damage);
     }
 }

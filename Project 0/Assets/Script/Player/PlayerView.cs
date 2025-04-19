@@ -58,9 +58,9 @@ namespace Player
             transform.localScale = scale;
         }
 
-        public void TakeDamageFromBomb(int damage)
+        public void TakeDamage(int damage)
         {
-            playerController.TakeDamageFromBomb(damage);
+            playerController.TakeDamage(damage);
         }
 
         private void OnTriggerEnter2D(Collider2D other)

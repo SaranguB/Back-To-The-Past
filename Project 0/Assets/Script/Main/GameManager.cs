@@ -8,6 +8,7 @@ using Enemy;
 using System;
 using Objects.Destroyable;
 using Level;
+using Trap;
 
 namespace Main
 {
@@ -18,6 +19,7 @@ namespace Main
         public EventService eventService;
         public EnemyService enemyService;
         public LevelService levelService;
+        public TrapService trapService;
 
         [Header("Player")]
         [SerializeField] private PlayerView playerView;
@@ -39,12 +41,18 @@ namespace Main
         [Header("Level")]
         [SerializeField] private LevelView levelView;
 
+        [Header("Traps")]
+        [SerializeField] private TrapViewCollection trapViewCollection;
+
+        public object OnPlayerGotAttackedByEnemy { get; internal set; }
+
         protected override void Awake()
         {
             base.Awake();
             eventService = new EventService();
             levelService = new LevelService(levelView);
             timeSwitchService = new TimeSwitchService(timeSwitchView);
+            trapService = new TrapService(trapViewCollection);
             playerService = new PlayerService(playerView, playerS0, bombSO, bombView);
             enemyService = new EnemyService(enemyViewCollection, bombSO, bombView);
 

@@ -7,10 +7,10 @@ public class DestroyableObjectView : MonoBehaviour, IDamagableFromBomb
 {
     private DestroyableObjectController destroyableObjectController;
 
-    [SerializeField] public GameObject presentWall;
-    [SerializeField] public GameObject pastWall;
-    [SerializeField] public BoxCollider2D boxCollider;
-
+    public GameObject presentObject;
+    public GameObject pastObject;
+    public BoxCollider2D boxCollider;
+    public bool CanDestroyInPast;
     public void SetController(DestroyableObjectController destroyableObjectController)
     {
         this.destroyableObjectController = destroyableObjectController;
@@ -21,7 +21,7 @@ public class DestroyableObjectView : MonoBehaviour, IDamagableFromBomb
         DisablePresentWall();
         EnablePastWall();
     }
-    
+
     public void TimeSwitchedToPresent()
     {
         DisablePastWall();
@@ -30,35 +30,45 @@ public class DestroyableObjectView : MonoBehaviour, IDamagableFromBomb
 
     private void EnablePresentWall()
     {
-        if (presentWall != null)
-            presentWall.SetActive(true);
+        if (presentObject != null)
+            presentObject.SetActive(true);
     }
 
     private void EnablePastWall()
     {
-        if (pastWall != null)
-            pastWall.SetActive(true);
+        if (pastObject != null)
+            pastObject.SetActive(true);
     }
 
     private void DisablePresentWall()
     {
-        if (presentWall != null)
-            presentWall.SetActive(false);
+        if (presentObject != null)
+            presentObject.SetActive(false);
     }
 
     public void DisablePastWall()
     {
-        if (presentWall != null)
-            pastWall.SetActive(false);
+        if (presentObject != null)
+            pastObject.SetActive(false);
     }
 
-    public void TakeDamageFromBomb(int damage)
+    public void TakeDamage(int damage)
     {
-        if (!destroyableObjectController.GetIsPresentTime())
+
+        if (!destroyableObjectController.GetIsPresentTime() && CanDestroyInPast)
         {
+            Debug.Log("Destroy in past");
             boxCollider.enabled = false;
-            Destroy(pastWall.gameObject);
-            Destroy(presentWall.gameObject);
+            Destroy(pastObject.gameObject);
+            Destroy(presentObject.gameObject);
+        }     
+        
+        if (destroyableObjectController.GetIsPresentTime() && !CanDestroyInPast)
+        {
+            Debug.Log("Destroy in present");
+            boxCollider.enabled = false;
+            Destroy(pastObject.gameObject);
+            Destroy(presentObject.gameObject);
         }
 
     }

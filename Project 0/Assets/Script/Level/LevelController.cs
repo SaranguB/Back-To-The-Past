@@ -36,7 +36,7 @@ namespace Level
 
 
         public void LevelFinished()
-        {
+        { 
             levelView.LevelFInished();
         }
     }

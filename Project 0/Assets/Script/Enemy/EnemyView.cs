@@ -32,7 +32,7 @@ namespace Enemy
             enemyController.FixedUpdateStateMachine();
         }
 
-        public void TakeDamageFromBomb(int damage)
+        public void TakeDamage(int damage)
         {
             enemyController.TakeDamage(damage);
         }

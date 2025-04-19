@@ -15,10 +15,6 @@ namespace Level
             this.levelController = levelController;
         }
 
-        private void OnDisable()
-        {
-            levelController.UnSubscribetToEvents();
-        }
 
         public void DestroyKey()
         {

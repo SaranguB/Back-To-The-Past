@@ -11,7 +11,7 @@ namespace Events
         public EventController<bool> OnTimeSwitchWithBoolParam;
         public EventController OnPlayerGotKey;
         public EventController OnPlayerFinishedLevel;
-
+        public EventController<int> OnPlayerGotDamaged;
         public EventService()
         {
             onTimeSwitched = new EventController();
@@ -19,8 +19,8 @@ namespace Events
             OnTimeSwitchWithBoolParam = new EventController<bool>();
             OnPlayerGotKey = new EventController();
             OnPlayerFinishedLevel = new EventController();
+            OnPlayerGotDamaged = new EventController<int>();
         }
-
 
     }
 }

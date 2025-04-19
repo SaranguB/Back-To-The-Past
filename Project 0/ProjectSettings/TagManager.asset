@@ -19,7 +19,7 @@ TagManager:
   - Environment
   - Enemy
   - MovableObjects
-  - 
+  - Trap
   - 
   - 
   - 
@@ -72,6 +72,9 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 2119625803
+    locked: 0
+  - name: Traps
+    uniqueID: 792615559
     locked: 0
   - name: Player
     uniqueID: 12997045

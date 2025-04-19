@@ -72,6 +72,9 @@ namespace Enemy
                 case EnemyType.PigWithACanon:
                     owner.FireBomb();
                     break;
+                case EnemyType.Pig:
+                    owner.MeleAttack();
+                    break;
             }
         }
 

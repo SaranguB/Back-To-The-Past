@@ -130,5 +130,10 @@ namespace Enemy
 
             return false;
         }
+
+        public override void MeleAttack()
+        {
+            GameManager.Instance.eventService.OnPlayerGotDamaged.InvokeEvent(enemyData.damage);
+        }
     }
 }

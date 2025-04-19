@@ -10,7 +10,7 @@ namespace Enemy
         private EnemyViewCollection enemyViewCollection;
 
         protected Vector2 playerPosition;
-       
+
 
         public EnemyController()
         {
@@ -36,7 +36,7 @@ namespace Enemy
             if (direction.x > 0)
                 GetEnemyTransform().localScale = new Vector3(-1, 1, 1);
             else if (direction.x < 0)
-                GetEnemyTransform().localScale = new Vector3(1, 1, 1); 
+                GetEnemyTransform().localScale = new Vector3(1, 1, 1);
         }
 
         public abstract Transform GetEnemyTransform();
@@ -53,7 +53,7 @@ namespace Enemy
 
         public virtual void PlayerExitRanged()
         {
-            
+
         }
         public abstract void TakeDamage(int damage);
 
@@ -65,7 +65,7 @@ namespace Enemy
 
         public virtual void FireBomb()
         {
-           
+
         }
 
         public virtual void FireCanon()
@@ -74,7 +74,12 @@ namespace Enemy
 
         public virtual void Fire()
         {
-            
+
+        }
+
+        public virtual void MeleAttack()
+        {
+
         }
     }
 }

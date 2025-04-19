@@ -29,6 +29,12 @@ namespace Player
             CreatePlayerStateMachine();
             ChangePlayerState(PlayerState.Alive);
             this.bombPool = bombPool;
+            SubscribeToEvents();
+        }
+
+        private void SubscribeToEvents()
+        {
+            GameManager.Instance.eventService.OnPlayerGotDamaged.AddListener(TakeDamage);
         }
 
         private void ChangePlayerState(PlayerState state)
@@ -385,9 +391,8 @@ namespace Player
             healthUIController.SetNumberOfLives(playerModel.numberOfLives);
         }
 
-        public void TakeDamageFromBomb(int damage)
+        public void TakeDamage(int damage)
         {
-
             healthUIController.RemoveLives(damage);
         }
     }

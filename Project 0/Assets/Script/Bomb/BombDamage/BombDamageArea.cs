@@ -33,7 +33,7 @@ public class BombDamageArea : MonoBehaviour
     {
         if (other.TryGetComponent<IDamagableFromBomb>(out var damagable))
         {
-            damagable.TakeDamageFromBomb(bombDamage);
+            damagable.TakeDamage(bombDamage);
         }
     }
 
