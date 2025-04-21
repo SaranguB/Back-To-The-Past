@@ -9,6 +9,7 @@ using System;
 using Objects.Destroyable;
 using Level;
 using Trap;
+using VFX;
 
 namespace Main
 {
@@ -20,6 +21,7 @@ namespace Main
         public EnemyService enemyService;
         public LevelService levelService;
         public TrapService trapService;
+        public VFXService vfxService;
 
         [Header("Player")]
         [SerializeField] private PlayerView playerView;
@@ -44,13 +46,23 @@ namespace Main
         [Header("Traps")]
         [SerializeField] private TrapViewCollection trapViewCollection;
 
+        [Header("VFX")]
+        [SerializeField] private VFXView vfxPrefab;
+
         public object OnPlayerGotAttackedByEnemy { get; internal set; }
 
         protected override void Awake()
         {
             base.Awake();
+            InitializeServices();
+            InitializeDestroyabelObjectController();
+        }
+
+        private void InitializeServices()
+        {
             eventService = new EventService();
             levelService = new LevelService(levelView);
+            vfxService = new VFXService(vfxPrefab);
             timeSwitchService = new TimeSwitchService(timeSwitchView);
 
             if (trapViewCollection != null)
@@ -58,8 +70,6 @@ namespace Main
 
             playerService = new PlayerService(playerView, playerS0, bombSO, bombView);
             enemyService = new EnemyService(enemyViewCollection, bombSO, bombView);
-
-            InitializeDestroyabelObjectController();
         }
 
         private void InitializeDestroyabelObjectController()

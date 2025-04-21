@@ -82,12 +82,14 @@ namespace Enemy
         {
             enemyController.UnsubscribeToEvents();
             Destroy(this.gameObject);
-
         }
 
         public void FireCanon()
         {
             enemyController.Fire();
         }
+
+        public void MeleAttack()
+            =>enemyController.MeleAttack();
     }
 }

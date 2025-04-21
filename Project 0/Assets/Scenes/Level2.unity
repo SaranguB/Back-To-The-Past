@@ -10193,7 +10193,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.081787, y: 13.866265, z: -10}
+  m_LocalPosition: {x: 20.081787, y: 10.859995, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10231,6 +10231,37 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
+--- !u!1 &524083091
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 524083092}
+  m_Layer: 3
+  m_Name: ParticleEffect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &524083092
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 524083091}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 26.72, y: 4.46, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1428304213}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &527000664
 GameObject:
   m_ObjectHideFlags: 0
@@ -10949,7 +10980,7 @@ Transform:
   m_GameObject: {fileID: 792812097}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 22.525581, y: 13.097848, z: 0.07721996}
+  m_LocalPosition: {x: 22.525581, y: 8.517848, z: 0.07721996}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11146,6 +11177,37 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1368091983}
   m_SourcePrefab: {fileID: 100100000, guid: 178616feb4767724683d6633fb255f33, type: 3}
+--- !u!1 &915343706
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 915343707}
+  m_Layer: 3
+  m_Name: ParticleEffect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &915343707
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 915343706}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.46, y: -2.61, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1259099566}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1007881912
 GameObject:
   m_ObjectHideFlags: 0
@@ -11420,6 +11482,7 @@ Transform:
   m_Children:
   - {fileID: 648027919}
   - {fileID: 266364170}
+  - {fileID: 1768966970}
   m_Father: {fileID: 1584169729}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1040908702
@@ -11438,6 +11501,7 @@ MonoBehaviour:
   pastObject: {fileID: 266364169}
   boxCollider: {fileID: 1040908703}
   CanDestroyInPast: 1
+  particleEffect: {fileID: 1768966970}
 --- !u!61 &1040908703
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12250,6 +12314,7 @@ Transform:
   m_Children:
   - {fileID: 2147281385}
   - {fileID: 1539201770}
+  - {fileID: 915343707}
   m_Father: {fileID: 1584169729}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1259099567
@@ -12314,6 +12379,7 @@ MonoBehaviour:
   pastObject: {fileID: 1539201769}
   boxCollider: {fileID: 1259099567}
   CanDestroyInPast: 1
+  particleEffect: {fileID: 915343707}
 --- !u!1 &1295291924
 GameObject:
   m_ObjectHideFlags: 0
@@ -12606,6 +12672,7 @@ Transform:
   m_Children:
   - {fileID: 1144917854}
   - {fileID: 1007881913}
+  - {fileID: 524083092}
   m_Father: {fileID: 1584169729}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1428304214
@@ -12670,6 +12737,7 @@ MonoBehaviour:
   pastObject: {fileID: 1007881912}
   boxCollider: {fileID: 1428304214}
   CanDestroyInPast: 0
+  particleEffect: {fileID: 524083092}
 --- !u!4 &1436699444 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2531083298908738946, guid: 2e3385d7e77af074c9e2ff01c6a5587e, type: 3}
@@ -13087,6 +13155,7 @@ MonoBehaviour:
   destroyableObjectViewCollection: {fileID: 686638868}
   levelView: {fileID: 709517333}
   trapViewCollection: {fileID: 1571581522}
+  vfxPrefab: {fileID: 9076844673794526640, guid: 21563ef68c4f60743a5f63e7c25bd9de, type: 3}
 --- !u!4 &1522333370
 Transform:
   m_ObjectHideFlags: 0
@@ -13861,6 +13930,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a075248b726b08c42947d66ba16dc224, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1768966969
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1768966970}
+  m_Layer: 3
+  m_Name: ParticleEffect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1768966970
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768966969}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.45, y: 14.38, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1040908700}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1838941690
 GameObject:
   m_ObjectHideFlags: 0
@@ -19613,7 +19713,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7525151381986033123, guid: b6be7e767ae782d4e95329c8f11ae7ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 15.19
+      value: 10.61
       objectReference: {fileID: 0}
     - target: {fileID: 7525151381986033123, guid: b6be7e767ae782d4e95329c8f11ae7ac, type: 3}
       propertyPath: m_LocalPosition.z

@@ -8,8 +8,9 @@ public class EnemyBoxController : MonoBehaviour
 {
     [SerializeField] private GameObject enemy;
     [SerializeField] private Animator boxAnimator;
-    [SerializeField] private GameObject Box;
+    [SerializeField] private GameObject box;
     [SerializeField] private float animationLength;
+    
 
     private bool hasTriggered = false;
     private EnemyView enemyView;
@@ -39,9 +40,10 @@ public class EnemyBoxController : MonoBehaviour
     {
         yield return new WaitForSeconds(animationLength);
 
+        GameManager.Instance.vfxService.PlayVFXAtPosition(VFX.VFXType.PigOutOfBoxEffect, box.transform.position);
         enemyView.SetOriginallyActive();
         enemy.gameObject.SetActive(true);
-        Box.gameObject.SetActive(false);
+        box.gameObject.SetActive(false);
     }
 
     private void TimeSwitched(bool value)

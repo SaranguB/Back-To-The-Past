@@ -152,19 +152,30 @@ namespace Player
             SetAnimatorBool("IsTimeSwitching", true);
             StopPlayerActions();
 
+            if (!playerView.timeSwitchParticle.isPlaying)
+                playerView.timeSwitchParticle.Play();
+
             playerModel.timeSwitchingDuration += Time.deltaTime;
             SetTimeSwitchSlider(true, playerModel.timeRequiredForSwitching);
 
             if (playerModel.timeSwitchingDuration >= playerModel.timeRequiredForSwitching)
             {
-                Debug.Log("Time Switched");
                 SwitchTime();
                 playerModel.isTimeSwitching = true;
             }
         }
 
+        public void StopPlayerActions()
+        {
+            playerModel.horizontalInput = 0f;
+            playerModel.isJumping = false;
+            SetAnimatorFloatValue("Speed", 0f);
+            playerModel.canDeployBomb = false;
+        }
+
         public void CancelTimeSwitching()
         {
+            playerView.timeSwitchParticle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
             SetAnimatorBool("IsTimeSwitching", false);
             SetTimeSwitchSlider(false, playerModel.timeRequiredForSwitching);
             playerModel.timeSwitchingDuration = 0f;
@@ -175,6 +186,7 @@ namespace Player
         public void SwitchTime()
         {
             SetAnimatorBool("IsTimeSwitching", false);
+            playerView.timeSwitchParticle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
             GameManager.Instance.eventService.onTimeSwitched.InvokeEvent();
         }
 
@@ -263,13 +275,7 @@ namespace Player
             }
         }
 
-        public void StopPlayerActions()
-        {
-            playerModel.horizontalInput = 0f;
-            playerModel.isJumping = false;
-            SetAnimatorFloatValue("Speed", 0f);
-            playerModel.canDeployBomb = false;
-        }
+
 
 
         public void SetISJumping(bool value)

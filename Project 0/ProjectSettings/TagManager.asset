@@ -88,5 +88,8 @@ TagManager:
   - name: Crates
     uniqueID: 390953359
     locked: 0
+  - name: Sfx
+    uniqueID: 4191318113
+    locked: 0
   m_RenderingLayers:
   - Default

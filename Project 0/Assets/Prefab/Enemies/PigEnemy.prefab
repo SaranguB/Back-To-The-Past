@@ -78,7 +78,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -948069473
-  m_SortingLayer: 11
+  m_SortingLayer: 14
   m_SortingOrder: 0
   m_Sprite: {fileID: 4571226829092849726, guid: 98e20614636d9dc449d6537c42dc7f48, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -107,6 +107,7 @@ MonoBehaviour:
   enemyAnimator: {fileID: 7952957364122474336}
   enemyTriggerManager: {fileID: 0}
   WasActiveInitially: 1
+  firePoint: {fileID: 0}
 --- !u!50 &4628536599963473096
 Rigidbody2D:
   serializedVersion: 5

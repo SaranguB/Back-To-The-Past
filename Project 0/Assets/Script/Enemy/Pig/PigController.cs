@@ -2,6 +2,7 @@ using Main;
 using StateMachine;
 using System;
 using UnityEngine;
+using VFX;
 
 namespace Enemy
 {
@@ -106,7 +107,10 @@ namespace Enemy
             pigHealth -= damage;
 
             if (pigHealth <= 0)
+            {
+                GameManager.Instance.vfxService.PlayVFXAtPosition(VFXType.EnemyDestroyEffect, enemyView.transform.position);
                 enemyView.EnemyIsDead();
+            }
         }
 
         private void TimeSwitched(bool value)

@@ -22,6 +22,8 @@ namespace Player
         [Header("Bomb")]
         public Transform bombBagPosition;
 
+        public ParticleSystem timeSwitchParticle;
+
         private void Start()
         {
 

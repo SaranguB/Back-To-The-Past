@@ -1,3 +1,4 @@
+using Main;
 using Objects.Destroyable;
 using System;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class DestroyableObjectView : MonoBehaviour, IDamagableFromBomb
     public GameObject pastObject;
     public BoxCollider2D boxCollider;
     public bool CanDestroyInPast;
+    public Transform particleEffect;
     public void SetController(DestroyableObjectController destroyableObjectController)
     {
         this.destroyableObjectController = destroyableObjectController;
@@ -60,6 +62,7 @@ public class DestroyableObjectView : MonoBehaviour, IDamagableFromBomb
             boxCollider.enabled = false;
             Destroy(pastObject.gameObject);
             Destroy(presentObject.gameObject);
+            GameManager.Instance.vfxService.PlayVFXAtPosition(VFX.VFXType.DestroyableObjectExplosion, particleEffect.position);
         }     
         
         if (destroyableObjectController.GetIsPresentTime() && !CanDestroyInPast)
@@ -68,6 +71,7 @@ public class DestroyableObjectView : MonoBehaviour, IDamagableFromBomb
             boxCollider.enabled = false;
             Destroy(pastObject.gameObject);
             Destroy(presentObject.gameObject);
+            GameManager.Instance.vfxService.PlayVFXAtPosition(VFX.VFXType.DestroyableObjectExplosion, particleEffect.position);
         }
 
     }
