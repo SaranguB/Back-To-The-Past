@@ -19,17 +19,31 @@ namespace UI
         private HealthUIController healthUIController;
         [SerializeField] HealthUIView healthUIView;
 
+        [Header("LevelSelectionUI")]
+        private LevelSelectionUIController levelSelectionUIController;
+        [SerializeField] private LevelSelectionUIView levelSelectionUIView;
+
         private void Start()
         {
-            timeSwitchUIController = new TimeSwitchUIController(timeSwitchUIView);
-            playerUIController = new PlayerUIController(playerUIView);
-            healthUIController = new HealthUIController(healthUIView);
+            if (levelSelectionUIView != null)
+                levelSelectionUIController = new LevelSelectionUIController(levelSelectionUIView);
+
+            if (timeSwitchUIView != null)
+                timeSwitchUIController = new TimeSwitchUIController(timeSwitchUIView);
+
+            if (playerUIView != null)
+                playerUIController = new PlayerUIController(playerUIView);
+
+            if (healthUIView != null)
+                healthUIController = new HealthUIController(healthUIView);
+
             InitializeUI();
         }
 
         private void InitializeUI()
         {
-            GameManager.Instance.playerService.SetUI(GetTimeSwitchUI(), GetPlayerUI(), GetHealthUI());
+            if (timeSwitchUIView != null && playerUIView != null && healthUIView != null)
+                GameManager.Instance.playerService.SetUI(GetTimeSwitchUI(), GetPlayerUI(), GetHealthUI());
         }
 
         public PlayerUIController GetPlayerUI()
