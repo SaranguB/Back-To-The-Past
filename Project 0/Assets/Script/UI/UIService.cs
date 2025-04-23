@@ -19,12 +19,19 @@ namespace UI
         private HealthUIController healthUIController;
         [SerializeField] HealthUIView healthUIView;
 
+        [Header("Main Menu")]
+        private MainMenuUIController mainMenuUIController;
+        [SerializeField] private MainMenuUIView mainMenuUIView;
+
         [Header("LevelSelectionUI")]
         private LevelSelectionUIController levelSelectionUIController;
         [SerializeField] private LevelSelectionUIView levelSelectionUIView;
 
         private void Start()
         {
+            if (mainMenuUIView != null)
+                mainMenuUIController = new MainMenuUIController(mainMenuUIView);
+
             if (levelSelectionUIView != null)
                 levelSelectionUIController = new LevelSelectionUIController(levelSelectionUIView);
 

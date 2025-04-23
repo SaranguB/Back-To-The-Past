@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Utilis;
 
 namespace UI
 {
@@ -15,11 +16,19 @@ namespace UI
         public List<LevelSO> levelData;
         public GameObject levelParentObject;
         public GameObject levelButtonPrefab;
+        public Button backButton;
+        public CanvasGroup levelSelectionCanvas;
 
         public void SetController(LevelSelectionUIController levelSelectionUIController)
         {
             this.levelSelectionUIController = levelSelectionUIController;
             DisplayLevelButtons();
+            backButton.onClick.AddListener(DisableLevelSelection);
+        }
+
+        private void DisableLevelSelection()
+        {
+            CanvasGroupExtension.Hide(levelSelectionCanvas);
         }
 
         private void DisplayLevelButtons()
