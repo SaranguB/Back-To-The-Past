@@ -67,8 +67,13 @@ namespace Player
         private void UnlockDoor()
         {
             playerModel.canUnlockDoor = false;
-            GameManager.Instance.eventService.OnPlayerFinishedLevel.InvokeEvent();
+            GameManager.Instance.eventService.OnPlayerOpenedDoor.InvokeEvent();
             playerView.LevelFinished();
+        }
+
+        public void LevelFinished()
+        {
+            GameManager.Instance.eventService.OnPlayerFinishedLevel.InvokeEvent();
         }
 
         private void ConfigureBombDeployInput()
@@ -401,5 +406,6 @@ namespace Player
         {
             healthUIController.RemoveLives(damage);
         }
+
     }
 }

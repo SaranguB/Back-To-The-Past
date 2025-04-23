@@ -14,6 +14,7 @@ namespace UI
 
         public void UnlockLevel(string levelName)
         {
+            Debug.Log($"Saving level: {levelName}");
             PlayerPrefs.SetInt(levelName, 1);
             PlayerPrefs.Save();
         }

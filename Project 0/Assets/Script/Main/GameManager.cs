@@ -10,6 +10,8 @@ using Objects.Destroyable;
 using Level;
 using Trap;
 using VFX;
+using UI;
+using Sound;
 
 namespace Main
 {
@@ -22,6 +24,8 @@ namespace Main
         public LevelService levelService;
         public TrapService trapService;
         public VFXService vfxService;
+        public UIService uiService;
+        public SoundService soundService;
 
         [Header("Player")]
         [SerializeField] private PlayerView playerView;
@@ -49,6 +53,11 @@ namespace Main
         [Header("VFX")]
         [SerializeField] private VFXView vfxPrefab;
 
+        [Header("Sound")]
+        [SerializeField] private SoundSO soundSo;
+        [SerializeField] private AudioSource audioEffectSource;
+        [SerializeField] private AudioSource backgroundMusicSource;
+
         public object OnPlayerGotAttackedByEnemy { get; internal set; }
 
         protected override void Awake()
@@ -60,6 +69,7 @@ namespace Main
 
         private void InitializeServices()
         {
+            soundService =new SoundService(soundSo,audioEffectSource, backgroundMusicSource);
             eventService = new EventService();
             levelService = new LevelService(levelView);
             vfxService = new VFXService(vfxPrefab);

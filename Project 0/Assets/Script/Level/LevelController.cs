@@ -1,6 +1,7 @@
 using Main;
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Level
 {
@@ -18,13 +19,13 @@ namespace Level
 
         private void SubscribeToEvents()
         {
-            GameManager.Instance.eventService.OnPlayerFinishedLevel.AddListener(LevelFinished);
+            GameManager.Instance.eventService.OnPlayerOpenedDoor.AddListener(LevelFinished);
             GameManager.Instance.eventService.OnPlayerGotKey.AddListener(PlayerGotKey);
         }
 
         public void UnSubscribetToEvents()
         {
-            GameManager.Instance.eventService.OnPlayerFinishedLevel.RemoveListener(LevelFinished);
+            GameManager.Instance.eventService.OnPlayerOpenedDoor.RemoveListener(LevelFinished);
             GameManager.Instance.eventService.OnPlayerGotKey.RemoveListener(PlayerGotKey);
         }
 
@@ -36,8 +37,23 @@ namespace Level
 
 
         public void LevelFinished()
-        { 
+        {
             levelView.LevelFInished();
+            UnlockNextevel();
+        }
+
+        private void UnlockNextevel()
+        {
+            int nextLevelBuildIndex = SceneManager.GetActiveScene().buildIndex + 1;
+
+            if (nextLevelBuildIndex < SceneManager.sceneCountInBuildSettings)
+            {
+                string scenePath = SceneUtility.GetScenePathByBuildIndex(nextLevelBuildIndex);
+                string sceneName = System.IO.Path.GetFileNameWithoutExtension(scenePath);
+
+                PlayerPrefs.SetInt(sceneName, 1);
+                PlayerPrefs.Save();
+            }
         }
     }
 }
