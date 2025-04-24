@@ -1,3 +1,4 @@
+using Main;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -24,15 +25,22 @@ namespace UI
 
         private void OnMainMenuButtonClicked()
         {
+            PlayButtonSound();
             CanvasGroupExtension.Hide(levelEndUICanvasGroup);
             SceneManager.LoadScene("MainMenu");
         }
 
         private void OnReplayButtonClicked()
         {
+            PlayButtonSound();
             CanvasGroupExtension.Hide(levelEndUICanvasGroup);
             Scene currentScene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(currentScene.name);
+        }
+
+        public static void PlayButtonSound()
+        {
+            GameManager.Instance.soundService.PlaySoundEffects(Audio.SoundType.ButtonSound);
         }
 
         private void OnDestroy()

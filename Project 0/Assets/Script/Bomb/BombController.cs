@@ -78,5 +78,10 @@ namespace Wepons.Bomb
             Vector2 throwForce = new Vector2(throwDirection.x * bombThrowForceX, bombThrowForceY);
             bombView.bombRB.AddForce(throwForce, ForceMode2D.Impulse);
         }
+
+        public void PlayBombExposionSound()
+        {
+            GameManager.Instance.soundService.PlaySoundEffects(Audio.SoundType.ExplosionSound);
+        }
     }
 }

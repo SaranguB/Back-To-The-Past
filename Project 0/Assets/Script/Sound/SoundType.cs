@@ -1,11 +1,19 @@
+using System;
 using UnityEngine;
 
-namespace Sound
+namespace Audio
 {
+
     public enum SoundType
     {
-        menuBackground,
-        gameplayBackground,
-
+        MenuBackground,
+        GameplayBackground,
+        ButtonSound,
+        EnemyDeathSound,
+        PlayerDashing,
+        EnemySword,
+        CrateSound,
+        ExplosionSound,
+        TimeSwitchingSound,
     }
 }

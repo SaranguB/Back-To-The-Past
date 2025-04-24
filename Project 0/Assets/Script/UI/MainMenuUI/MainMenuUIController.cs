@@ -1,3 +1,6 @@
+using Audio;
+using Main;
+using System;
 using UnityEngine;
 
 namespace UI
@@ -10,6 +13,11 @@ namespace UI
         {
             this.mainMenuUIView = mainMenuUIView;
             this.mainMenuUIView.SetController(this);
+        }
+
+        public void PlayButtonSound()
+        {
+            GameManager.Instance.soundService.PlaySoundEffects(SoundType.ButtonSound);
         }
     }
 }

@@ -1,5 +1,9 @@
+using Audio;
+using Main;
 using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Utilis;
 
@@ -18,6 +22,25 @@ namespace UI
         public Button exitButton;
         public Button OptionBackButton;
 
+        private void Start()
+        {
+            playButton.interactable = false;
+            optionsButton.interactable = false;
+            exitButton.interactable = false;
+
+            StartCoroutine(EnableButtonsAfterDelay());
+        }
+
+        private IEnumerator EnableButtonsAfterDelay()
+        {
+            yield return new WaitForSeconds(0.1f);
+            playButton.interactable = true;
+            optionsButton.interactable = true;
+            exitButton.interactable = true;
+        }
+
+
+
         public void SetController(MainMenuUIController mainMenuUIController)
         {
             this.mainMenuUIController = mainMenuUIController;
@@ -26,25 +49,36 @@ namespace UI
 
         private void AddListenersToButton()
         {
-            playButton.onClick.AddListener(EnableLevelSelectionMenu);
-            optionsButton.onClick.AddListener(EnableOptionsMenu);
-            exitButton.onClick.AddListener(exitGame);
-            OptionBackButton.onClick.AddListener(DisableOptionsMenu);
+            playButton.onClick.AddListener(OnPlayButtonClicked);
+            optionsButton.onClick.AddListener(OnOptionsButtonClicked);
+            exitButton.onClick.AddListener(OnExitButtonClicked);
+            OptionBackButton.onClick.AddListener(OnOptionBackButtonClicked);
         }
 
-        private void DisableOptionsMenu()
-            => CanvasGroupExtension.Hide(optionsCanvasGroup);
-
-        private void exitGame()
-            => Application.Quit();
-
-        private void EnableOptionsMenu()
-            => CanvasGroupExtension.Show(optionsCanvasGroup);
-
-        private void EnableLevelSelectionMenu()
+        private void OnOptionBackButtonClicked()
         {
+            mainMenuUIController.PlayButtonSound();
+            CanvasGroupExtension.Hide(optionsCanvasGroup);
+        }
+
+        private void OnExitButtonClicked()
+        {
+            mainMenuUIController.PlayButtonSound();
+            Application.Quit();
+        }
+
+        private void OnOptionsButtonClicked()
+        {
+            mainMenuUIController.PlayButtonSound();
+            CanvasGroupExtension.Show(optionsCanvasGroup);
+        }
+
+        private void OnPlayButtonClicked()
+        {
+            mainMenuUIController.PlayButtonSound();
             UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
             CanvasGroupExtension.Show(levelSelectionMenu);
+
         }
     }
 }

@@ -1,8 +1,10 @@
 using UnityEngine;
 
-namespace Sound
+namespace Audio
 {
-    public class SoundSO : MonoBehaviour
+    [CreateAssetMenu(fileName = "SoundSO", menuName = "ScriptableObjects/SoundSO")]
+    public class SoundSO : ScriptableObject
     {
+       public Sounds[] audioList;
     }
 }

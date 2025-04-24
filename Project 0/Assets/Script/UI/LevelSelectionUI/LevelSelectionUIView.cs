@@ -23,11 +23,12 @@ namespace UI
         {
             this.levelSelectionUIController = levelSelectionUIController;
             DisplayLevelButtons();
-            backButton.onClick.AddListener(DisableLevelSelection);
+            backButton.onClick.AddListener(OnBackButtonClicked);
         }
 
-        private void DisableLevelSelection()
+        private void OnBackButtonClicked()
         {
+            levelSelectionUIController.PlayButtonSound();
             CanvasGroupExtension.Hide(levelSelectionCanvas);
         }
 
@@ -77,13 +78,14 @@ namespace UI
         private void SetLevelButton(LevelSO capturedLevel, GameObject levelObject)
         {
             Button levelButton = levelObject.GetComponent<Button>();
-
+            
             levelButton.onClick.AddListener(() => LoadScene(capturedLevel.sceneName));
         }
 
         private void LoadScene(string sceneName)
         {
-            SceneManager.LoadScene(sceneName);
+            levelSelectionUIController.PlayButtonSound();
+            SceneManager.LoadSceneAsync(sceneName);
         }
     }
 }

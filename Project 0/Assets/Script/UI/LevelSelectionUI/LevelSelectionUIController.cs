@@ -1,3 +1,6 @@
+using Audio;
+using Main;
+using System;
 using UnityEngine;
 
 namespace UI
@@ -14,12 +17,18 @@ namespace UI
 
         public void UnlockLevel(string levelName)
         {
-            Debug.Log($"Saving level: {levelName}");
+          
             PlayerPrefs.SetInt(levelName, 1);
             PlayerPrefs.Save();
         }
 
         public bool IsLevelUnlocked(string levelName)
             =>PlayerPrefs.GetInt(levelName, 0) == 1;
+
+        public void PlayButtonSound()
+        {
+            GameManager.Instance.soundService.PlaySoundEffects(SoundType.ButtonSound);
+
+        }
     }
 }

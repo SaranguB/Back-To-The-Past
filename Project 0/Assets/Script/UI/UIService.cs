@@ -2,6 +2,7 @@ using Main;
 using Player.UI;
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace UI
 {
@@ -34,6 +35,11 @@ namespace UI
         [Header("LevelLostUI")]
         private LevelLostUIController levelLostUIController;
         [SerializeField] private LevelLostUIView levelLostUIView;
+
+        private void Awake()
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
 
         private void Start()
         {

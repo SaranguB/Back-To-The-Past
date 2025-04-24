@@ -18,6 +18,7 @@ namespace UI
 
         private void OnNextLevelButtonCLicked()
         {
+            PlayButtonSound();
             int currentScene = (SceneManager.GetActiveScene().buildIndex) + 1;
             SceneManager.LoadScene(currentScene);
         }
