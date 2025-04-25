@@ -15,6 +15,7 @@ namespace UI
         private void Awake()
         {
             AddListenersToButton();
+            CanvasGroupExtension.Hide(levelEndUICanvasGroup);
         }
 
         public void AddListenersToButton()
@@ -26,16 +27,15 @@ namespace UI
         private void OnMainMenuButtonClicked()
         {
             PlayButtonSound();
-            CanvasGroupExtension.Hide(levelEndUICanvasGroup);
             SceneManager.LoadScene("MainMenu");
+
         }
 
         private void OnReplayButtonClicked()
         {
             PlayButtonSound();
-            CanvasGroupExtension.Hide(levelEndUICanvasGroup);
             Scene currentScene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(currentScene.name);
+            SceneManager.LoadSceneAsync(currentScene.name);
         }
 
         public static void PlayButtonSound()

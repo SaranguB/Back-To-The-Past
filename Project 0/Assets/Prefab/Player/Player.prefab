@@ -24932,6 +24932,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0732d8c1299e22b4c933986ff0fa2eda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerRB: {fileID: 0}
+  playerAnimator: {fileID: 4199621830093461611}
+  playerTransform: {fileID: 0}
   groundCheckPoint:
   - {fileID: 667548102634992035}
   - {fileID: 1376652388582851680}

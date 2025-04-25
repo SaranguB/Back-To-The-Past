@@ -1,4 +1,5 @@
 using Main;
+using Player;
 using StateMachine;
 using System;
 using UnityEngine;
@@ -10,16 +11,18 @@ namespace Enemy
         private EnemyViewCollection enemyViewCollection;
 
         protected Vector2 playerPosition;
-
+        protected PlayerState playerState;
 
         public EnemyController()
         {
+            playerState = PlayerState.Alive;
             SubscribeToEvents();
         }
 
         private void SubscribeToEvents()
         {
             GameManager.Instance.eventService.onPlayerPositionChanged.AddListener(SetPlayerPosition);
+            GameManager.Instance.eventService.OnPlayerDeadWithParams.AddListener(SetPlayerState);
         }
 
         public virtual void PlayerEnteredRange()
@@ -28,6 +31,10 @@ namespace Enemy
 
         public void SetPlayerPosition(Vector2 playerPosition)
             => this.playerPosition = playerPosition;
+
+        public void SetPlayerState(PlayerState playerState)
+          => this.playerState = playerState;
+
 
         public virtual void FacePlayer()
         {
@@ -38,6 +45,9 @@ namespace Enemy
             else if (direction.x < 0)
                 GetEnemyTransform().localScale = new Vector3(1, 1, 1);
         }
+
+        public PlayerState GetPlayerState()
+            => playerState;
 
         public abstract Transform GetEnemyTransform();
         public abstract bool IsInCastingState();

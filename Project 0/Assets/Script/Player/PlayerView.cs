@@ -1,3 +1,4 @@
+using Main;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -9,10 +10,10 @@ namespace Player
     {
         //Player
         private PlayerController playerController;
-        private Rigidbody2D playerRB;
-        private Animator playerAnimator;
-        private Transform playerTransform;
-
+        public Rigidbody2D playerRB;
+        public Animator playerAnimator;
+        public Transform playerTransform;
+        public Vector2 playerStartPosition;
         //Jump
         [Header("Jump")]
         public Transform[] groundCheckPoint;
@@ -26,26 +27,29 @@ namespace Player
 
         private void Start()
         {
-
             playerRB = GetComponent<Rigidbody2D>();
-            playerAnimator = GetComponent<Animator>();
             playerTransform = playerRB.transform;
-
-            this.playerController.SetPlayerValues(playerAnimator, playerRB);
+            playerStartPosition = playerTransform.position;
         }
 
 
         private void Update()
         {
-            playerController.OnPlayerPositionChanged(playerTransform.position);
-            playerController.HandleInput();
-            playerController.HandleDashing();
+            if (playerController.GetCurrentPlayerState() is not DeadState)
+            {
+                playerController.OnPlayerPositionChanged(playerTransform.position);
+                playerController.HandleInput();
+                playerController.HandleDashing();
+            }
         }
 
         private void FixedUpdate()
         {
-            playerController.HandleMovement();
-            playerController.ExecuteDashing();
+            if (playerController.GetCurrentPlayerState() is not DeadState)
+            {
+                playerController.HandleMovement();
+                playerController.ExecuteDashing();
+            }
         }
 
         public void SetController(PlayerController playerController)
@@ -83,6 +87,11 @@ namespace Player
                 }
             }
 
+            if(other.CompareTag("DeathZone"))
+            {
+                playerController.TakeDamage(3);
+            }
+
         }
 
         private void OnTriggerExit2D(Collider2D other)
@@ -95,10 +104,26 @@ namespace Player
 
         public void LevelFinished()
         {
-            StartCoroutine(DisablePlayer());
+            StartCoroutine(LevelWon());
         }
 
-        private IEnumerator DisablePlayer()
+        public void ChangeStateToAlive()
+            => playerController.ChangePlayerState(PlayerState.Alive);
+
+        public void OnPlayerDead()
+        {
+            playerController.OnPlayerDead();
+            StartCoroutine(HandlePlayerDeath());
+        }
+
+        private IEnumerator HandlePlayerDeath()
+        {
+            yield return new WaitForSeconds(2f);
+            playerController.OnPlayerDestroyed();
+            Destroy(this.gameObject);
+        }
+
+        private IEnumerator LevelWon()
         {
             yield return new WaitForSeconds(.5f);
 

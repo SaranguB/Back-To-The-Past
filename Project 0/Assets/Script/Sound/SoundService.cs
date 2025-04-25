@@ -54,9 +54,13 @@ namespace Audio
             return null;
         }
 
-        public void StopPlayingSound()
+        public void StopPlayingSoundEffect()
         {
+
             audioEffects.Stop();
         }
+
+        public void StopBackgroundSong()
+            => backgroundMusic.Stop();
     }
 }

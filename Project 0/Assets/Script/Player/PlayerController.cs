@@ -1,6 +1,7 @@
 using Audio;
 using Main;
 using Player.UI;
+using StateMachine;
 using System;
 using TimeSwitching;
 using UI;
@@ -13,10 +14,9 @@ namespace Player
     {
         private PlayerView playerView;
         private PlayerModel playerModel;
-        private Rigidbody2D playerRB;
         private TimeSwitchUIController timeSwitchUIController;
         private PlayerUIController playerUIController;
-        private Animator playerAnimator;
+
         private BombPool bombPool;
         private PlayerStateMachine playerStateMachine;
         private HealthUIController healthUIController;
@@ -38,14 +38,14 @@ namespace Player
             GameManager.Instance.eventService.OnPlayerGotDamaged.AddListener(TakeDamage);
         }
 
-        private void ChangePlayerState(PlayerState state)
+        public void ChangePlayerState(PlayerState state)
         {
             playerStateMachine.ChangeState(state);
         }
 
         private void CreatePlayerStateMachine()
         {
-            playerStateMachine = new PlayerStateMachine(this);
+            playerStateMachine = new PlayerStateMachine(this, playerView.playerAnimator);
         }
 
         public void HandleInput()
@@ -185,7 +185,7 @@ namespace Player
         {
             playerView.timeSwitchParticle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
             SetAnimatorBool("IsTimeSwitching", false);
-            GameManager.Instance.soundService.StopPlayingSound();
+            GameManager.Instance.soundService.StopPlayingSoundEffect();
             SetTimeSwitchSlider(false, playerModel.timeRequiredForSwitching);
             playerModel.timeSwitchingDuration = 0f;
             playerModel.isTimeSwitching = false;
@@ -235,8 +235,8 @@ namespace Player
         public void Move(float horizontalInput)
         {
             float speed = horizontalInput * playerModel.movementSpeed;
-            Vector2 currentvelocity = playerRB.linearVelocity;
-            playerRB.linearVelocity = new Vector2(speed, currentvelocity.y);
+            Vector2 currentvelocity = playerView.playerRB.linearVelocity;
+            playerView.playerRB.linearVelocity = new Vector2(speed, currentvelocity.y);
 
             if (horizontalInput != 0)
             {
@@ -258,7 +258,7 @@ namespace Player
         {
 
             SetAnimatorBool("IsJumping", true);
-            playerRB.linearVelocity = new Vector2(playerRB.linearVelocityX, playerModel.jumpForce);
+            playerView.playerRB.linearVelocity = new Vector2(playerView.playerRB.linearVelocityX, playerModel.jumpForce);
 
         }
 
@@ -274,19 +274,19 @@ namespace Player
 
         public void HandleFalling()
         {
-            if (playerRB.linearVelocity.y < 0)
+            if (playerView.playerRB.linearVelocity.y < 0)
             {
                 SetAnimatorBool("IsJumping", false);
-                playerRB.gravityScale = playerModel.fallingSpeed;
+                playerView.playerRB.gravityScale = playerModel.fallingSpeed;
 
             }
-            else if (playerRB.linearVelocity.y > 0 && !Input.GetKey(KeyCode.Space))
+            else if (playerView.playerRB.linearVelocity.y > 0 && !Input.GetKey(KeyCode.Space))
             {
-                playerRB.gravityScale = playerModel.fallingSpeed;
+                playerView.playerRB.gravityScale = playerModel.fallingSpeed;
             }
             else
             {
-                playerRB.gravityScale = 1f;
+                playerView.playerRB.gravityScale = 1f;
             }
         }
 
@@ -300,18 +300,12 @@ namespace Player
 
         public void SetAnimatorFloatValue(string parameterName, float value)
         {
-            playerAnimator.SetFloat(parameterName, MathF.Abs(value));
-        }
-
-        public void SetPlayerValues(Animator playerAnimator, Rigidbody2D playerRB)
-        {
-            this.playerAnimator = playerAnimator;
-            this.playerRB = playerRB;
+            playerView.playerAnimator.SetFloat(parameterName, MathF.Abs(value));
         }
 
         public void SetAnimatorBool(string stringValue, bool boolValue)
         {
-            playerAnimator.SetBool(stringValue, boolValue);
+            playerView.playerAnimator.SetBool(stringValue, boolValue);
         }
 
         public void OnPlayerPositionChanged(Vector2 position)
@@ -360,7 +354,7 @@ namespace Player
 
         private void StartDashing()
         {
-            playerAnimator.SetBool("IsDashing", true);
+            playerView.playerAnimator.SetBool("IsDashing", true);
             GameManager.Instance.soundService.PlaySoundEffects(SoundType.PlayerDashing);
             playerModel.isDashing = true;
             playerModel.dashTimer = playerModel.dashDuration;
@@ -368,10 +362,10 @@ namespace Player
 
         private void EndDashing()
         {
-            playerAnimator.SetBool("IsDashing", false);
+            playerView.playerAnimator.SetBool("IsDashing", false);
             playerModel.isDashing = false;
 
-            playerRB.linearVelocity = new Vector2(playerModel.horizontalInput * playerModel.movementSpeed, 0);
+            playerView.playerRB.linearVelocity = new Vector2(playerModel.horizontalInput * playerModel.movementSpeed, 0);
         }
 
         public void ExecuteDashing()
@@ -384,7 +378,7 @@ namespace Player
                     playerModel.inputDirection = new Vector2(facingDirection, 0);
                 }
 
-                playerRB.linearVelocity = playerModel.inputDirection * playerModel.dashSpeed;
+                playerView.playerRB.linearVelocity = playerModel.inputDirection * playerModel.dashSpeed;
             }
         }
 
@@ -415,8 +409,32 @@ namespace Player
 
         public void TakeDamage(int damage)
         {
+
+            playerModel.currentLives -= damage;
             healthUIController.RemoveLives(damage);
+            playerStateMachine.ChangeState(PlayerState.Hurt);
+
+            if (playerModel.currentLives <= 0)
+            {
+                playerStateMachine.ChangeState(PlayerState.Dead);
+            }
         }
 
+        public IState<PlayerController> GetCurrentPlayerState()
+        {
+            return playerStateMachine.GetCurrentState();
+        }
+
+        public void OnPlayerDestroyed()
+        {
+            GameManager.Instance.eventService.OnPlayerDead.InvokeEvent();
+        }
+
+        public void OnPlayerDead()
+        {
+            GameManager.Instance.soundService.StopBackgroundSong();
+            GameManager.Instance.soundService.PlaySoundEffects(SoundType.LevelLostSound);
+            GameManager.Instance.eventService.OnPlayerDeadWithParams.InvokeEvent(PlayerState.Dead);
+        }
     }
 }

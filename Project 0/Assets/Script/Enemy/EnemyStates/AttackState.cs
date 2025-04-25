@@ -22,15 +22,21 @@ namespace Enemy
 
         public void OnStateEnter()
         {
-            attackDelay = owner.GetAttackDelay();
-            enemyAnimator.SetBool("IsAttacking", true);
-            Attack();
+            if (owner.GetPlayerState() == Player.PlayerState.Alive)
+            {
+                attackDelay = owner.GetAttackDelay();
+                enemyAnimator.SetBool("IsAttacking", true);
+                Attack();
+            }
         }
 
         public void UpdateState()
         {
-            AttackPlayerBetweenDelays();
-            CheckPlayerAttackRange();
+            if (owner.GetPlayerState() == Player.PlayerState.Alive)
+            {
+                AttackPlayerBetweenDelays();
+                CheckPlayerAttackRange();
+            }
         }
 
         public void FixedUpdateState()

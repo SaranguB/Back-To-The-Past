@@ -15,5 +15,7 @@ namespace Audio
         CrateSound,
         ExplosionSound,
         TimeSwitchingSound,
+        LevelWonSound,
+        LevelLostSound,
     }
 }

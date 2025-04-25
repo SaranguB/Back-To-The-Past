@@ -1,4 +1,5 @@
 using Events;
+using Player;
 using UnityEngine;
 
 
@@ -13,6 +14,7 @@ namespace Events
         public EventController OnPlayerOpenedDoor;
         public EventController OnPlayerFinishedLevel;
         public EventController OnPlayerDead;
+        public EventController<PlayerState> OnPlayerDeadWithParams;
         public EventController<int> OnPlayerGotDamaged;
         public EventService()
         {
@@ -24,6 +26,7 @@ namespace Events
             OnPlayerGotDamaged = new EventController<int>();
             OnPlayerFinishedLevel = new EventController();
             OnPlayerDead = new EventController();
+            OnPlayerDeadWithParams = new EventController<PlayerState>();
         }
 
     }

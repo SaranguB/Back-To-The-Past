@@ -36,24 +36,23 @@ namespace UI
         private LevelLostUIController levelLostUIController;
         [SerializeField] private LevelLostUIView levelLostUIView;
 
-        private void Awake()
-        {
-            EventSystem.current.SetSelectedGameObject(null);
-        }
+        [Header("Options")]
+        private OptionsUIController optionsUIController;
+        [SerializeField] private OptionsUIView optionsUIView;
+
 
         private void Start()
         {
             InitializeUIControllers();
             RegisterUI();
             SubscribeToEvents();
- 
+
         }
 
         private void SubscribeToEvents()
         {
             if (levelLostUIView != null && levelWonUIView != null)
-            { 
-            
+            {
                 GameManager.Instance.eventService.OnPlayerFinishedLevel.AddListener(CreateLevelWonUI);
                 GameManager.Instance.eventService.OnPlayerDead.AddListener(CreateLevelLostUI);
             }
@@ -76,7 +75,9 @@ namespace UI
 
         private void InitializeUIControllers()
         {
-          
+            if(optionsUIView != null)
+                optionsUIController = new OptionsUIController(optionsUIView);
+
             if (mainMenuUIView != null)
                 mainMenuUIController = new MainMenuUIController(mainMenuUIView);
 
@@ -111,13 +112,14 @@ namespace UI
         public void CreateLevelLostUI()
         {
            
-                levelLostUIController = new LevelLostUIController(levelLostUIView);
+            levelLostUIController = new LevelLostUIController(levelLostUIView);
         }
 
         public void CreateLevelWonUI()
         {
-  
-                levelWonUIController = new LevelWonUIController(levelWonUIView);
+            GameManager.Instance.soundService.StopBackgroundSong();
+            GameManager.Instance.soundService.PlaySoundEffects(Audio.SoundType.LevelWonSound);
+            levelWonUIController = new LevelWonUIController(levelWonUIView);
         }
     }
 }

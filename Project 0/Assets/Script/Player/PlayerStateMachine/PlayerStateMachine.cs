@@ -7,21 +7,23 @@ namespace Player
     public class PlayerStateMachine : GenericStateMachine<PlayerController, PlayerState>
     {
 
-        public PlayerStateMachine(PlayerController owner) : base(owner)
+        public PlayerStateMachine(PlayerController owner, Animator playerAnimator) : base(owner)
         {
-            CreateStates();
+            CreateStates(playerAnimator);
             SetOwner();
         }
 
-        private void CreateStates()
+        private void CreateStates(Animator playerAnimator)
         {
-            AddState(PlayerState.Alive, new AliveState());
-            AddState(PlayerState.Dead, new DeadState());
+            AddState(PlayerState.Alive, new AliveState(playerAnimator));
+            AddState(PlayerState.Dead, new DeadState(playerAnimator));
+            AddState(PlayerState.Hurt, new HurtState(playerAnimator));
         }
     }
     public enum PlayerState
     {
         Alive,
-        Dead
+        Dead,
+        Hurt
     }
 }

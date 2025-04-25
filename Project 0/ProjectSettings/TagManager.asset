@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Key
   - FinalDoor
+  - Boundary
+  - DeathZone
   layers:
   - Default
   - TransparentFX
