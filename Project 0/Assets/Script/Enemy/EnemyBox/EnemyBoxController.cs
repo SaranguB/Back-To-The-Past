@@ -1,3 +1,4 @@
+using Audio;
 using Enemy;
 using Main;
 using Player;
@@ -40,6 +41,7 @@ public class EnemyBoxController : MonoBehaviour
     {
         yield return new WaitForSeconds(animationLength);
 
+        GameManager.Instance.soundService.PlaySoundEffects(SoundType.CrateSound);
         GameManager.Instance.vfxService.PlayVFXAtPosition(VFX.VFXType.PigOutOfBoxEffect, box.transform.position);
         enemyView.SetOriginallyActive();
         enemy.gameObject.SetActive(true);

@@ -103,6 +103,7 @@ namespace Player
             yield return new WaitForSeconds(.5f);
 
             gameObject.SetActive(false);
+            playerController.LevelFinished();
         }
     }
 }

@@ -1,3 +1,4 @@
+using Audio;
 using Main;
 using Player.UI;
 using System;
@@ -67,8 +68,13 @@ namespace Player
         private void UnlockDoor()
         {
             playerModel.canUnlockDoor = false;
-            GameManager.Instance.eventService.OnPlayerFinishedLevel.InvokeEvent();
+            GameManager.Instance.eventService.OnPlayerOpenedDoor.InvokeEvent();
             playerView.LevelFinished();
+        }
+
+        public void LevelFinished()
+        {
+            GameManager.Instance.eventService.OnPlayerFinishedLevel.InvokeEvent();
         }
 
         private void ConfigureBombDeployInput()
@@ -150,6 +156,8 @@ namespace Player
         public void HandleTimeSwitching(float deltaTime)
         {
             SetAnimatorBool("IsTimeSwitching", true);
+            if (!GameManager.Instance.soundService.IsAudioEffectsPlaying())
+                GameManager.Instance.soundService.PlaySoundEffects(SoundType.TimeSwitchingSound);
             StopPlayerActions();
 
             if (!playerView.timeSwitchParticle.isPlaying)
@@ -177,6 +185,7 @@ namespace Player
         {
             playerView.timeSwitchParticle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
             SetAnimatorBool("IsTimeSwitching", false);
+            GameManager.Instance.soundService.StopPlayingSound();
             SetTimeSwitchSlider(false, playerModel.timeRequiredForSwitching);
             playerModel.timeSwitchingDuration = 0f;
             playerModel.isTimeSwitching = false;
@@ -230,7 +239,10 @@ namespace Player
             playerRB.linearVelocity = new Vector2(speed, currentvelocity.y);
 
             if (horizontalInput != 0)
+            {
                 playerView.FlipOnDirection(horizontalInput);
+
+            }
         }
 
         private void ConfigureJumpInput()
@@ -244,8 +256,10 @@ namespace Player
 
         public void Jump()
         {
+
             SetAnimatorBool("IsJumping", true);
             playerRB.linearVelocity = new Vector2(playerRB.linearVelocityX, playerModel.jumpForce);
+
         }
 
         public bool IsGrounded()
@@ -264,6 +278,7 @@ namespace Player
             {
                 SetAnimatorBool("IsJumping", false);
                 playerRB.gravityScale = playerModel.fallingSpeed;
+
             }
             else if (playerRB.linearVelocity.y > 0 && !Input.GetKey(KeyCode.Space))
             {
@@ -346,6 +361,7 @@ namespace Player
         private void StartDashing()
         {
             playerAnimator.SetBool("IsDashing", true);
+            GameManager.Instance.soundService.PlaySoundEffects(SoundType.PlayerDashing);
             playerModel.isDashing = true;
             playerModel.dashTimer = playerModel.dashDuration;
         }
@@ -401,5 +417,6 @@ namespace Player
         {
             healthUIController.RemoveLives(damage);
         }
+
     }
 }

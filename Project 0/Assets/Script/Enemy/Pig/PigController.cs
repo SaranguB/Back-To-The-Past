@@ -1,3 +1,4 @@
+using Audio;
 using Main;
 using StateMachine;
 using System;
@@ -109,6 +110,7 @@ namespace Enemy
             if (pigHealth <= 0)
             {
                 GameManager.Instance.vfxService.PlayVFXAtPosition(VFXType.EnemyDestroyEffect, enemyView.transform.position);
+                GameManager.Instance.soundService.PlaySoundEffects(SoundType.EnemyDeathSound);
                 enemyView.EnemyIsDead();
             }
         }
@@ -137,6 +139,7 @@ namespace Enemy
 
         public override void MeleAttack()
         {
+            GameManager.Instance.soundService.PlaySoundEffects(SoundType.EnemySword);
             GameManager.Instance.eventService.OnPlayerGotDamaged.InvokeEvent(enemyData.damage);
         }
     }

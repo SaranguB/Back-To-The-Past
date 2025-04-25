@@ -10,6 +10,9 @@ using Objects.Destroyable;
 using Level;
 using Trap;
 using VFX;
+using UI;
+using Audio;
+using UnityEngine.SceneManagement;
 
 namespace Main
 {
@@ -22,6 +25,8 @@ namespace Main
         public LevelService levelService;
         public TrapService trapService;
         public VFXService vfxService;
+        public UIService uiService;
+        public SoundService soundService;
 
         [Header("Player")]
         [SerializeField] private PlayerView playerView;
@@ -49,6 +54,11 @@ namespace Main
         [Header("VFX")]
         [SerializeField] private VFXView vfxPrefab;
 
+        [Header("Audio")]
+        [SerializeField] private SoundSO soundSo;
+        [SerializeField] private AudioSource audioEffectSource;
+        [SerializeField] private AudioSource backgroundMusicSource;
+
         public object OnPlayerGotAttackedByEnemy { get; internal set; }
 
         protected override void Awake()
@@ -58,26 +68,50 @@ namespace Main
             InitializeDestroyabelObjectController();
         }
 
+        private void Start()
+        {
+            PlayBackgroundMusic();
+        }
+
         private void InitializeServices()
         {
+            soundService = new SoundService(soundSo, audioEffectSource, backgroundMusicSource);
             eventService = new EventService();
-            levelService = new LevelService(levelView);
-            vfxService = new VFXService(vfxPrefab);
-            timeSwitchService = new TimeSwitchService(timeSwitchView);
+
+            if (levelView != null)
+                levelService = new LevelService(levelView);
+
+            if (vfxPrefab != null)
+                vfxService = new VFXService(vfxPrefab);
+
+            if (timeSwitchView != null)
+                timeSwitchService = new TimeSwitchService(timeSwitchView);
 
             if (trapViewCollection != null)
                 trapService = new TrapService(trapViewCollection);
 
-            playerService = new PlayerService(playerView, playerS0, bombSO, bombView);
-            enemyService = new EnemyService(enemyViewCollection, bombSO, bombView);
+            if (playerView != null)
+                playerService = new PlayerService(playerView, playerS0, bombSO, bombView);
+
+            if (enemyViewCollection != null)
+                enemyService = new EnemyService(enemyViewCollection, bombSO, bombView);
+        }
+
+        private void PlayBackgroundMusic()
+        {
+            if (SceneManager.GetActiveScene().name == "MainMenu")
+                soundService.PlayBackgroundMusic(SoundType.MenuBackground);
+            else
+                soundService.PlayBackgroundMusic(SoundType.GameplayBackground);
         }
 
         private void InitializeDestroyabelObjectController()
         {
-            foreach (DestroyableObjectView destroyableObjectView in destroyableObjectViewCollection.destroyableObjectViews)
-            {
-                DestroyableObjectController destroyableObjectController = new DestroyableObjectController(destroyableObjectView);
-            }
+            if (destroyableObjectViewCollection != null)
+                foreach (DestroyableObjectView destroyableObjectView in destroyableObjectViewCollection.destroyableObjectViews)
+                {
+                    DestroyableObjectController destroyableObjectController = new DestroyableObjectController(destroyableObjectView);
+                }
         }
     }
 }

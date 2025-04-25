@@ -17,6 +17,7 @@ namespace Wepons.Bomb
 
         public void OnStateEnter()
         {
+            owner.PlayBombExposionSound();
             owner.SetAnimatorBool("IsExploded", true);
             owner.ChangeDamageAreaColliderState(true);
         }
