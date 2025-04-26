@@ -1,7 +1,4 @@
 using StateMachine;
-using System;
-using UnityEngine;
-using Wepons.Bomb;
 
 namespace Wepons.Bomb
 {

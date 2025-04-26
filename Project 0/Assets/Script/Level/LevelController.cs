@@ -1,5 +1,4 @@
 using Main;
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,7 +11,6 @@ namespace Level
         public LevelController(LevelView levelView)
         {
             this.levelView = levelView;
-
             this.levelView.SetController(this);
             SubscribeToEvents();
         }
@@ -29,12 +27,8 @@ namespace Level
             GameManager.Instance.eventService.OnPlayerGotKey.RemoveListener(PlayerGotKey);
         }
 
-
         private void PlayerGotKey()
-        {
-            levelView.PlayerGotKey();
-        }
-
+            =>levelView.PlayerGotKey();
 
         public void LevelFinished()
         {

@@ -1,6 +1,3 @@
-using System;
-using UnityEngine;
-
 namespace Trap
 {
     public class TrapService
@@ -15,12 +12,10 @@ namespace Trap
 
         private void CreateTrapController()
         {
-
             foreach (TrapView trapView in trapViewCollection.trapView)
             {
                 TrapController trapController = new TrapController(trapView);
             }
-
         }
     }
 }

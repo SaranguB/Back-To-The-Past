@@ -1,12 +1,9 @@
 using StateMachine;
-using TimeSwitching;
-using UnityEngine;
 
 namespace TimeSwitching
 {
     public class PresentState : IState<TimeSwitchController>
     {
-
         public TimeSwitchController owner { get; set; }
         public TimeAffectedObjectController[] objectController;
 
@@ -14,7 +11,6 @@ namespace TimeSwitching
         {
             this.objectController = objectController;
         }
-
 
         public void OnStateEnter()
         {
@@ -26,15 +22,14 @@ namespace TimeSwitching
 
         public void UpdateState()
         {
-
         }
+
         public void FixedUpdateState()
         {
-
         }
+
         public void OnStateExit()
         {
-
         }
     }
 }

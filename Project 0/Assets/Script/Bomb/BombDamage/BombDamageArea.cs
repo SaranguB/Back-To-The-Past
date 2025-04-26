@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Wepons.Bomb;
 
@@ -6,7 +5,6 @@ public class BombDamageArea : MonoBehaviour
 {
     private int bombDamage;
     private CapsuleCollider2D damageAreaCollider;
-
 
     public void SetDamageValues(float damageRadius, int bombDamage)
     {
@@ -27,7 +25,6 @@ public class BombDamageArea : MonoBehaviour
         newSize.x = damageRadius;
         damageAreaCollider.size = newSize;
     }
-
 
     private void OnTriggerEnter2D(Collider2D other)
     {

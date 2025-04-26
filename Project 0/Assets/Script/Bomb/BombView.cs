@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Wepons.Bomb
@@ -19,20 +20,26 @@ namespace Wepons.Bomb
         }
 
         public void SetController(BombController bombController)
-        {
-            this.bombController = bombController;
-        }
-
+            =>this.bombController = bombController;
 
         public void ConfigurePosition(Transform bombPosition)
-        {
-            this.transform.position = bombPosition.position;
-        }
+            => this.transform.position = bombPosition.position;
+
+        public void DisableBombDamageArea()
+            =>bombController.ChangeDamageAreaColliderState(false);
 
         public void OnExplosionEnd()
-        {
+            => bombController.SetBombState(BombState.Exploded);
 
-            bombController.SetBombState(BombState.Exploded);
+        public void StartBombTimer()
+        {
+            StartCoroutine(SetBombStateToExploding());
+        }
+
+        private IEnumerator SetBombStateToExploding()
+        {
+            yield return new WaitForSeconds(bombController.GetBombPrimingTime());
+            bombController.SetBombState(BombState.Exploding);
         }
     }
 }

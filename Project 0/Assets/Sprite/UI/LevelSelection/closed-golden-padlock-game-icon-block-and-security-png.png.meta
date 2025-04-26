@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      closed-golden-padlock-game-icon-block-and-security-png_0: -2342399291535473750
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -5,7 +5,6 @@ using TimeSwitching;
 using Events;
 using Wepons.Bomb;
 using Enemy;
-using System;
 using Objects.Destroyable;
 using Level;
 using Trap;
@@ -18,6 +17,7 @@ namespace Main
 {
     public class GameManager : GenericMonoSingelton<GameManager>
     {
+        #region Dependencies
         public PlayerService playerService;
         public TimeSwitchService timeSwitchService;
         public EventService eventService;
@@ -27,7 +27,10 @@ namespace Main
         public VFXService vfxService;
         public UIService uiService;
         public SoundService soundService;
+        public CameraController cameraController;
+        #endregion
 
+        #region Serilized Fields
         [Header("Player")]
         [SerializeField] private PlayerView playerView;
         [SerializeField] private PlayerSO playerS0;
@@ -58,12 +61,12 @@ namespace Main
         [SerializeField] private SoundSO soundSo;
         [SerializeField] private AudioSource audioEffectSource;
         [SerializeField] private AudioSource backgroundMusicSource;
-
-        public object OnPlayerGotAttackedByEnemy { get; internal set; }
+        #endregion
 
         protected override void Awake()
         {
             base.Awake();
+            
             InitializeServices();
             InitializeDestroyabelObjectController();
         }
@@ -75,8 +78,10 @@ namespace Main
 
         private void InitializeServices()
         {
-            soundService = new SoundService(soundSo, audioEffectSource, backgroundMusicSource);
+
             eventService = new EventService();
+            cameraController = new CameraController();
+            soundService = new SoundService(soundSo, audioEffectSource, backgroundMusicSource);
 
             if (levelView != null)
                 levelService = new LevelService(levelView);

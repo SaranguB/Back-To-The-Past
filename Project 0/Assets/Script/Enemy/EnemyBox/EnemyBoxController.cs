@@ -11,7 +11,6 @@ public class EnemyBoxController : MonoBehaviour
     [SerializeField] private Animator boxAnimator;
     [SerializeField] private GameObject box;
     [SerializeField] private float animationLength;
-    
 
     private bool hasTriggered = false;
     private EnemyView enemyView;
@@ -20,11 +19,25 @@ public class EnemyBoxController : MonoBehaviour
     private void Start()
     {
         enemyView = enemy.GetComponent<EnemyView>();
-
         enemyView.WasActiveInitially = false;
-        GameManager.Instance.eventService.OnTimeSwitchWithBoolParam.AddListener(TimeSwitched);
-        
+        SubscribeToEvents();
     }
+
+    private void OnDestroy()
+    {
+        UnSubscribeToEvents();
+    }
+
+    private void SubscribeToEvents()
+    {
+        GameManager.Instance.eventService.OnTimeSwitchWithBoolParam.AddListener(TimeSwitched);
+    }
+
+    public void UnSubscribeToEvents()
+    {
+        GameManager.Instance.eventService.OnTimeSwitchWithBoolParam.RemoveListener(TimeSwitched);
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (hasTriggered) return;
@@ -53,12 +66,8 @@ public class EnemyBoxController : MonoBehaviour
         isEnemyInPresent = value;
 
         if (isEnemyInPresent)
-        {
            this.gameObject.SetActive(true);
-        }
         else
-        {
            this.gameObject.SetActive(false);
-        }
     }
 }

@@ -1,8 +1,3 @@
-using Enemy;
-using System;
-using UI;
-using UnityEngine;
-
 namespace TimeSwitching
 {
     public class TimeSwitchService
@@ -16,7 +11,5 @@ namespace TimeSwitching
 
         public TimeSwitchController GetTimeSwitchController()
             => timeSwitchController;
-
-
     }
 }

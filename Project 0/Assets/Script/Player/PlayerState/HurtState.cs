@@ -16,7 +16,6 @@ namespace Player
 
         public void OnStateEnter()
         {
-
             playerAnimator.SetBool("IsHurt", true);
         }
 
@@ -26,14 +25,11 @@ namespace Player
 
         public void FixedUpdateState()
         {
-
         }
 
         public void OnStateExit()
         {
             playerAnimator.SetBool("IsHurt", false);
         }
-
-
     }
 }

@@ -1,8 +1,5 @@
-using Enemy;
 using Main;
 using StateMachine;
-using System;
-using System.Threading.Tasks;
 using UnityEngine;
 using Wepons.Bomb;
 
@@ -17,7 +14,6 @@ namespace Enemy
         private BombPool bombPool;
 
         public bool WasInitiallyActive = true;
-        private int pigHealth;
 
         public PigWithACanonController(EnemyView enemyView, BombPool bombPool)
         {
@@ -71,8 +67,6 @@ namespace Enemy
             }
         }
 
-
-
         public override void ChangeState(EnemyStates state)
             => pigWithACanonStateMachine.ChangeState(state);
 
@@ -101,7 +95,47 @@ namespace Enemy
             => pigWithACanonStateMachine.FixedUpdate();
 
         public override void SetEnemyPosition(Vector2 pos)
-        { }
+        { 
+        }
+
+        public override void TakeDamage(int damage)
+        {
+        }
+
+        public override void FireBomb()
+        {
+            base.FireBomb();
+            LightTheMatch();
+        }
+
+        private void LightTheMatch()
+            =>enemyView.enemyAnimator.SetBool("IsAttacking", true);
+
+        public override void Fire()
+        {
+
+            if (enemyView.firePoint != null)
+            {
+                BombController bomb = bombPool.GetBomb();
+
+                if (bomb != null)
+                {
+                    bomb.ConfigureBomb(enemyView.firePoint);
+                    Vector2 direction = (playerPosition - (Vector2)enemyView.firePoint.position).normalized;
+                    bomb.LaunchBomb(direction, enemyData.bombThrowForceX, enemyData.bombThrowForceY);
+
+                    bomb.StartBombTimer();
+                    enemyView.enemyAnimator.SetBool("IsAttacking", false);
+                }
+            }
+        }
+
+        public override bool IsEnemyViewActiveAndEnabled()
+        {
+            if (enemyView != null)
+                return enemyView.IsEnemyViewActiveAndEnabled();
+            return false;
+        }
 
         public override Vector2 GetPlayerPosition()
             => playerPosition;
@@ -120,48 +154,5 @@ namespace Enemy
 
         public override EnemySO GetEnemyData()
                 => enemyData;
-
-        public override void TakeDamage(int damage)
-        {
-
-        }
-        public override void FireBomb()
-        {
-            base.FireBomb();
-             LightTheMatch();
-        }
-
-        private  void LightTheMatch()
-        {
-            enemyView.enemyAnimator.SetBool("IsAttacking", true);
-        }
-
-        public override void Fire()
-        {
-
-            if (enemyView.firePoint != null)
-            {
-                BombController bomb = bombPool.GetBomb();
-
-                if (bomb != null)
-                {
-                    bomb.ConfigureBomb(enemyView.firePoint);
-                    Vector2 direction = (playerPosition - (Vector2)enemyView.firePoint.position).normalized;
-
-                    bomb.LaunchBomb(direction, enemyData.bombThrowForceX, enemyData.bombThrowForceY);
-
-                    bomb.StartBombTimer();
-                    enemyView.enemyAnimator.SetBool("IsAttacking", false);
-                }
-            }
-        }
-
-        public override bool IsEnemyViewActiveAndEnabled()
-        {
-            if (enemyView != null)
-                return enemyView.IsEnemyViewActiveAndEnabled();
-
-            return false;
-        }
     }
 }

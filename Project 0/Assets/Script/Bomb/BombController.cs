@@ -1,7 +1,4 @@
-
 using Main;
-using Player;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Wepons.Bomb
@@ -11,6 +8,7 @@ namespace Wepons.Bomb
         private BombView bombView;
         private BombModel bombModel;
         private BombStateMachine bombStateMachine;
+
         public BombController(BombView bombPrefab, BombSO bombSO)
         {
             SetViewAndModel(bombPrefab, bombSO);
@@ -25,9 +23,8 @@ namespace Wepons.Bomb
         }
 
         private void CreateStateMachine()
-        {
-            bombStateMachine = new BombStateMachine(this);
-        }
+            =>bombStateMachine = new BombStateMachine(this);
+        
 
         public void ConfigureBomb(Transform bombPosition)
         {
@@ -36,7 +33,6 @@ namespace Wepons.Bomb
             SetDamageArea();
             bombView.ConfigurePosition(bombPosition);
         }
-
         private void SetDamageArea()
         {
             bombView.damageArea.SetDamageValues(bombModel.DamageRadius, bombModel.bombDamage);
@@ -44,17 +40,16 @@ namespace Wepons.Bomb
         }
 
         public void ChangeDamageAreaColliderState(bool value)
+            => bombView.damageArea.ChangeColliderState(value);
+
+
+        public void StartBombTimer()
         {
-            bombView.damageArea.ChangeColliderState(value);
+            bombView.StartBombTimer();
         }
 
-        public async void StartBombTimer()
-        {
-            await Task.Delay((int)(bombModel.primingTime * 1000));
-
-            SetBombState(BombState.Exploding);
-        }
-
+        public float GetBombPrimingTime()
+            => bombModel.primingTime;
 
         public void SetAnimatorBool(string parameterName, bool boolValue)
         {
@@ -63,9 +58,8 @@ namespace Wepons.Bomb
         }
 
         public void SetBombState(BombState state)
-        {
-            bombStateMachine.ChangeState(state);
-        }
+            => bombStateMachine.ChangeState(state);
+
 
         public void DisableBomb()
         {
@@ -80,8 +74,7 @@ namespace Wepons.Bomb
         }
 
         public void PlayBombExposionSound()
-        {
-            GameManager.Instance.soundService.PlaySoundEffects(Audio.SoundType.ExplosionSound);
-        }
+            => GameManager.Instance.soundService.PlaySoundEffects(Audio.SoundType.ExplosionSound);
+
     }
 }

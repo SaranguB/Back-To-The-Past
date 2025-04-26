@@ -7,7 +7,6 @@ namespace TimeSwitching
     {
         public Sprite pastSprite;
         public Sprite presentSprite;
-
         public bool isMovableInPresent;
         public bool isMovableInPast;
     }

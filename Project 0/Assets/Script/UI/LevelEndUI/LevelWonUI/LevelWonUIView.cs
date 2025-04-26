@@ -1,5 +1,3 @@
-using System;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -19,6 +17,7 @@ namespace UI
         private void OnNextLevelButtonCLicked()
         {
             PlayButtonSound();
+
             int currentScene = (SceneManager.GetActiveScene().buildIndex) + 1;
             SceneManager.LoadScene(currentScene);
         }

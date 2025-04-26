@@ -1,5 +1,4 @@
 using Level;
-using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -37,7 +36,6 @@ namespace UI
             foreach (var level in levelData)
             {
                 GameObject levelButtonObject = Instantiate(levelButtonPrefab, levelParentObject.transform);
-
                 SetLevelButton(level, levelButtonObject);
 
                 Image lockedImage = levelButtonObject.transform.Find("LockedImage").GetComponent<Image>();
@@ -58,13 +56,11 @@ namespace UI
             SetLevelButtonInteractable(levelButtonObject, false);
         }
 
-
-
         private void SetLevelText(GameObject levelButtonObject, LevelSO capturedLevelData, Image lockedImage, TextMeshProUGUI levelText)
         {
             lockedImage.enabled = false;
-
             levelText.text = capturedLevelData.levelNumber.ToString();
+
             SetLevelButtonInteractable(levelButtonObject, true);
         }
 
@@ -78,7 +74,6 @@ namespace UI
         private void SetLevelButton(LevelSO capturedLevel, GameObject levelObject)
         {
             Button levelButton = levelObject.GetComponent<Button>();
-            
             levelButton.onClick.AddListener(() => LoadScene(capturedLevel.sceneName));
         }
 

@@ -1,8 +1,6 @@
 using Main;
 using Player.UI;
-using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 namespace UI
 {
@@ -40,13 +38,11 @@ namespace UI
         private OptionsUIController optionsUIController;
         [SerializeField] private OptionsUIView optionsUIView;
 
-
         private void Start()
         {
             InitializeUIControllers();
             RegisterUI();
             SubscribeToEvents();
-
         }
 
         private void SubscribeToEvents()
@@ -58,14 +54,13 @@ namespace UI
             }
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             UnSubscribeToEvents();
         }
 
         private void UnSubscribeToEvents()
         {
-
             if (levelLostUIView != null && levelWonUIView != null)
             {
                 GameManager.Instance.eventService.OnPlayerFinishedLevel.RemoveListener(CreateLevelWonUI);
@@ -100,6 +95,16 @@ namespace UI
                 GameManager.Instance.playerService.SetUI(GetTimeSwitchUI(), GetPlayerUI(), GetHealthUI());
         }
 
+        public void CreateLevelLostUI()
+           => levelLostUIController = new LevelLostUIController(levelLostUIView);
+
+        public void CreateLevelWonUI()
+        {
+            GameManager.Instance.soundService.StopBackgroundSong();
+            GameManager.Instance.soundService.PlaySoundEffects(Audio.SoundType.LevelWonSound);
+            levelWonUIController = new LevelWonUIController(levelWonUIView);
+        }
+
         public PlayerUIController GetPlayerUI()
              => playerUIController;
 
@@ -108,18 +113,5 @@ namespace UI
 
         public HealthUIController GetHealthUI()
              => healthUIController;
-
-        public void CreateLevelLostUI()
-        {
-           
-            levelLostUIController = new LevelLostUIController(levelLostUIView);
-        }
-
-        public void CreateLevelWonUI()
-        {
-            GameManager.Instance.soundService.StopBackgroundSong();
-            GameManager.Instance.soundService.PlaySoundEffects(Audio.SoundType.LevelWonSound);
-            levelWonUIController = new LevelWonUIController(levelWonUIView);
-        }
     }
 }

@@ -1,6 +1,4 @@
-using Enemy;
 using StateMachine;
-using System;
 using UnityEngine;
 using Wepons.Bomb;
 
@@ -41,9 +39,7 @@ namespace Enemy
 
         public void FixedUpdateState()
         {
-
         }
-
 
         private void CheckPlayerAttackRange()
         {
@@ -86,6 +82,5 @@ namespace Enemy
             if (enemyAnimator != null)
                 enemyAnimator.SetBool("IsAttacking", false);
         }
-
     }
 }

@@ -1,7 +1,6 @@
 using Audio;
 using Main;
 using StateMachine;
-using System;
 using UnityEngine;
 using VFX;
 
@@ -9,22 +8,21 @@ namespace Enemy
 {
     public class PigController : EnemyController
     {
-        public EnemySO enemyData;
         private EnemyView enemyView;
         private PigStateMachine pigStateMachine;
-
         private bool isEnemyInPresent;
-        public bool WasInitiallyActive = true;
         private int pigHealth;
+
+        public EnemySO enemyData;
+        public bool WasInitiallyActive = true;
 
         public PigController(EnemyView enemyView)
         {
             SetEnemyView(enemyView);
-
             CreateStateMachine();
             ChangeState(EnemyStates.Idle);
-            SubscribeToEvents();
 
+            SubscribeToEvents();
             InitializeValues();
         }
 
@@ -52,9 +50,8 @@ namespace Enemy
         }
 
         private void CreateStateMachine()
-        {
-            pigStateMachine = new PigStateMachine(this, enemyView.enemyAnimator);
-        }
+           =>pigStateMachine = new PigStateMachine(this, enemyView.enemyAnimator);
+
 
         public override void PlayerEnteredRange()
         {
@@ -67,6 +64,42 @@ namespace Enemy
             base.PlayerExitRanged();
             ChangeState(EnemyStates.Idle);
         }
+
+        public override void TakeDamage(int damage)
+        {
+            pigHealth -= damage;
+
+            if (pigHealth <= 0)
+            {
+                GameManager.Instance.vfxService.PlayVFXAtPosition(VFXType.EnemyDestroyEffect, enemyView.transform.position);
+                GameManager.Instance.soundService.PlaySoundEffects(SoundType.EnemyDeathSound);
+                enemyView.EnemyIsDead();
+            }
+        }
+
+        private void TimeSwitched(bool value)
+        {
+            isEnemyInPresent = value;
+
+            if (isEnemyInPresent)
+                enemyView.TimeSwitchedToPresent();
+            else
+                enemyView.TimeSwitchedToPast();
+        }
+
+        public override bool IsEnemyViewActiveAndEnabled()
+        {
+            if (enemyView != null)
+                return enemyView.IsEnemyViewActiveAndEnabled();
+            return false;
+        }
+
+        public override void MeleAttack()
+        {
+            GameManager.Instance.soundService.PlaySoundEffects(SoundType.EnemySword);
+            GameManager.Instance.eventService.OnPlayerGotDamaged.InvokeEvent(enemyData.damage);
+        }
+
         public override bool IsInCastingState()
             => GetCurrentState() is catchingState<PigController>;
 
@@ -96,51 +129,10 @@ namespace Enemy
 
         public override Transform GetEnemyTransform()
             => enemyView.transform;
-
         public override float GetAttackDelay()
             => enemyData.attackDelay;
 
         public override EnemySO GetEnemyData()
                 => enemyData;
-
-        public override void TakeDamage(int damage)
-        {
-            pigHealth -= damage;
-
-            if (pigHealth <= 0)
-            {
-                GameManager.Instance.vfxService.PlayVFXAtPosition(VFXType.EnemyDestroyEffect, enemyView.transform.position);
-                GameManager.Instance.soundService.PlaySoundEffects(SoundType.EnemyDeathSound);
-                enemyView.EnemyIsDead();
-            }
-        }
-
-        private void TimeSwitched(bool value)
-        {
-            isEnemyInPresent = value;
-
-            if (isEnemyInPresent)
-            {
-                enemyView.TimeSwitchedToPresent();
-            }
-            else
-            {
-                enemyView.TimeSwitchedToPast();
-            }
-        }
-
-        public override bool IsEnemyViewActiveAndEnabled()
-        {
-            if (enemyView != null)
-                return enemyView.IsEnemyViewActiveAndEnabled();
-
-            return false;
-        }
-
-        public override void MeleAttack()
-        {
-            GameManager.Instance.soundService.PlaySoundEffects(SoundType.EnemySword);
-            GameManager.Instance.eventService.OnPlayerGotDamaged.InvokeEvent(enemyData.damage);
-        }
     }
 }

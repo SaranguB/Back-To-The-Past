@@ -1,7 +1,4 @@
 using Main;
-using System;
-using System.Collections;
-using UnityEngine;
 
 namespace Trap
 {
@@ -27,8 +24,6 @@ namespace Trap
                     GameManager.Instance.eventService.OnPlayerGotDamaged.InvokeEvent(trapView.trapData.damage);
                     break;
             }
-            
         }
-
     }
 }

@@ -28,7 +28,6 @@ namespace UI
         {
             PlayButtonSound();
             SceneManager.LoadScene("MainMenu");
-
         }
 
         private void OnReplayButtonClicked()
@@ -39,9 +38,8 @@ namespace UI
         }
 
         public static void PlayButtonSound()
-        {
-            GameManager.Instance.soundService.PlaySoundEffects(Audio.SoundType.ButtonSound);
-        }
+           =>GameManager.Instance.soundService.PlaySoundEffects(Audio.SoundType.ButtonSound);
+        
 
         private void OnDestroy()
         {

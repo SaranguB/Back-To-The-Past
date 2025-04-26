@@ -1,4 +1,3 @@
-using UnityEngine;
 using Wepons.Bomb;
 
 namespace Enemy
@@ -8,6 +7,7 @@ namespace Enemy
         private EnemyController enemy;
         private EnemyViewCollection enemyViewCollection;
         private BombPool bombPool;
+
         public EnemyService(EnemyViewCollection enemyViewCollection, BombSO bombSO, BombView bombPrefab)
         {
             bombPool = new BombPool(bombSO, bombPrefab);
@@ -30,6 +30,5 @@ namespace Enemy
                 }
             }
         }
-
     }
 }

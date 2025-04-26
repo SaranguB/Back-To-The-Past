@@ -1,7 +1,4 @@
-using Events;
 using Main;
-using System;
-using UnityEngine;
 
 namespace Objects.Destroyable
 {
@@ -18,22 +15,16 @@ namespace Objects.Destroyable
         }
 
         private void SubscribeToEvents()
-        {
-            GameManager.Instance.eventService.OnTimeSwitchWithBoolParam.AddListener(TimeSwitched);
-        }
+            => GameManager.Instance.eventService.OnTimeSwitchWithBoolParam.AddListener(TimeSwitched);
 
         private void TimeSwitched(bool value)
         {
             isPresent = value;
 
             if (isPresent)
-            {
                 destroyableObjectView.TimeSwitchedToPresent();
-            }
             else
-            {
                 destroyableObjectView.TimeSwitchedToPast();
-            }
         }
 
         public bool GetIsPresentTime()

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,18 +30,13 @@ namespace UI
                 }
             }
             else
-            {
                 ResetUI();
-            }
         }
 
         private void ResetUI()
         {
             currentFillTime = 0f;
             timeSwitchRingImage.fillAmount = 0f;
-
         }
-
-
     }
 }

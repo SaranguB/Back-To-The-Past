@@ -1,9 +1,5 @@
-using Audio;
-using Main;
-using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Utilis;
 
@@ -16,7 +12,6 @@ namespace UI
         public CanvasGroup MainMenuCanvasGroup;
         public CanvasGroup optionsCanvasGroup;
         public CanvasGroup levelSelectionMenu;
-
         public Button playButton;
         public Button optionsButton;
         public Button exitButton;
@@ -38,8 +33,6 @@ namespace UI
             optionsButton.interactable = true;
             exitButton.interactable = true;
         }
-
-
 
         public void SetController(MainMenuUIController mainMenuUIController)
         {

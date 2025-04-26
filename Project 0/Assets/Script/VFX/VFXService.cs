@@ -18,7 +18,7 @@ namespace VFX
             vfxToPlay.ConfigureVFX(vfxType, position);
         }
 
-        public void ReturnVFXToPool(VFXController vfxToReturn) => vfxPool.ReturnItem(vfxToReturn);
-
+        public void ReturnVFXToPool(VFXController vfxToReturn) 
+            => vfxPool.ReturnItem(vfxToReturn);
     }
 }

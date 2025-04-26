@@ -1,4 +1,3 @@
-using Enemy;
 using StateMachine;
 using UnityEngine;
 
@@ -7,13 +6,13 @@ namespace Enemy
     public class catchingState<T> : IState<T> where T : EnemyController
     {
         private Animator enemyAnimator;
+
         public T owner { get; set; }
 
         public catchingState(Animator enemyAnimator)
         {
             this.enemyAnimator = enemyAnimator;
         }
-
 
         public void OnStateEnter()
         {
@@ -56,6 +55,5 @@ namespace Enemy
         public void OnStateExit()
         {
         }
-
     }
 }

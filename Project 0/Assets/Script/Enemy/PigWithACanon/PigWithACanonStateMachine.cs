@@ -1,6 +1,4 @@
-using Enemy;
 using StateMachine;
-using System;
 using UnityEngine;
 using Wepons.Bomb;
 
@@ -8,7 +6,6 @@ namespace Enemy
 {
     public class PigWithACanonStateMachine : GenericStateMachine<PigWithACanonController, EnemyStates>
     {
-
         public PigWithACanonStateMachine(PigWithACanonController owner, Animator enemyAnimator, Wepons.Bomb.BombPool bombPool) : base(owner)
         {
             CreateState(enemyAnimator, bombPool);
@@ -19,7 +16,6 @@ namespace Enemy
         {
             AddState(EnemyStates.Idle, new IdleState<PigWithACanonController>(enemyAnimator));
             AddState(EnemyStates.Attack, new AttackState<PigWithACanonController>(enemyAnimator));
-            AddState(EnemyStates.Dead, new DeadState<PigWithACanonController>(enemyAnimator));
         }
     }
 }

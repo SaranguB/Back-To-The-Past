@@ -3,7 +3,6 @@ using Main;
 using Player.UI;
 using StateMachine;
 using System;
-using TimeSwitching;
 using UI;
 using UnityEngine;
 using Wepons.Bomb;
@@ -26,10 +25,10 @@ namespace Player
             this.playerView = playerView;
             playerModel = new PlayerModel(playerS0);
             this.playerView.SetController(this);
+            this.bombPool = bombPool;
 
             CreatePlayerStateMachine();
             ChangePlayerState(PlayerState.Alive);
-            this.bombPool = bombPool;
             SubscribeToEvents();
         }
 
@@ -38,15 +37,16 @@ namespace Player
             GameManager.Instance.eventService.OnPlayerGotDamaged.AddListener(TakeDamage);
         }
 
-        public void ChangePlayerState(PlayerState state)
+        public void UnSubcribeToEvents()
         {
-            playerStateMachine.ChangeState(state);
+            GameManager.Instance.eventService.OnPlayerGotDamaged.RemoveListener(TakeDamage);
         }
 
+        public void ChangePlayerState(PlayerState state)
+            => playerStateMachine.ChangeState(state);
+
         private void CreatePlayerStateMachine()
-        {
-            playerStateMachine = new PlayerStateMachine(this, playerView.playerAnimator);
-        }
+        => playerStateMachine = new PlayerStateMachine(this, playerView.playerAnimator);
 
         public void HandleInput()
         {
@@ -57,209 +57,56 @@ namespace Player
             ConfigureTransitionToNextLevelInput();
         }
 
-        private void ConfigureTransitionToNextLevelInput()
-        {
-            if (Input.GetKeyDown(KeyCode.F) && playerModel.isPlayerHasKey && playerModel.canUnlockDoor)
-            {
-                UnlockDoor();
-            }
-        }
-
-        private void UnlockDoor()
-        {
-            playerModel.canUnlockDoor = false;
-            GameManager.Instance.eventService.OnPlayerOpenedDoor.InvokeEvent();
-            playerView.LevelFinished();
-        }
-
-        public void LevelFinished()
-        {
-            GameManager.Instance.eventService.OnPlayerFinishedLevel.InvokeEvent();
-        }
-
-        private void ConfigureBombDeployInput()
-        {
-
-            if (playerModel.canDeployBomb)
-            {
-
-                if (Input.GetKeyDown(KeyCode.LeftControl))
-                {
-                    playerUIController.EnableBombThrowChargingBar(true);
-                    playerModel.isHoldingBombKey = true;
-                    playerModel.bombHoldTimer = 0f;
-                }
-
-                if (Input.GetKey(KeyCode.LeftControl))
-                {
-                    DisplayBombThrowIndicator(true);
-                    playerModel.bombHoldTimer += Time.deltaTime;
-                }
-
-                if (Input.GetKeyUp(KeyCode.LeftControl))
-                {
-                    if (playerModel.bombHoldTimer >= playerModel.bombThreshold)
-                    {
-                        ThrowBomb();
-                    }
-                    else
-                    {
-                        DeployBomb();
-                    }
-                    playerUIController.ResetUI();
-
-                }
-            }
-        }
-
-        private void DisplayBombThrowIndicator(bool value)
-        {
-            playerUIController.UpdateBombThrowUISlider(value, playerModel.bombThreshold);
-        }
-
-        private void ThrowBomb()
-        {
-            BombController bombToDeploy = CreateBomb();
-
-            Vector2 throwDirection = playerView.transform.localScale.x > 0 ? Vector2.right : Vector2.left;
-            bombToDeploy.LaunchBomb(throwDirection, playerModel.bombThrowForceX, playerModel.bombThrowForceY);
-        }
-
-        private void DeployBomb()
-        {
-            CreateBomb();
-        }
-
-        private BombController CreateBomb()
-        {
-            BombController bombToDeploy = bombPool.GetBomb();
-            bombToDeploy.ConfigureBomb(playerView.bombBagPosition);
-            return bombToDeploy;
-        }
-
-        private void ConfigureTimeSwitchInput()
-        {
-            if (Input.GetKey(KeyCode.Tab))
-            {
-                if (!playerModel.isTimeSwitching)
-                {
-                    HandleTimeSwitching(Time.deltaTime);
-                }
-            }
-
-            if (Input.GetKeyUp(KeyCode.Tab))
-            {
-                CancelTimeSwitching();
-            }
-        }
-
-        public void HandleTimeSwitching(float deltaTime)
-        {
-            SetAnimatorBool("IsTimeSwitching", true);
-            if (!GameManager.Instance.soundService.IsAudioEffectsPlaying())
-                GameManager.Instance.soundService.PlaySoundEffects(SoundType.TimeSwitchingSound);
-            StopPlayerActions();
-
-            if (!playerView.timeSwitchParticle.isPlaying)
-                playerView.timeSwitchParticle.Play();
-
-            playerModel.timeSwitchingDuration += Time.deltaTime;
-            SetTimeSwitchSlider(true, playerModel.timeRequiredForSwitching);
-
-            if (playerModel.timeSwitchingDuration >= playerModel.timeRequiredForSwitching)
-            {
-                SwitchTime();
-                playerModel.isTimeSwitching = true;
-            }
-        }
-
-        public void StopPlayerActions()
-        {
-            playerModel.horizontalInput = 0f;
-            playerModel.isJumping = false;
-            SetAnimatorFloatValue("Speed", 0f);
-            playerModel.canDeployBomb = false;
-        }
-
-        public void CancelTimeSwitching()
-        {
-            playerView.timeSwitchParticle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-            SetAnimatorBool("IsTimeSwitching", false);
-            GameManager.Instance.soundService.StopPlayingSoundEffect();
-            SetTimeSwitchSlider(false, playerModel.timeRequiredForSwitching);
-            playerModel.timeSwitchingDuration = 0f;
-            playerModel.isTimeSwitching = false;
-            playerModel.canDeployBomb = true;
-        }
-
-        public void SwitchTime()
-        {
-            SetAnimatorBool("IsTimeSwitching", false);
-            playerView.timeSwitchParticle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-            GameManager.Instance.eventService.onTimeSwitched.InvokeEvent();
-        }
-
-        public void SetTimeSwitchUI(TimeSwitchUIController timeSwitchUIController)
-        {
-            this.timeSwitchUIController = timeSwitchUIController;
-        }
-
-        public void SetTimeSwitchSlider(bool isKeyHeld, float timeRequiredForSwitching)
-        {
-            timeSwitchUIController.UpdateTimeSwitchUISlider(isKeyHeld, timeRequiredForSwitching);
-        }
-
         private void ConfigureMoveInput()
         {
             playerModel.horizontalInput = Input.GetAxis("Horizontal");
-            SetAnimatorFloatValue("Speed", playerModel.horizontalInput);
+            SetAnimatorFloatValue("Speed", Mathf.Abs(playerModel.horizontalInput));
         }
 
         public void HandleMovement()
         {
-            Move(playerModel.horizontalInput);
+            HandleHorizontalMovement();
+            HandleJumping();
+            HandleFalling();
+            UpdateAirDashStatus();
+        }
 
-            if (IsGrounded())
-            {
-                playerModel.canPlayerAirDash = true;
-            }
+        private void HandleHorizontalMovement()
+        {
+            float speed = playerModel.horizontalInput * playerModel.movementSpeed;
+            Vector2 velocity = playerView.playerRB.linearVelocity;
+            playerView.playerRB.linearVelocity = new Vector2(speed, velocity.y);
 
+            if (playerModel.horizontalInput != 0)
+                playerView.FlipOnDirection(playerModel.horizontalInput);
+        }
+
+        private void HandleJumping()
+        {
             if (playerModel.isJumping && IsGrounded())
             {
                 Jump();
-                SetISJumping(false);
+                SetIsJumping(false);
             }
-            HandleFalling();
         }
 
-        public void Move(float horizontalInput)
+        private void UpdateAirDashStatus()
         {
-            float speed = horizontalInput * playerModel.movementSpeed;
-            Vector2 currentvelocity = playerView.playerRB.linearVelocity;
-            playerView.playerRB.linearVelocity = new Vector2(speed, currentvelocity.y);
-
-            if (horizontalInput != 0)
-            {
-                playerView.FlipOnDirection(horizontalInput);
-
-            }
+            if (IsGrounded())
+                playerModel.canPlayerAirDash = true;
         }
 
         private void ConfigureJumpInput()
         {
             if (Input.GetKeyDown(KeyCode.Space))
-            {
-                SetISJumping(true);
-
-            }
+                SetIsJumping(true);
         }
 
         public void Jump()
         {
-
             SetAnimatorBool("IsJumping", true);
-            playerView.playerRB.linearVelocity = new Vector2(playerView.playerRB.linearVelocityX, playerModel.jumpForce);
-
+            Vector2 velocity = playerView.playerRB.linearVelocity;
+            playerView.playerRB.linearVelocity = new Vector2(velocity.x, playerModel.jumpForce);
         }
 
         public bool IsGrounded()
@@ -274,52 +121,34 @@ namespace Player
 
         public void HandleFalling()
         {
-            if (playerView.playerRB.linearVelocity.y < 0)
+            float verticalVelocity = playerView.playerRB.linearVelocity.y;
+
+            if (verticalVelocity < 0)
             {
                 SetAnimatorBool("IsJumping", false);
-                playerView.playerRB.gravityScale = playerModel.fallingSpeed;
-
+                SetGravity(playerModel.fallingSpeed);
             }
-            else if (playerView.playerRB.linearVelocity.y > 0 && !Input.GetKey(KeyCode.Space))
-            {
-                playerView.playerRB.gravityScale = playerModel.fallingSpeed;
-            }
+            else if (verticalVelocity > 0 && !Input.GetKey(KeyCode.Space))
+                SetGravity(playerModel.fallingSpeed);
             else
-            {
-                playerView.playerRB.gravityScale = 1f;
-            }
+                SetGravity(1f);
         }
 
+        private void SetGravity(float gravityScale)
+           => playerView.playerRB.gravityScale = gravityScale;
 
 
+        public void SetIsJumping(bool value)
+            => playerModel.isJumping = value;
 
-        public void SetISJumping(bool value)
-        {
-            playerModel.isJumping = value;
-        }
-
-        public void SetAnimatorFloatValue(string parameterName, float value)
-        {
-            playerView.playerAnimator.SetFloat(parameterName, MathF.Abs(value));
-        }
-
-        public void SetAnimatorBool(string stringValue, bool boolValue)
-        {
-            playerView.playerAnimator.SetBool(stringValue, boolValue);
-        }
-
-        public void OnPlayerPositionChanged(Vector2 position)
-        {
-            GameManager.Instance.eventService.onPlayerPositionChanged.InvokeEvent(position);
-        }
 
         public void HandleDashing()
         {
-            playerModel.inputDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
+            UpdateDashInputDirection();
 
-            if (!playerModel.isDashing && Input.GetKeyDown(KeyCode.LeftShift))
+            if (CanStartDash())
             {
-                if (playerModel.currentDashes > 0 && IsGrounded())
+                if (IsGrounded() && playerModel.currentDashes > 0)
                 {
                     GroundDash();
                 }
@@ -328,15 +157,29 @@ namespace Player
                     AirDash();
                 }
             }
-
             if (playerModel.isDashing)
-            {
-                playerModel.dashTimer -= Time.deltaTime;
+                UpdateDashTimer();
+        }
 
-                if (playerModel.dashTimer < 0)
-                    EndDashing();
-            }
+        private void UpdateDashInputDirection()
+        {
+            playerModel.inputDirection = new Vector2(
+                Input.GetAxisRaw("Horizontal"),
+                Input.GetAxisRaw("Vertical")
+            ).normalized;
+        }
 
+        private bool CanStartDash()
+        {
+            return !playerModel.isDashing && Input.GetKeyDown(KeyCode.LeftShift);
+        }
+
+        private void UpdateDashTimer()
+        {
+            playerModel.dashTimer -= Time.deltaTime;
+
+            if (playerModel.dashTimer <= 0f)
+                EndDashing();
         }
 
         private void AirDash()
@@ -365,7 +208,8 @@ namespace Player
             playerView.playerAnimator.SetBool("IsDashing", false);
             playerModel.isDashing = false;
 
-            playerView.playerRB.linearVelocity = new Vector2(playerModel.horizontalInput * playerModel.movementSpeed, 0);
+            playerView.playerRB.linearVelocity = new Vector2(
+                playerModel.horizontalInput * playerModel.movementSpeed, 0);
         }
 
         public void ExecuteDashing()
@@ -382,10 +226,173 @@ namespace Player
             }
         }
 
-        public void SetPlayerUI(PlayerUIController playerUIController)
+        private void ConfigureTransitionToNextLevelInput()
         {
-            this.playerUIController = playerUIController;
+            if (Input.GetKeyDown(KeyCode.F) && playerModel.isPlayerHasKey && playerModel.canUnlockDoor)
+                UnlockDoor();
         }
+
+        private void UnlockDoor()
+        {
+            playerModel.canUnlockDoor = false;
+            GameManager.Instance.eventService.OnPlayerOpenedDoor.InvokeEvent();
+            playerView.LevelFinished();
+        }
+
+        public void LevelFinished()
+           => GameManager.Instance.eventService.OnPlayerFinishedLevel.InvokeEvent();
+
+        private void ConfigureBombDeployInput()
+        {
+            if (!playerModel.canDeployBomb)
+                return;
+
+            HandleBombInput();
+        }
+
+        private void HandleBombInput()
+        {
+            if (Input.GetKeyDown(KeyCode.LeftControl))
+                StartChargingBomb();
+
+            if (Input.GetKey(KeyCode.LeftControl))
+                ChargeBomb();
+
+            if (Input.GetKeyUp(KeyCode.LeftControl))
+                ReleaseBomb();
+        }
+
+        private void StartChargingBomb()
+        {
+            playerUIController.EnableBombThrowChargingBar(true);
+            playerModel.isHoldingBombKey = true;
+            playerModel.bombHoldTimer = 0f;
+        }
+
+        private void ChargeBomb()
+        {
+            DisplayBombThrowIndicator(true);
+            playerModel.bombHoldTimer += Time.deltaTime;
+        }
+
+        private void ReleaseBomb()
+        {
+            if (playerModel.bombHoldTimer >= playerModel.bombThreshold)
+                ThrowBomb();
+            else
+                DeployBomb();
+
+            playerUIController.ResetUI();
+        }
+
+        private void DisplayBombThrowIndicator(bool value)
+           => playerUIController.UpdateBombThrowUISlider(value, playerModel.bombThreshold);
+
+        private void ThrowBomb()
+        {
+            BombController bombToDeploy = CreateBomb();
+
+            Vector2 throwDirection = playerView.transform.localScale.x > 0 ? Vector2.right : Vector2.left;
+            bombToDeploy.LaunchBomb(throwDirection, playerModel.bombThrowForceX, playerModel.bombThrowForceY);
+        }
+
+        private void DeployBomb()
+        {
+            CreateBomb();
+        }
+
+        private BombController CreateBomb()
+        {
+            BombController bombToDeploy = bombPool.GetBomb();
+            bombToDeploy.ConfigureBomb(playerView.bombBagPosition);
+            return bombToDeploy;
+        }
+
+        private void ConfigureTimeSwitchInput()
+        {
+            bool isTabHeld = Input.GetKey(KeyCode.Tab);
+
+            if (isTabHeld)
+            {
+                if (!playerModel.isTimeSwitching)
+                    BeginTimeSwitching(Time.deltaTime);
+            }
+            else if (Input.GetKeyUp(KeyCode.Tab))
+                CancelTimeSwitching();
+
+            GameManager.Instance.cameraController.UpdateCameraShake(isTabHeld, playerView.playerImpulseSource);
+        }
+
+        private void BeginTimeSwitching(float deltaTime)
+        {
+            SetAnimatorBool("IsTimeSwitching", true);
+
+            PlayTimeSwitchFeedback();
+            StopPlayerActions();
+
+            playerModel.timeSwitchingDuration += deltaTime;
+            SetTimeSwitchSlider(true, playerModel.timeRequiredForSwitching);
+
+            if (playerModel.timeSwitchingDuration >= playerModel.timeRequiredForSwitching)
+                ExecuteTimeSwitch();
+        }
+
+        private void PlayTimeSwitchFeedback()
+        {
+
+            if (!GameManager.Instance.soundService.IsAudioEffectsPlaying())
+                GameManager.Instance.soundService.PlaySoundEffects(SoundType.TimeSwitchingSound);
+
+            if (!playerView.timeSwitchParticle.isPlaying)
+                playerView.timeSwitchParticle.Play();
+        }
+
+        private void StopPlayerActions()
+        {
+            playerModel.horizontalInput = 0f;
+            SetAnimatorFloatValue("Speed", 0f);
+            playerModel.isJumping = false;
+            playerModel.canDeployBomb = false;
+        }
+
+        private void CancelTimeSwitching()
+        {
+            GameManager.Instance.soundService.StopPlayingSoundEffect();
+
+            playerView.timeSwitchParticle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            SetAnimatorBool("IsTimeSwitching", false);
+            SetTimeSwitchSlider(false, playerModel.timeRequiredForSwitching);
+
+            playerModel.timeSwitchingDuration = 0f;
+            playerModel.isTimeSwitching = false;
+            playerModel.canDeployBomb = true;
+        }
+
+        private void ExecuteTimeSwitch()
+        {
+            playerModel.isTimeSwitching = true;
+            SetAnimatorBool("IsTimeSwitching", false);
+            playerView.timeSwitchParticle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            GameManager.Instance.eventService.onTimeSwitched.InvokeEvent();
+        }
+
+        private void SetTimeSwitchSlider(bool show, float timeRequired)
+            => timeSwitchUIController.UpdateTimeSwitchUISlider(show, timeRequired);
+
+        public void SetTimeSwitchUI(TimeSwitchUIController timeSwitchUIController)
+            => this.timeSwitchUIController = timeSwitchUIController;
+
+        public void SetAnimatorFloatValue(string parameterName, float value)
+            => playerView.playerAnimator.SetFloat(parameterName, MathF.Abs(value));
+
+        public void SetAnimatorBool(string stringValue, bool boolValue)
+            => playerView.playerAnimator.SetBool(stringValue, boolValue);
+
+        public void OnPlayerPositionChanged(Vector2 position)
+            => GameManager.Instance.eventService.onPlayerPositionChanged.InvokeEvent(position);
+
+        public void SetPlayerUI(PlayerUIController playerUIController)
+            => this.playerUIController = playerUIController;
 
         public bool IsPlayerHasKey()
              => playerModel.isPlayerHasKey;
@@ -397,9 +404,7 @@ namespace Player
         }
 
         public void IsInfrontOfFinalDoor(bool value)
-        {
-            playerModel.canUnlockDoor = value;
-        }
+            => playerModel.canUnlockDoor = value;
 
         public void SetHealthUI(HealthUIController healthUIController)
         {
@@ -409,26 +414,21 @@ namespace Player
 
         public void TakeDamage(int damage)
         {
-
             playerModel.currentLives -= damage;
             healthUIController.RemoveLives(damage);
-            playerStateMachine.ChangeState(PlayerState.Hurt);
+
+            if (GetCurrentPlayerState() is not DeadState)
+                playerStateMachine.ChangeState(PlayerState.Hurt);
 
             if (playerModel.currentLives <= 0)
-            {
                 playerStateMachine.ChangeState(PlayerState.Dead);
-            }
         }
 
         public IState<PlayerController> GetCurrentPlayerState()
-        {
-            return playerStateMachine.GetCurrentState();
-        }
+            => playerStateMachine.GetCurrentState();
 
         public void OnPlayerDestroyed()
-        {
-            GameManager.Instance.eventService.OnPlayerDead.InvokeEvent();
-        }
+            => GameManager.Instance.eventService.OnPlayerDead.InvokeEvent();
 
         public void OnPlayerDead()
         {

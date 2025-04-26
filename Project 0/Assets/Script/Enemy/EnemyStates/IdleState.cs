@@ -1,4 +1,3 @@
-using Enemy;
 using StateMachine;
 using UnityEngine;
 
@@ -10,6 +9,7 @@ namespace Enemy
 
         private Animator enemyAnimator;
         private Coroutine playerCheckCorourine;
+
         public IdleState(Animator enemyAnimator)
         {
             this.enemyAnimator = enemyAnimator;
@@ -19,27 +19,24 @@ namespace Enemy
         {
             if (owner.IsEnemyViewActiveAndEnabled())
             {
-
                 if (!(owner.GetEnemyData().enemyType == EnemyType.PigWithACanon))
                     enemyAnimator.SetBool("IsCatching", false);
 
                 else
                     enemyAnimator.SetBool("IsAttacking", false);
-
             }
         }
+
         public void UpdateState()
         {
-
         }
+
         public void FixedUpdateState()
         {
-
         }
 
         public void OnStateExit()
         {
         }
-
     }
 }

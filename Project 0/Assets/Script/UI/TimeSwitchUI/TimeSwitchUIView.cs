@@ -6,6 +6,5 @@ namespace UI
     public class TimeSwitchUIView : MonoBehaviour
     {
         public Image filleImage;
-
     }
 }

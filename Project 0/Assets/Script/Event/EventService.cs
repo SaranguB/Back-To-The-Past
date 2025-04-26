@@ -1,7 +1,5 @@
-using Events;
 using Player;
 using UnityEngine;
-
 
 namespace Events
 {
@@ -16,6 +14,7 @@ namespace Events
         public EventController OnPlayerDead;
         public EventController<PlayerState> OnPlayerDeadWithParams;
         public EventController<int> OnPlayerGotDamaged;
+
         public EventService()
         {
             onTimeSwitched = new EventController();

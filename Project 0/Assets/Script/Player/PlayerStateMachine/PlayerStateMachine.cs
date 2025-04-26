@@ -1,12 +1,10 @@
 using StateMachine;
-using System;
 using UnityEngine;
 
 namespace Player
 {
     public class PlayerStateMachine : GenericStateMachine<PlayerController, PlayerState>
     {
-
         public PlayerStateMachine(PlayerController owner, Animator playerAnimator) : base(owner)
         {
             CreateStates(playerAnimator);
@@ -20,6 +18,7 @@ namespace Player
             AddState(PlayerState.Hurt, new HurtState(playerAnimator));
         }
     }
+
     public enum PlayerState
     {
         Alive,

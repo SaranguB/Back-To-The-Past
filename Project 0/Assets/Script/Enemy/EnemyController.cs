@@ -1,15 +1,11 @@
 using Main;
 using Player;
-using StateMachine;
-using System;
 using UnityEngine;
 
 namespace Enemy
 {
     public abstract class EnemyController
     {
-        private EnemyViewCollection enemyViewCollection;
-
         protected Vector2 playerPosition;
         protected PlayerState playerState;
 
@@ -25,17 +21,6 @@ namespace Enemy
             GameManager.Instance.eventService.OnPlayerDeadWithParams.AddListener(SetPlayerState);
         }
 
-        public virtual void PlayerEnteredRange()
-        {
-        }
-
-        public void SetPlayerPosition(Vector2 playerPosition)
-            => this.playerPosition = playerPosition;
-
-        public void SetPlayerState(PlayerState playerState)
-          => this.playerState = playerState;
-
-
         public virtual void FacePlayer()
         {
             Vector2 direction = playerPosition - (Vector2)GetEnemyTransform().position;
@@ -45,6 +30,35 @@ namespace Enemy
             else if (direction.x < 0)
                 GetEnemyTransform().localScale = new Vector3(1, 1, 1);
         }
+
+        public virtual void PlayerEnteredRange()
+        {
+        }
+
+        public virtual void PlayerExitRanged()
+        {
+        }
+        public virtual void FireBomb()
+        {
+        }
+
+        public virtual void FireCanon()
+        {
+        }
+
+        public virtual void Fire()
+        {
+        }
+
+        public virtual void MeleAttack()
+        {
+        }
+
+        public void SetPlayerPosition(Vector2 playerPosition)
+             => this.playerPosition = playerPosition;
+
+        public void SetPlayerState(PlayerState playerState)
+            => this.playerState = playerState;
 
         public PlayerState GetPlayerState()
             => playerState;
@@ -58,38 +72,10 @@ namespace Enemy
         public abstract float GetAttackRange();
         public abstract void ChangeState(EnemyStates state);
         public abstract float GetAttackDelay();
-
         public abstract void FixedUpdateStateMachine();
-
-        public virtual void PlayerExitRanged()
-        {
-
-        }
         public abstract void TakeDamage(int damage);
-
         public abstract bool IsEnemyViewActiveAndEnabled();
-
         public abstract EnemySO GetEnemyData();
-
         public abstract void UnsubscribeToEvents();
-
-        public virtual void FireBomb()
-        {
-
-        }
-
-        public virtual void FireCanon()
-        {
-        }
-
-        public virtual void Fire()
-        {
-
-        }
-
-        public virtual void MeleAttack()
-        {
-
-        }
     }
 }

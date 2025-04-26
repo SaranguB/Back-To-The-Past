@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 
-
 namespace Audio
 {
     public class SoundService
@@ -13,8 +12,8 @@ namespace Audio
         public SoundService(SoundSO soundSo, AudioSource audioEffectSource, AudioSource backgroundMusicSource)
         {
             this.soundSo = soundSo;
-            this.audioEffects = audioEffectSource;
-            this.backgroundMusic = backgroundMusicSource;
+            audioEffects = audioEffectSource;
+            backgroundMusic = backgroundMusicSource;
         }
 
         public void PlaySoundEffects(SoundType soundType, bool loopSound = false)
@@ -46,6 +45,7 @@ namespace Audio
 
         public bool IsAudioEffectsPlaying()
             => audioEffects.isPlaying;
+
         private AudioClip GetSoundClip(SoundType soundType)
         {
             Sounds sound = Array.Find(soundSo.audioList, item => item.soundType == soundType);
@@ -55,10 +55,7 @@ namespace Audio
         }
 
         public void StopPlayingSoundEffect()
-        {
-
-            audioEffects.Stop();
-        }
+            => audioEffects.Stop();
 
         public void StopBackgroundSong()
             => backgroundMusic.Stop();

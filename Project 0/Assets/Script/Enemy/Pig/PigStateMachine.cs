@@ -17,9 +17,6 @@ namespace Enemy
             AddState(EnemyStates.Idle, new IdleState<PigController>(enemyAnimator));
             AddState(EnemyStates.Catching, new catchingState<PigController>(enemyAnimator));
             AddState(EnemyStates.Attack, new AttackState<PigController>(enemyAnimator));
-            AddState(EnemyStates.Dead, new DeadState<PigController>(enemyAnimator));
         }
     }
-
-
 }

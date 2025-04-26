@@ -1,4 +1,3 @@
-using UnityEngine;
 using Utilis;
 
 namespace UI
@@ -11,6 +10,7 @@ namespace UI
         {
             this.levelWonUIView = levelWonUIView;
             this.levelWonUIView.SetController(this);
+
             EnableLevelWonUI();
         }
 

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Level
@@ -15,25 +14,21 @@ namespace Level
             this.levelController = levelController;
         }
 
+        private void OnDestroy()
+        {
+            levelController.UnSubscribetToEvents();
+        }
 
         public void DestroyKey()
-        {
-            Destroy(key.gameObject);
-        }
-
+            =>Destroy(key.gameObject);
+        
         public void OpenFinalDoor()
-        {
-            finalDoorAnimation.enabled = true;
-        }
-
+            =>finalDoorAnimation.enabled = true;
+        
         public void LevelFInished()
-        {
-            OpenFinalDoor();
-        }
-
+            =>OpenFinalDoor();
+        
         public void PlayerGotKey()
-        {
-            DestroyKey();
-        }
+            =>DestroyKey();
     }
 }

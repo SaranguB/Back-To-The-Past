@@ -1,6 +1,6 @@
-using Main;
 using System;
 using System.Collections;
+using Unity.Cinemachine;
 using UnityEngine;
 using Wepons.Bomb;
 
@@ -14,6 +14,8 @@ namespace Player
         public Animator playerAnimator;
         public Transform playerTransform;
         public Vector2 playerStartPosition;
+        public CinemachineImpulseSource playerImpulseSource;
+
         //Jump
         [Header("Jump")]
         public Transform[] groundCheckPoint;
@@ -23,6 +25,8 @@ namespace Player
         [Header("Bomb")]
         public Transform bombBagPosition;
 
+        //Particle System
+        [Header("ParticleSystem")]
         public ParticleSystem timeSwitchParticle;
 
         private void Start()
@@ -32,7 +36,6 @@ namespace Player
             playerStartPosition = playerTransform.position;
         }
 
-
         private void Update()
         {
             if (playerController.GetCurrentPlayerState() is not DeadState)
@@ -41,6 +44,11 @@ namespace Player
                 playerController.HandleInput();
                 playerController.HandleDashing();
             }
+        }
+
+        private void OnDestroy()
+        {
+            playerController.UnSubcribeToEvents();
         }
 
         private void FixedUpdate()
@@ -53,9 +61,8 @@ namespace Player
         }
 
         public void SetController(PlayerController playerController)
-        {
-            this.playerController = playerController;
-        }
+           => this.playerController = playerController;
+
 
         public void FlipOnDirection(float horizontalInput)
         {
@@ -65,47 +72,40 @@ namespace Player
         }
 
         public void TakeDamage(int damage)
-        {
-            playerController.TakeDamage(damage);
-        }
+            => playerController.TakeDamage(damage);
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (!playerController.IsPlayerHasKey())
+            switch (other.tag)
             {
-                if (other.CompareTag("Key"))
-                {
-                    playerController.OnKeyCollected();
-                }
-            }
+                case "Key":
+                    if (!playerController.IsPlayerHasKey())
+                        playerController.OnKeyCollected();
+                    break;
 
-            if (playerController.IsPlayerHasKey())
-            {
-                if (other.CompareTag("FinalDoor"))
-                {
-                    playerController.IsInfrontOfFinalDoor(true);
-                }
-            }
+                case "FinalDoor":
+                    if (playerController.IsPlayerHasKey())
+                        playerController.IsInfrontOfFinalDoor(true);
+                    break;
 
-            if(other.CompareTag("DeathZone"))
-            {
-                playerController.TakeDamage(3);
+                case "DeathZone":
+                    playerController.TakeDamage(3);
+                    break;
             }
-
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            if (other.CompareTag("FinalDoor"))
+            switch (other.tag)
             {
-                playerController.IsInfrontOfFinalDoor(false);
+                case "FinalDoor":
+                    playerController.IsInfrontOfFinalDoor(false);
+                    break;
             }
         }
 
         public void LevelFinished()
-        {
-            StartCoroutine(LevelWon());
-        }
+            => StartCoroutine(LevelWon());
 
         public void ChangeStateToAlive()
             => playerController.ChangePlayerState(PlayerState.Alive);
@@ -119,10 +119,10 @@ namespace Player
         private IEnumerator HandlePlayerDeath()
         {
             yield return new WaitForSeconds(2f);
+
             playerController.OnPlayerDestroyed();
             Destroy(this.gameObject);
         }
-
         private IEnumerator LevelWon()
         {
             yield return new WaitForSeconds(.5f);

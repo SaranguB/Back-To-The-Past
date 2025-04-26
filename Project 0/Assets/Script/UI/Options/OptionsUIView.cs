@@ -1,12 +1,9 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Utilis;
 
 namespace UI
 {
-
-
     public class OptionsUIView : MonoBehaviour
     {
         private OptionsUIController optionsUIController;
@@ -50,10 +47,7 @@ namespace UI
                 CanvasGroupExtension.Show(controlsCanvasGroup);
             }
             else
-            {
                 CanvasGroupExtension.Hide(controlsCanvasGroup);
-
-            }
         }
 
         private void OnMechanicsToggeled(bool isOn)
@@ -64,10 +58,7 @@ namespace UI
                 CanvasGroupExtension.Show(mechanicsCanvasGroup);
             }
             else
-            {
                 CanvasGroupExtension.Hide(mechanicsCanvasGroup);
-            }
         }
-    
     }
 }

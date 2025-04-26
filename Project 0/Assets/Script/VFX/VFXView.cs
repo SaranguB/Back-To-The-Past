@@ -20,7 +20,6 @@ namespace VFX
             gameObject.SetActive(true);
             gameObject.transform.position = positionToSet;
 
-
             foreach (VFXData item in particleSystemMap)
             {
                 if (item.vfxType == vfxType)
@@ -29,9 +28,7 @@ namespace VFX
                     currentPlayingVFX = item.particleSystem;
                 }
                 else
-                {
                     item.particleSystem.gameObject.SetActive(false);
-                }
             }
 
         }

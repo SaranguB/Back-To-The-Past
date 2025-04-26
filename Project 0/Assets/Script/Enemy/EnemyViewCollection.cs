@@ -1,4 +1,3 @@
-using Enemy;
 using UnityEngine;
 
 namespace Enemy

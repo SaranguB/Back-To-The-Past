@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace StateMachine
 {
@@ -39,9 +38,11 @@ namespace StateMachine
             states[key] = state;
         }
 
-        public void Update() => currentState?.UpdateState();
+        public void Update() 
+            => currentState?.UpdateState();
 
-        public void FixedUpdate() => currentState?.FixedUpdateState();
+        public void FixedUpdate() 
+            => currentState?.FixedUpdateState();
 
         public IState<T> GetCurrentState()
             => currentState;

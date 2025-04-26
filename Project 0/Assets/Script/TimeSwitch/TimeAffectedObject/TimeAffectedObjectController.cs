@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace TimeSwitching
@@ -17,6 +16,7 @@ namespace TimeSwitching
             objectSprite = GetComponent<SpriteRenderer>();
             objectCollider = GetComponent<Collider2D>();
         }
+
 
         public void SetPastProperties()
         {
@@ -40,10 +40,8 @@ namespace TimeSwitching
 
         private void Updatecollider()
         {
-
             if (objectSprite == null || objectCollider == null)
                 return;
-
 
             if (objectCollider is BoxCollider2D boxCollider)
             {
@@ -51,8 +49,6 @@ namespace TimeSwitching
                 boxCollider.offset = objectSprite.sprite.bounds.center;
             }
         }
-
-
     }
 }
 

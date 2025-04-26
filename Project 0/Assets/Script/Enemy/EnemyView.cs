@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using UnityEngine;
 using Wepons.Bomb;
 
@@ -25,11 +23,16 @@ namespace Enemy
         private void Update()
         {
             enemyController.UpdateStateMachine();
-
         }
+
         private void FixedUpdate()
         {
             enemyController.FixedUpdateStateMachine();
+        }
+
+        private void OnDestroy()
+        {
+            enemyController.UnsubscribeToEvents();
         }
 
         public void TakeDamage(int damage)
@@ -44,18 +47,13 @@ namespace Enemy
 
         public void TimeSwitchedToPresent()
         {
-            
-                if (WasActiveInitially)
-                {
-                    if (enemyController.GetEnemyData().inPresent)
-                    {
-                        this.gameObject.SetActive(true);
-                    }
-                    else
-                    {
-                        this.gameObject.SetActive(false);
-                    }
-                }
+            if (WasActiveInitially)
+            {
+                if (enemyController.GetEnemyData().inPresent)
+                    this.gameObject.SetActive(true);
+                else
+                    this.gameObject.SetActive(false);
+            }
         }
 
         public void TimeSwitchedToPast()
@@ -63,19 +61,10 @@ namespace Enemy
             if (WasActiveInitially)
             {
                 if (enemyController.GetEnemyData().inPast)
-                {
                     this.gameObject.SetActive(true);
-                }
                 else
-                {
                     this.gameObject.SetActive(false);
-                }
             }
-        }
-
-        public void SetOriginallyActive()
-        {
-            WasActiveInitially = true;
         }
 
         public void EnemyIsDead()
@@ -84,12 +73,13 @@ namespace Enemy
             Destroy(this.gameObject);
         }
 
+        public void SetOriginallyActive()
+            => WasActiveInitially = true;
+
         public void FireCanon()
-        {
-            enemyController.Fire();
-        }
+            =>enemyController.Fire();
 
         public void MeleAttack()
-            =>enemyController.MeleAttack();
+            => enemyController.MeleAttack();
     }
 }

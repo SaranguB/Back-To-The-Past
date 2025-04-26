@@ -69,7 +69,6 @@ namespace Player
             bombThreshold = playerS0.bombThreshold;
             bombThrowForceX = playerS0.BombThrowForceX;
             bombThrowForceY = playerS0.BombThrowForceY;
-
         }
     }
 }

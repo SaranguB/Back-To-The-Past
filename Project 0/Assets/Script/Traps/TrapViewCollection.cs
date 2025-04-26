@@ -1,7 +1,10 @@
 using Trap;
 using UnityEngine;
 
-public class TrapViewCollection : MonoBehaviour
+namespace Trap
 {
-   public TrapView[] trapView;
+    public class TrapViewCollection : MonoBehaviour
+    {
+        public TrapView[] trapView;
+    }
 }

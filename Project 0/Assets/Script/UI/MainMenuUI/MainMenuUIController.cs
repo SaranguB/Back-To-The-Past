@@ -1,7 +1,5 @@
 using Audio;
 using Main;
-using System;
-using UnityEngine;
 
 namespace UI
 {
@@ -16,8 +14,7 @@ namespace UI
         }
 
         public void PlayButtonSound()
-        {
-            GameManager.Instance.soundService.PlaySoundEffects(SoundType.ButtonSound);
-        }
+            => GameManager.Instance.soundService.PlaySoundEffects(SoundType.ButtonSound);
+
     }
 }

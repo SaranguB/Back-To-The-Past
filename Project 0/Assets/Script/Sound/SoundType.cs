@@ -1,9 +1,5 @@
-using System;
-using UnityEngine;
-
 namespace Audio
 {
-
     public enum SoundType
     {
         MenuBackground,

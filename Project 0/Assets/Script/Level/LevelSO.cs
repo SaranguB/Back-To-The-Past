@@ -1,6 +1,5 @@
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Level
 {
@@ -8,6 +7,8 @@ namespace Level
     public class LevelSO : ScriptableObject
     {
         public int levelNumber;
+        public string sceneName;
+        public bool unlockedAlready;
 
 #if UNITY_EDITOR
         [SerializeField] private SceneAsset sceneAsset;
@@ -19,8 +20,5 @@ namespace Level
             }
         }
 #endif
-        public string sceneName;
-        public bool unlockedAlready;
-
     }
 }

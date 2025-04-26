@@ -1,6 +1,5 @@
 using Main;
 using Objects.Destroyable;
-using System;
 using UnityEngine;
 using Wepons.Bomb;
 
@@ -13,10 +12,9 @@ public class DestroyableObjectView : MonoBehaviour, IDamagableFromBomb
     public BoxCollider2D boxCollider;
     public bool CanDestroyInPast;
     public Transform particleEffect;
+
     public void SetController(DestroyableObjectController destroyableObjectController)
-    {
-        this.destroyableObjectController = destroyableObjectController;
-    }
+        =>this.destroyableObjectController = destroyableObjectController;
 
     public void TimeSwitchedToPast()
     {
@@ -56,23 +54,19 @@ public class DestroyableObjectView : MonoBehaviour, IDamagableFromBomb
 
     public void TakeDamage(int damage)
     {
+        bool isPresent = destroyableObjectController.GetIsPresentTime();
 
-        if (!destroyableObjectController.GetIsPresentTime() && CanDestroyInPast)
+        if ((!isPresent && CanDestroyInPast) || (isPresent && !CanDestroyInPast))
         {
-            boxCollider.enabled = false;
-            Destroy(pastObject.gameObject);
-            Destroy(presentObject.gameObject);
-            GameManager.Instance.vfxService.PlayVFXAtPosition(VFX.VFXType.DestroyableObjectExplosion, particleEffect.position);
-        }     
-        
-        if (destroyableObjectController.GetIsPresentTime() && !CanDestroyInPast)
-        {
-            Debug.Log("Destroy in present");
-            boxCollider.enabled = false;
-            Destroy(pastObject.gameObject);
-            Destroy(presentObject.gameObject);
-            GameManager.Instance.vfxService.PlayVFXAtPosition(VFX.VFXType.DestroyableObjectExplosion, particleEffect.position);
+            DestroyObject();
         }
+    }
 
+    private void DestroyObject()
+    {
+        boxCollider.enabled = false;
+        Destroy(pastObject.gameObject);
+        Destroy(presentObject.gameObject);
+        GameManager.Instance.vfxService.PlayVFXAtPosition(VFX.VFXType.DestroyableObjectExplosion, particleEffect.position);
     }
 }

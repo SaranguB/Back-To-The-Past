@@ -1,35 +1,28 @@
-using Enemy;
 using Main;
-using System;
-using UI;
-using UnityEngine;
 
 namespace TimeSwitching
 {
     public class TimeSwitchController
     {
         private TimeSwitchView timeSwitchView;
-        private TimeSwitchModel timeSwitchModel;
         private TimeStateMachine timeStateMachine;
+
         public TimeSwitchController(TimeSwitchView timeSwitchView)
         {
             InitializeVariable(timeSwitchView);
             SetController();
             CreateStateMachine();
-            
 
-            SubcribeToEvents();
-            SwitchTimeToPresent();
-
+            SubscribeToEvents();
         }
 
-        private void SwitchTimeToPresent()
+        public void SwitchTimeToPresent()
         {
-            ChangeTimeToPresent();
+            ChangeTimeState(TimeState.Present);
             timeSwitchView.SwitchTimeToPresent();
         }
 
-        private void SubcribeToEvents()
+        private void SubscribeToEvents()
         {
             GameManager.Instance.eventService.onTimeSwitched.AddListener(SwitchTime);
         }
@@ -42,34 +35,25 @@ namespace TimeSwitching
         private void InitializeVariable(TimeSwitchView timeSwitchView)
         {
             this.timeSwitchView = timeSwitchView;
-            timeSwitchModel = new TimeSwitchModel();
         }
 
         private void CreateStateMachine()
-        {
-            timeStateMachine = new TimeStateMachine(this, timeSwitchView.GetAffectedObjects());
-        }
+            => timeStateMachine = new TimeStateMachine(this, timeSwitchView.GetAffectedObjects());
 
         public void SetPastProperties(TimeAffectedObjectController affectedObject)
         {
             if (affectedObject != null && affectedObject.gameObject.activeInHierarchy)
-            {
                 affectedObject.SetPastProperties();
-            }
         }
 
         public void SetPresentproperties(TimeAffectedObjectController affectedObject)
         {
             if (affectedObject != null && affectedObject.gameObject.activeInHierarchy)
-            {
                 affectedObject.SetPresentProperties();
-            }
         }
 
         private void SetController()
-        {
-            timeSwitchView.SetController(this);
-        }
+            => timeSwitchView.SetController(this);
 
         public void SwitchTime()
         {
@@ -77,33 +61,18 @@ namespace TimeSwitching
 
             if (currentState is PastState)
             {
-                ChangeTimeToPresent();
+                ChangeTimeState(TimeState.Present);
                 timeSwitchView.SwitchTimeToPresent();
-                
             }
             else if (currentState is PresentState)
             {
-                ChangeTimeToPast();
+                ChangeTimeState(TimeState.Past);
                 timeSwitchView.SwitchTimeToPast();
             }
             GameManager.Instance.eventService.OnTimeSwitchWithBoolParam.InvokeEvent(currentState is PastState);
         }
 
-        public void ChangeTimeToPast()
-        {
-            ChangeTimeState(TimeState.Past);
-        } 
-
-        public void ChangeTimeToPresent()
-        {
-            ChangeTimeState(TimeState.Present);
-        }
-
         public void ChangeTimeState(TimeState newState)
-        {
-            timeStateMachine.ChangeState(newState);
-        }
-
-     
+            =>timeStateMachine.ChangeState(newState);
     }
 }
