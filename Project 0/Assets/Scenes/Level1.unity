@@ -23450,7 +23450,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.019439697, y: -1.7978096, z: -10}
+  m_LocalPosition: {x: 18.93, y: 6.89, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -23942,11 +23942,11 @@ Transform:
   m_GameObject: {fileID: 709517331}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1507974478}
+  m_Father: {fileID: 1254281898}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &709517333
 MonoBehaviour:
@@ -23973,7 +23973,7 @@ GameObject:
   - component: {fileID: 783966103}
   - component: {fileID: 700142832}
   m_Layer: 0
-  m_Name: AudioSource
+  m_Name: backgroundAudio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29375,7 +29375,8 @@ Transform:
   m_LocalPosition: {x: 0.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 709517332}
   m_Father: {fileID: 1507974478}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1279049310
@@ -29409,7 +29410,7 @@ Transform:
   m_GameObject: {fileID: 1279049310}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.004417, y: -4.182152, z: 0.07721996}
+  m_LocalPosition: {x: 14.345583, y: 4.547848, z: 0.07721996}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -34838,7 +34839,6 @@ Transform:
   - {fileID: 2033473873}
   - {fileID: 518992866}
   - {fileID: 299389922}
-  - {fileID: 709517332}
   - {fileID: 1254281898}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -34915,8 +34915,8 @@ MonoBehaviour:
   trapViewCollection: {fileID: 0}
   vfxPrefab: {fileID: 9076844673794526640, guid: 21563ef68c4f60743a5f63e7c25bd9de, type: 3}
   soundSo: {fileID: 11400000, guid: 911ed0e67a3dc3943a2ed13d86bde010, type: 2}
-  audioEffectSource: {fileID: 700142832}
-  backgroundMusicSource: {fileID: 2018412085}
+  audioEffectSource: {fileID: 2018412085}
+  backgroundMusicSource: {fileID: 700142832}
 --- !u!4 &1522333370
 Transform:
   m_ObjectHideFlags: 0
@@ -35349,7 +35349,7 @@ GameObject:
   - component: {fileID: 2018412086}
   - component: {fileID: 2018412085}
   m_Layer: 0
-  m_Name: AudioSource
+  m_Name: EffectAudioSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45237,19 +45237,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7195907909159150702, guid: b6be7e767ae782d4e95329c8f11ae7ac, type: 3}
       propertyPath: DefaultVelocity.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7195907909159150702, guid: b6be7e767ae782d4e95329c8f11ae7ac, type: 3}
       propertyPath: DefaultVelocity.y
-      value: 1
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7195907909159150702, guid: b6be7e767ae782d4e95329c8f11ae7ac, type: 3}
+      propertyPath: ImpulseDefinition.ImpulseShape
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525151381986033123, guid: b6be7e767ae782d4e95329c8f11ae7ac, type: 3}
+      propertyPath: m_LocalScale.x
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7525151381986033123, guid: b6be7e767ae782d4e95329c8f11ae7ac, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.48
+      value: 18.87
       objectReference: {fileID: 0}
     - target: {fileID: 7525151381986033123, guid: b6be7e767ae782d4e95329c8f11ae7ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.09
+      value: 6.64
       objectReference: {fileID: 0}
     - target: {fileID: 7525151381986033123, guid: b6be7e767ae782d4e95329c8f11ae7ac, type: 3}
       propertyPath: m_LocalPosition.z

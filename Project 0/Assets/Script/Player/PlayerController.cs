@@ -12,7 +12,11 @@ namespace Player
     public class PlayerController
     {
         private PlayerView playerView;
+        public PlayerView PlayerView => playerView;
+
         private PlayerModel playerModel;
+        public PlayerModel PlayerModel => playerModel;
+
         private TimeSwitchUIController timeSwitchUIController;
         private PlayerUIController playerUIController;
 
@@ -28,7 +32,7 @@ namespace Player
             this.bombPool = bombPool;
 
             CreatePlayerStateMachine();
-            ChangePlayerState(PlayerState.Alive);
+            ChangePlayerState(PlayerState.Idle);
             SubscribeToEvents();
         }
 
@@ -42,189 +46,29 @@ namespace Player
             GameManager.Instance.eventService.OnPlayerGotDamaged.RemoveListener(TakeDamage);
         }
 
-        public void ChangePlayerState(PlayerState state)
-            => playerStateMachine.ChangeState(state);
+        public void UpdateState()
+        {
+            playerStateMachine.Update();
+        }
+
+        public void FixedUpdateState()
+        {
+            playerStateMachine.FixedUpdate();
+        }
+
+        public void ChangePlayerState(PlayerState newState)
+        {
+            playerStateMachine.ChangeState(newState);
+        }
 
         private void CreatePlayerStateMachine()
         => playerStateMachine = new PlayerStateMachine(this, playerView.playerAnimator);
 
         public void HandleInput()
         {
-            ConfigureMoveInput();
-            ConfigureJumpInput();
-            ConfigureTimeSwitchInput();
-            ConfigureBombDeployInput();
             ConfigureTransitionToNextLevelInput();
         }
 
-        private void ConfigureMoveInput()
-        {
-            playerModel.horizontalInput = Input.GetAxis("Horizontal");
-            SetAnimatorFloatValue("Speed", Mathf.Abs(playerModel.horizontalInput));
-        }
-
-        public void HandleMovement()
-        {
-            HandleHorizontalMovement();
-            HandleJumping();
-            HandleFalling();
-            UpdateAirDashStatus();
-        }
-
-        private void HandleHorizontalMovement()
-        {
-            float speed = playerModel.horizontalInput * playerModel.movementSpeed;
-            Vector2 velocity = playerView.playerRB.linearVelocity;
-            playerView.playerRB.linearVelocity = new Vector2(speed, velocity.y);
-
-            if (playerModel.horizontalInput != 0)
-                playerView.FlipOnDirection(playerModel.horizontalInput);
-        }
-
-        private void HandleJumping()
-        {
-            if (playerModel.isJumping && IsGrounded())
-            {
-                Jump();
-                SetIsJumping(false);
-            }
-        }
-
-        private void UpdateAirDashStatus()
-        {
-            if (IsGrounded())
-                playerModel.canPlayerAirDash = true;
-        }
-
-        private void ConfigureJumpInput()
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-                SetIsJumping(true);
-        }
-
-        public void Jump()
-        {
-            SetAnimatorBool("IsJumping", true);
-            Vector2 velocity = playerView.playerRB.linearVelocity;
-            playerView.playerRB.linearVelocity = new Vector2(velocity.x, playerModel.jumpForce);
-        }
-
-        public bool IsGrounded()
-        {
-            foreach (Transform point in playerView.groundCheckPoint)
-            {
-                if (Physics2D.OverlapCircle(point.position, playerModel.groundCheckDistance, playerView.groundLayer))
-                    return true;
-            }
-            return false;
-        }
-
-        public void HandleFalling()
-        {
-            float verticalVelocity = playerView.playerRB.linearVelocity.y;
-
-            if (verticalVelocity < 0)
-            {
-                SetAnimatorBool("IsJumping", false);
-                SetGravity(playerModel.fallingSpeed);
-            }
-            else if (verticalVelocity > 0 && !Input.GetKey(KeyCode.Space))
-                SetGravity(playerModel.fallingSpeed);
-            else
-                SetGravity(1f);
-        }
-
-        private void SetGravity(float gravityScale)
-           => playerView.playerRB.gravityScale = gravityScale;
-
-
-        public void SetIsJumping(bool value)
-            => playerModel.isJumping = value;
-
-
-        public void HandleDashing()
-        {
-            UpdateDashInputDirection();
-
-            if (CanStartDash())
-            {
-                if (IsGrounded() && playerModel.currentDashes > 0)
-                {
-                    GroundDash();
-                }
-                else if (!IsGrounded() && playerModel.canPlayerAirDash)
-                {
-                    AirDash();
-                }
-            }
-            if (playerModel.isDashing)
-                UpdateDashTimer();
-        }
-
-        private void UpdateDashInputDirection()
-        {
-            playerModel.inputDirection = new Vector2(
-                Input.GetAxisRaw("Horizontal"),
-                Input.GetAxisRaw("Vertical")
-            ).normalized;
-        }
-
-        private bool CanStartDash()
-        {
-            return !playerModel.isDashing && Input.GetKeyDown(KeyCode.LeftShift);
-        }
-
-        private void UpdateDashTimer()
-        {
-            playerModel.dashTimer -= Time.deltaTime;
-
-            if (playerModel.dashTimer <= 0f)
-                EndDashing();
-        }
-
-        private void AirDash()
-        {
-            StartDashing();
-            playerModel.canPlayerAirDash = false;
-        }
-
-        private void GroundDash()
-        {
-            StartDashing();
-            playerModel.currentDashes--;
-            playerModel.canPlayerAirDash = true;
-        }
-
-        private void StartDashing()
-        {
-            playerView.playerAnimator.SetBool("IsDashing", true);
-            GameManager.Instance.soundService.PlaySoundEffects(SoundType.PlayerDashing);
-            playerModel.isDashing = true;
-            playerModel.dashTimer = playerModel.dashDuration;
-        }
-
-        private void EndDashing()
-        {
-            playerView.playerAnimator.SetBool("IsDashing", false);
-            playerModel.isDashing = false;
-
-            playerView.playerRB.linearVelocity = new Vector2(
-                playerModel.horizontalInput * playerModel.movementSpeed, 0);
-        }
-
-        public void ExecuteDashing()
-        {
-            if (playerModel.isDashing)
-            {
-                if (playerModel.inputDirection == Vector2.zero)
-                {
-                    float facingDirection = Mathf.Sign(playerView.transform.localScale.x);
-                    playerModel.inputDirection = new Vector2(facingDirection, 0);
-                }
-
-                playerView.playerRB.linearVelocity = playerModel.inputDirection * playerModel.dashSpeed;
-            }
-        }
 
         private void ConfigureTransitionToNextLevelInput()
         {
@@ -242,141 +86,13 @@ namespace Player
         public void LevelFinished()
            => GameManager.Instance.eventService.OnPlayerFinishedLevel.InvokeEvent();
 
-        private void ConfigureBombDeployInput()
-        {
-            if (!playerModel.canDeployBomb)
-                return;
+        public PlayerUIController GetPlayerUIController()
+            => playerUIController;
 
-            HandleBombInput();
-        }
+        public BombPool GetBombPool()
+            => bombPool;
 
-        private void HandleBombInput()
-        {
-            if (Input.GetKeyDown(KeyCode.LeftControl))
-                StartChargingBomb();
-
-            if (Input.GetKey(KeyCode.LeftControl))
-                ChargeBomb();
-
-            if (Input.GetKeyUp(KeyCode.LeftControl))
-                ReleaseBomb();
-        }
-
-        private void StartChargingBomb()
-        {
-            playerUIController.EnableBombThrowChargingBar(true);
-            playerModel.isHoldingBombKey = true;
-            playerModel.bombHoldTimer = 0f;
-        }
-
-        private void ChargeBomb()
-        {
-            DisplayBombThrowIndicator(true);
-            playerModel.bombHoldTimer += Time.deltaTime;
-        }
-
-        private void ReleaseBomb()
-        {
-            if (playerModel.bombHoldTimer >= playerModel.bombThreshold)
-                ThrowBomb();
-            else
-                DeployBomb();
-
-            playerUIController.ResetUI();
-        }
-
-        private void DisplayBombThrowIndicator(bool value)
-           => playerUIController.UpdateBombThrowUISlider(value, playerModel.bombThreshold);
-
-        private void ThrowBomb()
-        {
-            BombController bombToDeploy = CreateBomb();
-
-            Vector2 throwDirection = playerView.transform.localScale.x > 0 ? Vector2.right : Vector2.left;
-            bombToDeploy.LaunchBomb(throwDirection, playerModel.bombThrowForceX, playerModel.bombThrowForceY);
-        }
-
-        private void DeployBomb()
-        {
-            CreateBomb();
-        }
-
-        private BombController CreateBomb()
-        {
-            BombController bombToDeploy = bombPool.GetBomb();
-            bombToDeploy.ConfigureBomb(playerView.bombBagPosition);
-            return bombToDeploy;
-        }
-
-        private void ConfigureTimeSwitchInput()
-        {
-            bool isTabHeld = Input.GetKey(KeyCode.Tab);
-
-            if (isTabHeld)
-            {
-                if (!playerModel.isTimeSwitching)
-                    BeginTimeSwitching(Time.deltaTime);
-            }
-            else if (Input.GetKeyUp(KeyCode.Tab))
-                CancelTimeSwitching();
-
-            GameManager.Instance.cameraController.UpdateCameraShake(isTabHeld, playerView.playerImpulseSource);
-        }
-
-        private void BeginTimeSwitching(float deltaTime)
-        {
-            SetAnimatorBool("IsTimeSwitching", true);
-
-            PlayTimeSwitchFeedback();
-            StopPlayerActions();
-
-            playerModel.timeSwitchingDuration += deltaTime;
-            SetTimeSwitchSlider(true, playerModel.timeRequiredForSwitching);
-
-            if (playerModel.timeSwitchingDuration >= playerModel.timeRequiredForSwitching)
-                ExecuteTimeSwitch();
-        }
-
-        private void PlayTimeSwitchFeedback()
-        {
-
-            if (!GameManager.Instance.soundService.IsAudioEffectsPlaying())
-                GameManager.Instance.soundService.PlaySoundEffects(SoundType.TimeSwitchingSound);
-
-            if (!playerView.timeSwitchParticle.isPlaying)
-                playerView.timeSwitchParticle.Play();
-        }
-
-        private void StopPlayerActions()
-        {
-            playerModel.horizontalInput = 0f;
-            SetAnimatorFloatValue("Speed", 0f);
-            playerModel.isJumping = false;
-            playerModel.canDeployBomb = false;
-        }
-
-        private void CancelTimeSwitching()
-        {
-            GameManager.Instance.soundService.StopPlayingSoundEffect();
-
-            playerView.timeSwitchParticle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-            SetAnimatorBool("IsTimeSwitching", false);
-            SetTimeSwitchSlider(false, playerModel.timeRequiredForSwitching);
-
-            playerModel.timeSwitchingDuration = 0f;
-            playerModel.isTimeSwitching = false;
-            playerModel.canDeployBomb = true;
-        }
-
-        private void ExecuteTimeSwitch()
-        {
-            playerModel.isTimeSwitching = true;
-            SetAnimatorBool("IsTimeSwitching", false);
-            playerView.timeSwitchParticle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-            GameManager.Instance.eventService.onTimeSwitched.InvokeEvent();
-        }
-
-        private void SetTimeSwitchSlider(bool show, float timeRequired)
+        public void SetTimeSwitchSlider(bool show, float timeRequired)
             => timeSwitchUIController.UpdateTimeSwitchUISlider(show, timeRequired);
 
         public void SetTimeSwitchUI(TimeSwitchUIController timeSwitchUIController)
@@ -417,12 +133,15 @@ namespace Player
             playerModel.currentLives -= damage;
             healthUIController.RemoveLives(damage);
 
-            if (GetCurrentPlayerState() is not DeadState)
-                playerStateMachine.ChangeState(PlayerState.Hurt);
-
             if (playerModel.currentLives <= 0)
                 playerStateMachine.ChangeState(PlayerState.Dead);
+
+            if (GetCurrentPlayerState() is not DeadState)
+                PlayerView.playerAnimator.SetBool("IsHurt", true);
         }
+
+        public void DisableHurtAnimation()
+           => playerView.DisableHurtAnimation();
 
         public IState<PlayerController> GetCurrentPlayerState()
             => playerStateMachine.GetCurrentState();

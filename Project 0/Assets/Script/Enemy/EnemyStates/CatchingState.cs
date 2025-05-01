@@ -47,7 +47,7 @@ namespace Enemy
             }
             else
             {
-                if (owner.GetPlayerState() == Player.PlayerState.Alive)
+                if (!(owner.GetPlayerState() == Player.PlayerState.Dead))
                     owner.ChangeState(EnemyStates.Attack);
             }
         }

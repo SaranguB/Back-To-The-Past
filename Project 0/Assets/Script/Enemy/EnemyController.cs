@@ -11,7 +11,7 @@ namespace Enemy
 
         public EnemyController()
         {
-            playerState = PlayerState.Alive;
+            playerState = PlayerState.Idle;
             SubscribeToEvents();
         }
 

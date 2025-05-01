@@ -20,7 +20,7 @@ namespace Enemy
 
         public void OnStateEnter()
         {
-            if (owner.GetPlayerState() == Player.PlayerState.Alive)
+            if (!(owner.GetPlayerState() == Player.PlayerState.Dead))
             {
                 attackDelay = owner.GetAttackDelay();
                 enemyAnimator.SetBool("IsAttacking", true);
@@ -30,7 +30,7 @@ namespace Enemy
 
         public void UpdateState()
         {
-            if (owner.GetPlayerState() == Player.PlayerState.Alive)
+            if (!(owner.GetPlayerState() == Player.PlayerState.Dead))
             {
                 AttackPlayerBetweenDelays();
                 CheckPlayerAttackRange();

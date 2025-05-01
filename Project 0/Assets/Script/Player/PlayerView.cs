@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 using Wepons.Bomb;
+using static UnityEngine.UI.GridLayoutGroup;
 
 namespace Player
 {
@@ -38,12 +40,12 @@ namespace Player
 
         private void Update()
         {
-            if (playerController.GetCurrentPlayerState() is not DeadState)
-            {
-                playerController.OnPlayerPositionChanged(playerTransform.position);
-                playerController.HandleInput();
-                playerController.HandleDashing();
-            }
+            if (playerController.GetCurrentPlayerState() != null)
+                Debug.Log(playerController.GetCurrentPlayerState().ToString());
+
+            playerController.OnPlayerPositionChanged(playerTransform.position);
+            playerController.HandleInput();
+            playerController.UpdateState();
         }
 
         private void OnDestroy()
@@ -53,11 +55,7 @@ namespace Player
 
         private void FixedUpdate()
         {
-            if (playerController.GetCurrentPlayerState() is not DeadState)
-            {
-                playerController.HandleMovement();
-                playerController.ExecuteDashing();
-            }
+            playerController.FixedUpdateState();
         }
 
         public void SetController(PlayerController playerController)
@@ -107,8 +105,8 @@ namespace Player
         public void LevelFinished()
             => StartCoroutine(LevelWon());
 
-        public void ChangeStateToAlive()
-            => playerController.ChangePlayerState(PlayerState.Alive);
+        public void DisableHurtAnimation()
+            => playerAnimator.SetBool("IsHurt", false);
 
         public void OnPlayerDead()
         {
@@ -123,6 +121,7 @@ namespace Player
             playerController.OnPlayerDestroyed();
             Destroy(this.gameObject);
         }
+
         private IEnumerator LevelWon()
         {
             yield return new WaitForSeconds(.5f);

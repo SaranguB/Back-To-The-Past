@@ -28,10 +28,10 @@ namespace Wepons.Bomb
 
         public void ConfigureBomb(Transform bombPosition)
         {
-            SetBombState(BombState.Primed);
-            bombView.gameObject.SetActive(true);
+            bombView.gameObject.SetActive(true); 
             SetDamageArea();
             bombView.ConfigurePosition(bombPosition);
+            SetBombState(BombState.Primed); 
         }
         private void SetDamageArea()
         {

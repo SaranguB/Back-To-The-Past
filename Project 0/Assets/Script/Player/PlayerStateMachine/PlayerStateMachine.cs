@@ -13,16 +13,26 @@ namespace Player
 
         private void CreateStates(Animator playerAnimator)
         {
-            AddState(PlayerState.Alive, new AliveState(playerAnimator));
+            AddState(PlayerState.Idle, new IdleState(playerAnimator));
+            AddState(PlayerState.Running, new RunningState(playerAnimator));
+            AddState(PlayerState.Jumping, new JumpingState(playerAnimator));
+            AddState(PlayerState.Attack, new AttackingState(playerAnimator));
+            AddState(PlayerState.Falling, new FallingState(playerAnimator));
+            AddState(PlayerState.Dashing, new DashingState(playerAnimator));
+            AddState(PlayerState.TimeSwitching, new TimeSwitchingState(playerAnimator));
             AddState(PlayerState.Dead, new DeadState(playerAnimator));
-            AddState(PlayerState.Hurt, new HurtState(playerAnimator));
         }
     }
 
     public enum PlayerState
     {
-        Alive,
+        Idle,
+        Running,
+        Jumping,
+        Falling,
+        Dashing,
+        TimeSwitching,
+        Attack,
         Dead,
-        Hurt
     }
 }

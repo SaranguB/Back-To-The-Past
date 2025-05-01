@@ -3,31 +3,31 @@ using UnityEngine;
 
 namespace Player
 { 
-    public class DeadState : IState<PlayerController>
+    public class DeadState : PlayerBaseState
     {
         private Animator playerAnimator;
 
         public DeadState(Animator playerAnimator)
         {
+
             this.playerAnimator = playerAnimator;
         }
 
-        public PlayerController owner { get; set; }
-
-        public void OnStateEnter()
+        public override void OnStateEnter()
         {
+            DisableHurtAnimation();
             playerAnimator.SetBool("IsDead", true);
         }
 
-        public void UpdateState()
+        public override void UpdateState()
         {
         }
 
-        public void FixedUpdateState()
+        public override void FixedUpdateState()
         {
         }
 
-        public void OnStateExit()
+        public override void OnStateExit()
         {
         }
     }
