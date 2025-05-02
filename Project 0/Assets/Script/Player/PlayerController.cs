@@ -47,20 +47,14 @@ namespace Player
         }
 
         public void UpdateState()
-        {
-            playerStateMachine.Update();
-        }
+           => playerStateMachine.Update();
 
         public void FixedUpdateState()
-        {
-            playerStateMachine.FixedUpdate();
-        }
+           => playerStateMachine.FixedUpdate();
 
         public void ChangePlayerState(PlayerState newState)
-        {
-            playerStateMachine.ChangeState(newState);
-        }
-
+          =>  playerStateMachine.ChangeState(newState);
+ 
         private void CreatePlayerStateMachine()
         => playerStateMachine = new PlayerStateMachine(this, playerView.playerAnimator);
 
@@ -68,7 +62,6 @@ namespace Player
         {
             ConfigureTransitionToNextLevelInput();
         }
-
 
         private void ConfigureTransitionToNextLevelInput()
         {

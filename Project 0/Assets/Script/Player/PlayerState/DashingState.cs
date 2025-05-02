@@ -8,11 +8,8 @@ namespace Player
 {
     public class DashingState : PlayerBaseState
     {
-        private Animator playerAnimator;
-
-        public DashingState(Animator playerAnimator)
+        public DashingState()
         {
-            this.playerAnimator = playerAnimator;
         }
 
         public override void OnStateEnter()

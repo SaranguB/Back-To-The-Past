@@ -119,7 +119,6 @@ namespace Player
         }
 
         public override void FixedUpdateState() { }
-
         public override void OnStateExit() { }
     }
 }

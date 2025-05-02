@@ -1,5 +1,3 @@
-using Player.UI;
-using StateMachine;
 using UnityEngine;
 using Wepons.Bomb;
 
@@ -7,11 +5,9 @@ namespace Player
 {
     public class AttackingState : PlayerBaseState
     {
-        private Animator playerAnimator;
 
-        public AttackingState(Animator playerAnimator)
+        public AttackingState()
         {
-            this.playerAnimator = playerAnimator;
         }
 
         public override void OnStateEnter()

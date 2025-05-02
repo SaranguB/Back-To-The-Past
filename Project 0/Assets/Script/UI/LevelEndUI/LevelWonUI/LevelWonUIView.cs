@@ -11,7 +11,9 @@ namespace UI
         public void SetController(LevelWonUIController levelWonUIController)
         {
             this.levelWonUIController = levelWonUIController;
-            nextLevelButton.onClick.AddListener(OnNextLevelButtonCLicked);
+
+            if (nextLevelButton != null)
+                nextLevelButton.onClick.AddListener(OnNextLevelButtonCLicked);
         }
 
         private void OnNextLevelButtonCLicked()

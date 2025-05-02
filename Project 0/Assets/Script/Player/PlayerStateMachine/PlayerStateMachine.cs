@@ -16,9 +16,9 @@ namespace Player
             AddState(PlayerState.Idle, new IdleState(playerAnimator));
             AddState(PlayerState.Running, new RunningState(playerAnimator));
             AddState(PlayerState.Jumping, new JumpingState(playerAnimator));
-            AddState(PlayerState.Attack, new AttackingState(playerAnimator));
+            AddState(PlayerState.Attack, new AttackingState());
             AddState(PlayerState.Falling, new FallingState(playerAnimator));
-            AddState(PlayerState.Dashing, new DashingState(playerAnimator));
+            AddState(PlayerState.Dashing, new DashingState());
             AddState(PlayerState.TimeSwitching, new TimeSwitchingState(playerAnimator));
             AddState(PlayerState.Dead, new DeadState(playerAnimator));
         }

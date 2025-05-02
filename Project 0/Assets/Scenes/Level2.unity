@@ -639,6 +639,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'LevelWonUIPanel '
       objectReference: {fileID: 0}
+    - target: {fileID: 3655504681640131468, guid: 997c202e0f4eff043b52c69c9f746cf1, type: 3}
+      propertyPath: m_Spacing
+      value: -54.07
+      objectReference: {fileID: 0}
     - target: {fileID: 4245329309415366601, guid: 997c202e0f4eff043b52c69c9f746cf1, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -669,6 +673,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4579650298879764397, guid: 997c202e0f4eff043b52c69c9f746cf1, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5138155131604251329, guid: 997c202e0f4eff043b52c69c9f746cf1, type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5138155131604251329, guid: 997c202e0f4eff043b52c69c9f746cf1, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5138155131604251329, guid: 997c202e0f4eff043b52c69c9f746cf1, type: 3}
+      propertyPath: m_BlocksRaycasts
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6194316586276132504, guid: 997c202e0f4eff043b52c69c9f746cf1, type: 3}
@@ -752,7 +768,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5858640525393966778, guid: 997c202e0f4eff043b52c69c9f746cf1, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 997c202e0f4eff043b52c69c9f746cf1, type: 3}
@@ -10362,7 +10379,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.081787, y: 13.866265, z: -10}
+  m_LocalPosition: {x: 1.4496107, y: -0.2500043, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11228,7 +11245,7 @@ Transform:
   m_GameObject: {fileID: 792812097}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 22.805582, y: 12.817848, z: 0.07721996}
+  m_LocalPosition: {x: -4.7444177, y: -2.5921516, z: 0.07721996}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -23283,6 +23300,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5929827514563647122, guid: b6be7e767ae782d4e95329c8f11ae7ac, type: 3}
+      propertyPath: playerRB
+      value: 
+      objectReference: {fileID: 2415497012989294259}
+    - target: {fileID: 5929827514563647122, guid: b6be7e767ae782d4e95329c8f11ae7ac, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 518992866}
+    - target: {fileID: 5929827514563647122, guid: b6be7e767ae782d4e95329c8f11ae7ac, type: 3}
       propertyPath: groundLayer.m_Bits
       value: 4104
       objectReference: {fileID: 0}
@@ -23300,11 +23325,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7525151381986033123, guid: b6be7e767ae782d4e95329c8f11ae7ac, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 26.83
+      value: -0.72
       objectReference: {fileID: 0}
     - target: {fileID: 7525151381986033123, guid: b6be7e767ae782d4e95329c8f11ae7ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 14.91
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7525151381986033123, guid: b6be7e767ae782d4e95329c8f11ae7ac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -23357,6 +23382,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0732d8c1299e22b4c933986ff0fa2eda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!50 &2415497012989294259 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 1253787077536760158, guid: b6be7e767ae782d4e95329c8f11ae7ac, type: 3}
+  m_PrefabInstance: {fileID: 2415497012989294255}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2999440876086131679 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8213356820368309838, guid: ff90692a58349fa42bf031e1ab0fcd5b, type: 3}

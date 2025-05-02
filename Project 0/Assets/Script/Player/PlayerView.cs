@@ -40,9 +40,6 @@ namespace Player
 
         private void Update()
         {
-            if (playerController.GetCurrentPlayerState() != null)
-                Debug.Log(playerController.GetCurrentPlayerState().ToString());
-
             playerController.OnPlayerPositionChanged(playerTransform.position);
             playerController.HandleInput();
             playerController.UpdateState();

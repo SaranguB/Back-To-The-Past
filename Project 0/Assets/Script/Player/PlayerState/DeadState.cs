@@ -9,7 +9,6 @@ namespace Player
 
         public DeadState(Animator playerAnimator)
         {
-
             this.playerAnimator = playerAnimator;
         }
 
