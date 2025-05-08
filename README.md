@@ -43,14 +43,6 @@ Throw Bomb – Left Click
 
 Solve puzzles, destroy barriers, and find the key to escape.
 
-🛠️ Setup Instructions
-Clone the repository
-
-bash
-Copy
-Edit
-git clone https://github.com/yourusername/back-to-the-past.git
-Open the project in Unity (recommended Unity version: 2022.3+)
 
 Press Play and start your time-traveling adventure!
 
