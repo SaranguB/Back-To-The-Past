@@ -1,4 +1,5 @@
 using StateMachine;
+using System;
 using UnityEngine;
 
 namespace Player
@@ -20,7 +21,7 @@ namespace Player
 
         public override void UpdateState()
         {
-           ConfigureMoveInput();
+            ConfigureMoveInput();
             ConfigureJumpInput();
 
             if (HandleTimeSwitchInput()) return;
@@ -30,6 +31,7 @@ namespace Player
             if (HandleJumpInput()) return;
             if (HandleFallingCheck()) return;
 
+            UpdateAirDashStatus();
             StopHorizontalMovement();
         }
 

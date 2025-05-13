@@ -34,7 +34,7 @@ namespace Player
         public bool isDashing = false;
         public float dashTimer = 0f;
         public Vector2 inputDirection;
-        public bool canPlayerAirDash = false;
+        public bool canPlayerAirDash = true;
         public float currentAirDashes;
         public bool canDeployBomb = true;
 

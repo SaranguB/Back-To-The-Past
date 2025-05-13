@@ -120,6 +120,14 @@ namespace Player
             return !owner.PlayerModel.isDashing && Input.GetKeyDown(KeyCode.LeftShift);
         }
 
+        protected void UpdateAirDashStatus()
+        {
+            if (IsGrounded())
+            {
+                owner.PlayerModel.canPlayerAirDash = true;
+            }
+        }
+
         public abstract void OnStateEnter();
         public abstract void UpdateState();
         public abstract void FixedUpdateState();

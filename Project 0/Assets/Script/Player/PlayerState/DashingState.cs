@@ -15,8 +15,12 @@ namespace Player
         public override void OnStateEnter()
         {
             DisableHurtAnimation();
-            owner.PlayerModel.canPlayerAirDash = true;
-            StartDashing();
+
+            if (!owner.PlayerModel.isDashing)
+            {
+                HandleDashing();
+            }
+          
         }
 
         public override void UpdateState()
@@ -28,10 +32,6 @@ namespace Player
                 UpdateDashTimer();
             }
 
-            if (!owner.PlayerModel.isDashing)
-            {
-                HandleDashing();
-            }
 
             if (owner.PlayerModel.dashTimer <= 0f)
             {
@@ -67,11 +67,17 @@ namespace Player
         {
             if (IsGrounded() && owner.PlayerModel.currentDashes > 0)
             {
+                Debug.Log("ground dashing");
                 GroundDash();
             }
             else if (!IsGrounded() && owner.PlayerModel.canPlayerAirDash)
             {
+                Debug.Log("air dashing");
                 AirDash();
+            }
+            else
+            {
+                owner.ChangePlayerState(PlayerState.Idle);
             }
         }
 
@@ -120,6 +126,7 @@ namespace Player
 
         public override void OnStateExit()
         {
+            owner.PlayerModel.canPlayerAirDash = false;
             owner.PlayerView.playerAnimator.SetBool("IsDashing", false);
             owner.PlayerModel.isDashing = false;
             owner.PlayerModel.dashTimer = owner.PlayerModel.dashDuration;

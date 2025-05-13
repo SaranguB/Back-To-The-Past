@@ -33,6 +33,8 @@ namespace Player
 
             if (HandleDashInput()) return;
             if (HandleAttackInput()) return;
+
+            UpdateAirDashStatus();
         }
 
         public override void FixedUpdateState()

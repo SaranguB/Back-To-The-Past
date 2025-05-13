@@ -28,6 +28,8 @@ namespace Player
             {
                 owner.ChangePlayerState(PlayerState.Idle);
             }
+
+            UpdateAirDashStatus();
         }
 
         public override void FixedUpdateState()
